@@ -1,4 +1,4 @@
-# react-admin-template-smart
+# picachu-ui
 
 
 ## Start
