@@ -36,10 +36,10 @@
     "rules": {
       // https://eslint.org/docs/rules/indent here you can read about SwitchCase
       "indent": ["error", 2, { "SwitchCase": 1 }],
-      "linebreak-style": [
-          "error",
-          "unix"
-      ],
+      // "linebreak-style": [
+      //     "error",
+      //     "unix"
+      // ],
       // start. new rules after review Alex
       "@typescript-eslint/member-delimiter-style": "warn", 
       "@typescript-eslint/type-annotation-spacing": "warn",
@@ -47,6 +47,7 @@
       "react/jsx-max-props-per-line": [1, { "maximum": 1 }],
       "react/jsx-curly-spacing": [2, {"when": "never", "children": true }],
       "quotes": "off",
+      "linebreak-style":"off",
       "@typescript-eslint/quotes": ["error", "backtick", { "avoidEscape": true }],
       // end . need testing
       "max-len": [ 

@@ -1,0 +1,70 @@
+.form__field {
+  position: relative;
+  margin-bottom: 24px;
+  width: 100%;
+  text-align: left;
+
+  label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 500;
+    font-style: normal;
+    font-size: 14px;
+    line-height: 20px;
+    color: $color-grey_label;
+  }
+
+  input {
+    outline: 1px solid $color-grey_input;
+    border-radius: 6px;
+    padding: 16px;
+    width: 100%;
+    box-sizing: border-box;
+    color: $color-grey_label;
+    gap: 8px;
+
+    &::placeholder {
+      font-weight: 500;
+      font-size: 14px;
+      color: $color-grey_input;
+    }
+
+    &:focus-within {
+      outline: 2px solid $primary-color-default;
+    }
+
+    &[type="password"] {
+      letter-spacing: 0.125em;
+
+      &::placeholder {
+        font-family: Inter, sans-serif;
+        font-weight: 500;
+        font-size: 14px;
+        line-height: 20px;
+        letter-spacing: 0;
+        color: $color-grey_input;
+      }
+    }
+  }
+
+  .field__error {
+    position: absolute;
+    left: 10px;
+    bottom: -24px;
+    width: 100%;
+    font-size: 12px;
+    color: $primary-color-default;
+  }
+
+  button {
+    position: absolute;
+    right: 5%;
+    top: 57%;
+
+    svg:hover {
+      path {
+        fill: $color-grey_label;
+      }
+    }
+  }
+}

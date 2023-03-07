@@ -1,3 +1,58 @@
-.login-page {
-    color: $color-black;
+.container {
+  position: relative;
+  display: block;
+  color: $color-black;
+
+  &__image {
+    img {
+      width: 327px;
+      height: 262px;
+    }
+  }
+
+  &__loginForm {
+    margin: 72px auto;
+    width: 336px;
+    height: 388px;
+
+    h2 {
+      margin: 0;
+      margin-bottom: 56px;
+      font-weight: 500;
+      font-size: 36px;
+      line-height: 40px;
+      text-align: left;
+      color: #06040e;
+    }
+
+    form {
+      position: relative;
+      display: flex;
+      align-items: flex-start;
+      flex-direction: column;
+      width: fill;
+
+      .default.bright {
+        margin-top: 32px;
+        width: 100%;
+      }
+    }
+
+    @include desktop {
+      margin: 0;
+    }
+  }
+
+  @include desktop {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    &__image {
+      img {
+        width: 704px;
+        height: 704px;
+      }
+    }
+  }
 }
