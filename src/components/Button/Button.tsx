@@ -10,7 +10,7 @@ function Button({
   return (
     <button
       type="button"
-      className={clsx(`default`, className, theme)}
+      className={clsx(`button`, className, theme)}
       {...props}
     >
       {children}

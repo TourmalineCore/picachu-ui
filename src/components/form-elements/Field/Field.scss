@@ -1,31 +1,29 @@
-.form__field {
+.fields-container {
   position: relative;
   margin-bottom: 24px;
   width: 100%;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 1.4;
   text-align: left;
 
-  label {
+  &__label {
     display: block;
     margin-bottom: 8px;
-    font-weight: 500;
-    font-style: normal;
-    font-size: 14px;
-    line-height: 20px;
     color: $color-grey_label;
   }
 
-  input {
+  &__input {
     outline: 1px solid $color-grey_input;
     border-radius: 6px;
-    padding: 16px;
+    padding: 16px 45px 16px 16px;
     width: 100%;
     box-sizing: border-box;
+    font-size: inherit;
     color: $color-grey_label;
     gap: 8px;
 
     &::placeholder {
-      font-weight: 500;
-      font-size: 14px;
       color: $color-grey_input;
     }
 
@@ -37,29 +35,27 @@
       letter-spacing: 0.125em;
 
       &::placeholder {
-        font-family: Inter, sans-serif;
-        font-weight: 500;
-        font-size: 14px;
-        line-height: 20px;
         letter-spacing: 0;
         color: $color-grey_input;
       }
     }
   }
 
-  .field__error {
-    position: absolute;
-    left: 10px;
-    bottom: -24px;
-    width: 100%;
-    font-size: 12px;
-    color: $primary-color-default;
+  &__icon {
+    position: relative;
+    width: 20px;
+    height: 20px;
+
+    svg {
+      width: 100%;
+      height: 100%;
+    }
   }
 
   button {
     position: absolute;
     right: 5%;
-    top: 57%;
+    top: 55%;
 
     svg:hover {
       path {

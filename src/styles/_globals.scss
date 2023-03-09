@@ -21,14 +21,6 @@ input {
   all: unset;
 }
 
-#root {
-  margin: 0 auto;
-  padding: 2rem;
-  width: 100%;
-  max-width: 1280px;
-  text-align: center;
-}
-
 a {
   font-weight: 500;
   text-decoration: inherit;
@@ -40,16 +32,8 @@ a:hover {
 }
 
 body {
-  display: flex;
   margin: 0;
-  min-width: 320px;
-  min-height: 100vh;
-  place-items: center;
-}
-
-h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
+  font-family: var(font-family);
 }
 
 ul {

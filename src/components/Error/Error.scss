@@ -1,0 +1,18 @@
+.error-message {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  outline: 1px solid $error-color;
+  border-radius: 6px;
+  padding: 16px 24px;
+  width: 100%;
+  color: $error-color;
+  background: linear-gradient(0deg, rgb(234 51 77 / 10%), rgb(234 51 77 / 10%)), #fff;
+
+  &__title {
+    margin: 0;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 20px;
+  }
+}
