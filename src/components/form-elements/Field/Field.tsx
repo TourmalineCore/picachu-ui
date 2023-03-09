@@ -48,6 +48,7 @@ const Field = forwardRef<HTMLInputElement, TypeInputPropsField>(
           <Button
             type="button"
             theme={ThemeButton.SMALL}
+            className="fields-container__button"
             onClick={togglePasswordVisiblity}
           >
             <div className="fields-container__icon">

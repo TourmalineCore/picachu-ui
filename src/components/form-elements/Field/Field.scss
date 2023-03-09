@@ -45,6 +45,7 @@
     position: relative;
     width: 20px;
     height: 20px;
+    color: $color-grey_input;
 
     svg {
       width: 100%;
@@ -52,15 +53,13 @@
     }
   }
 
-  button {
+  &__button {
     position: absolute;
     right: 5%;
     top: 55%;
 
     svg:hover {
-      path {
-        fill: $color-grey_label;
-      }
+      color: $color-grey_label;
     }
   }
 }
