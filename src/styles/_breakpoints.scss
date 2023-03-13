@@ -1,6 +1,6 @@
-$mobile-width: 375px;
-$tablet-width: 768px;
-$desktop-width: 1360px;
+$mobile-width: 320px;
+$tablet-width: 500px;
+$desktop-width: 768px;
 
 @mixin mobile {
   @media (min-width: #{$mobile-width}) {

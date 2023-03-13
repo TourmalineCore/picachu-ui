@@ -1,50 +1,37 @@
 .button {
-  margin: 0;
-  outline: none;
-  border: none;
-  padding: 0;
-  background: none;
-  cursor: pointer;
-}
+  &--small {
+    line-height: 0;
 
-.small {
-  svg {
-    width: 100%;
-    height: 100%;
-  }
-}
-
-.bright {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 16px;
-  color: #fff;
-  background-color: $primary-color-default;
-  transition: transform 0.2s ease-in-out;
-
-  &:focus,
-  :focus-visible {
-    outline: none;
+    svg {
+      width: 100%;
+      height: 100%;
+    }
   }
 
-  &:hover {
-    background-color: $primary-color-hover;
-  }
+  &--bright {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 16px;
+    font-family: Inter, Avenir, Helvetica, Arial, sans-serif;
+    font-size: 14px;
+    line-height: 20px;
+    color: $color-white;
+    background-color: $primary-color-default;
+    transition: all 0.3s ease-in-out;
 
-  &:active {
-    transform: translateY(1px);
-  }
-}
+    &:hover {
+      background-color: $primary-color-hover;
+    }
 
-.disabled {
-  background-color: $primary-color-disable;
+    &:active {
+      transform: translateY(1px);
+    }
 
-  &:hover {
-    background-color: $primary-color-disable;
-  }
-
-  &:active {
-    transform: none;
+    &:disabled,
+    &[disabled] {
+      background-color: $primary-color-disable;
+      pointer-events: none;
+    }
   }
 }

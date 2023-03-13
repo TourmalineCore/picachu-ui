@@ -1,10 +1,9 @@
-import { ReactComponent as CloseIcon } from '../../assets/icons/close.svg';
+import { ReactComponent as CloseIcon } from '../../assets/icons/icon-close-error.svg';
 import Button from '../Button/Button';
-import { ThemeButton } from '../Button/Button.types';
 
 type IError = {
   error: string;
-  removeError: () => void;
+  removeError?: () => void;
 };
 
 function Error({ error, removeError }: IError) {
@@ -15,8 +14,8 @@ function Error({ error, removeError }: IError) {
       </p>
       <Button
         type="button"
-        theme={ThemeButton.SMALL}
-        onClick={() => removeError()}
+        className="--small"
+        onClick={removeError}
       >
         <CloseIcon />
       </Button>

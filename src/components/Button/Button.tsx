@@ -1,16 +1,14 @@
-import clsx from 'clsx';
 import { ButtonProps } from './Button.types';
 
 function Button({
   className,
   children,
-  theme,
   ...props
 }: ButtonProps) {
   return (
     <button
       type="button"
-      className={clsx(`button`, className, theme)}
+      className={`button${className}`}
       {...props}
     >
       {children}
