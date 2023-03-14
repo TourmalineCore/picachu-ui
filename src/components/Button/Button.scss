@@ -21,13 +21,9 @@
   }
 
   &--eye {
-    position: absolute;
-    right: 5%;
-    bottom: 0;
     width: 20px;
     height: 20px;
     color: $color-grey-input;
-    transform: translateY(-16px);
 
     svg {
       width: 100%;

@@ -46,16 +46,17 @@ function LoginPage() {
             >
               Login
             </label>
-            <input
-              type="text"
-              className="login-page__input"
-              placeholder="Enter login"
-              id="login"
-              name="login"
-              value={username}
-              onChange={(e) => setUsername(e.target.value.trim())}
-            />
-
+            <div className="login-page__input-wrapper">
+              <input
+                type="text"
+                className="login-page__input"
+                placeholder="Enter login"
+                id="login"
+                name="login"
+                value={username}
+                onChange={(e) => setUsername(e.target.value.trim())}
+              />
+            </div>
           </div>
 
           <div className="login-page__field-box">
@@ -65,28 +66,29 @@ function LoginPage() {
             >
               Password
             </label>
-            <input
-              type={isPasswordShown ? `text` : `password`}
-              className="login-page__input"
-              placeholder="Enter password"
-              id="password"
-              name="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value.trim())}
-            />
-            <Button
-              type="button"
-              className="--eye"
-              onClick={() => setPasswordShown(!isPasswordShown)}
-            >
-              {isPasswordShown ? <EyeClosed /> : <EyeOpened />}
-
-            </Button>
+            <div className="login-page__input-wrapper login-page__input-wrapper--password">
+              <input
+                type={isPasswordShown ? `text` : `password`}
+                className="login-page__input"
+                placeholder="Enter password"
+                id="password"
+                name="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value.trim())}
+              />
+              <Button
+                type="button"
+                className="button--eye login-page__password-switch-btn"
+                onClick={() => setPasswordShown(!isPasswordShown)}
+              >
+                {isPasswordShown ? <EyeClosed /> : <EyeOpened />}
+              </Button>
+            </div>
           </div>
 
           <Button
             type="submit"
-            className="--bright"
+            className="button--bright"
             disabled={isUsernameInvalid || isPasswordInvalid}
           >
             Sign in

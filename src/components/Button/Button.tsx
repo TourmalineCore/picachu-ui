@@ -8,7 +8,7 @@ function Button({
   return (
     <button
       type="button"
-      className={`button button${className}`}
+      className={`button ${className}`}
       {...props}
     >
       {children}

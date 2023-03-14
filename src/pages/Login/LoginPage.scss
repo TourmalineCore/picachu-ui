@@ -1,4 +1,6 @@
 .login-page {
+  $this: &;
+
   position: relative;
   display: block;
   padding: 40px 24px;
@@ -57,7 +59,8 @@
     color: $color-grey-label;
   }
 
-  &__input {
+  &__input-wrapper {
+    position: relative;
     outline: 1px solid $color-grey-input;
     border-radius: 6px;
     padding: 16px;
@@ -65,23 +68,36 @@
     box-sizing: border-box;
     color: $color-grey-label;
     transition: all 0.2s ease-in-out;
-    gap: 8px;
-
-    &::placeholder {
-      color: $color-grey-input;
-    }
 
     &:focus-within {
       outline: 2px solid $primary-color-default;
     }
 
-    &[type="password"] {
+    &--password {
       padding: 16px 45px 16px 16px;
+    }
+  }
 
+  &__input {
+    width: 100%;
+    color: $color-grey-label;
+
+    &::placeholder {
+      color: $color-grey-input;
+    }
+
+    &[type="password"] {
       &::placeholder {
         color: $color-grey-input;
       }
     }
+  }
+
+  &__password-switch-btn {
+    position: absolute;
+    right: 5%;
+    top: 50%;
+    transform: translateY(-50%);
   }
 
   &__field-box {
