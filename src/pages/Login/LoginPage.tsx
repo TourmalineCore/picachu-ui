@@ -4,21 +4,16 @@ import Button from '../../components/Button/Button';
 import Error from '../../components/Error/Error';
 import { ReactComponent as EyeClosed } from '../../assets/icons/icon-closed-eye.svg';
 import { ReactComponent as EyeOpened } from '../../assets/icons/icon-opened-eye.svg';
-import { useInput } from './useInput';
 
 function LoginPage() {
   const [isPasswordShown, setPasswordShown] = useState(false);
 
-  const username = useInput(``, {
-    isEmpty: true,
-    minLength: 1,
-    noSpace: true,
-  });
-  const password = useInput(``, {
-    isEmpty: true,
-    minLength: 1,
-    noSpace: true,
-  });
+  const [username, setUsername] = useState(``);
+  const [password, setPassword] = useState(``);
+
+  const isUsernameInvalid = !username || !username.length;
+  const isPasswordInvalid = !password || !password.length;
+
   function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
 
@@ -57,9 +52,8 @@ function LoginPage() {
               placeholder="Enter login"
               id="login"
               name="login"
-              value={username.value}
-              onBlur={username.onBlur}
-              onChange={(e) => username.onChange(e)}
+              value={username}
+              onChange={(e) => setUsername(e.target.value.trim())}
             />
 
           </div>
@@ -77,13 +71,12 @@ function LoginPage() {
               placeholder="Enter password"
               id="password"
               name="password"
-              value={password.value}
-              onBlur={password.onBlur}
-              onChange={(e) => password.onChange(e)}
+              value={password}
+              onChange={(e) => setPassword(e.target.value.trim())}
             />
             <Button
               type="button"
-              className="--small"
+              className="--eye"
               onClick={() => setPasswordShown(!isPasswordShown)}
             >
               {isPasswordShown ? <EyeClosed /> : <EyeOpened />}
@@ -94,19 +87,16 @@ function LoginPage() {
           <Button
             type="submit"
             className="--bright"
-            disabled={!username.inputValid || !password.inputValid}
+            disabled={isUsernameInvalid || isPasswordInvalid}
           >
             Sign in
           </Button>
 
         </form>
-        {
-          ((username.isDirty && username.isError) || (password.isDirty && password.isError)) && (
-            <Error
-              error="Incorrect login or password."
-            />
-          )
-        }
+        <Error
+          error="Incorrect login or password."
+          className="login-page"
+        />
 
       </div>
 

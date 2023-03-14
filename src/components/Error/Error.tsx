@@ -4,17 +4,18 @@ import Button from '../Button/Button';
 type IError = {
   error: string;
   removeError?: () => void;
+  className?: string;
 };
 
-function Error({ error, removeError }: IError) {
+function Error({ error, removeError, className }: IError) {
   return (
-    <div className="error-message">
+    <div className={`error-message ${className}__error-message`}>
       <p className="error-message__title">
         {error}
       </p>
       <Button
         type="button"
-        className="--small"
+        className="--close"
         onClick={removeError}
       >
         <CloseIcon />
