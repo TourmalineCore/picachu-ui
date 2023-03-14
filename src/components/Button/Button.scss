@@ -1,15 +1,12 @@
 .button {
-  margin: 0;
-  border: none;
+  @include reset-button;
+
   border-radius: 8px;
-  padding: 0;
   font-weight: 500;
   background-color: transparent;
-  cursor: pointer;
   transition: all 0.3s ease-in-out;
 
   &--close {
-    position: relative;
     width: 9px;
     height: 9px;
     line-height: 0;
