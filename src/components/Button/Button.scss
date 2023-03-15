@@ -2,7 +2,10 @@
   @include reset-button;
 
   border-radius: 8px;
+  font-family: Inter, Avenir, Helvetica, Arial, sans-serif;
   font-weight: 500;
+  font-size: 14px;
+  line-height: 1.4;
   background-color: transparent;
   transition: all 0.3s ease-in-out;
 
@@ -38,9 +41,6 @@
     justify-content: center;
     padding: 16px;
     width: 100%;
-    font-family: Inter, Avenir, Helvetica, Arial, sans-serif;
-    font-size: 14px;
-    line-height: 20px;
     color: $color-white;
     background-color: $primary-color-default;
 

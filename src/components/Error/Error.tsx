@@ -9,7 +9,7 @@ type IError = {
 
 function Error({ error, removeError, className }: IError) {
   return (
-    <div className={`error-message ${className}__error-message`}>
+    <div className={`error-message ${className}`}>
       <p className="error-message__title">
         {error}
       </p>

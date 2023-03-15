@@ -10,108 +10,14 @@
   color: $color-black;
   place-items: center;
 
-  &__error-message {
+  &__image {
     position: absolute;
-    bottom: 0;
-  }
-
-  &__title {
-    margin: 0;
-    margin-bottom: 40px;
-    font-weight: 500;
-    font-size: 22px;
-    line-height: 40px;
-    text-align: left;
-    color: #06040e;
-
-    @include desktop {
-      margin-bottom: 56px;
-      font-size: 36px;
-    }
-  }
-
-  &__login-form-container {
-    position: relative;
-    margin: 0;
-    margin-top: 56px;
-    padding-bottom: 76px;
-    width: 100%;
-
-    @include tablet {
-      margin: 56px auto;
-      width: 60%;
-    }
-
-    @include desktop {
-      margin: 0;
-      width: 30%;
-    }
-  }
-
-  &__form {
-    position: relative;
-    width: 100%;
-  }
-
-  &__label {
+    left: 0;
+    top: 0;
     display: block;
-    margin-bottom: 8px;
-    color: $color-grey-label;
-  }
-
-  &__input-wrapper {
-    position: relative;
-    outline: 1px solid $color-grey-input;
-    border-radius: 6px;
-    padding: 16px;
     width: 100%;
-    box-sizing: border-box;
-    color: $color-grey-label;
-    transition: all 0.2s ease-in-out;
-
-    &:focus-within {
-      outline: 2px solid $primary-color-default;
-    }
-
-    &--password {
-      padding: 16px 45px 16px 16px;
-    }
-  }
-
-  &__input {
-    width: 100%;
-    color: $color-grey-label;
-
-    &::placeholder {
-      color: $color-grey-input;
-    }
-
-    &[type="password"] {
-      &::placeholder {
-        color: $color-grey-input;
-      }
-    }
-  }
-
-  &__password-switch-btn {
-    position: absolute;
-    right: 5%;
-    top: 50%;
-    transform: translateY(-50%);
-  }
-
-  &__field-box {
-    position: relative;
-    margin-bottom: 56px;
-    width: 100%;
-    font-weight: 500;
-    font-size: 14px;
-    line-height: 1.4;
-    text-align: left;
-
-    &:first-child {
-      margin-bottom: 24px;
-    }
+    height: 100%;
+    object-fit: cover;
   }
 
   &__image-container {
@@ -119,28 +25,21 @@
     overflow: hidden;
     border-radius: 32px;
     width: 100%;
-    height: 30%;
+    max-height: 30%;
     aspect-ratio: 16/9;
-
-    img {
-      display: block;
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
 
     @include tablet {
       margin: 0 auto;
       width: 60%;
-      height: 40%;
+      max-height: 40%;
       aspect-ratio: 16/9;
     }
 
     @include desktop {
       margin: 0;
       margin-right: 60px;
-      width: auto;
-      height: 100%;
+      width: 50%;
+      max-height: 100%;
       aspect-ratio: 1;
     }
   }
