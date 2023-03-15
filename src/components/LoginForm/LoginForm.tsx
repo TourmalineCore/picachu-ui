@@ -4,7 +4,7 @@ import Error from "../Error/Error";
 import { ReactComponent as EyeClosed } from '../../assets/icons/icon-closed-eye.svg';
 import { ReactComponent as EyeOpened } from '../../assets/icons/icon-opened-eye.svg';
 
-function LoginForm() {
+function LoginForm(){
   const [isPasswordShown, setPasswordShown] = useState(false);
 
   const [username, setUsername] = useState(``);
@@ -22,6 +22,7 @@ function LoginForm() {
     const formJson = Object.fromEntries(formData.entries());
     alert(JSON.stringify(formJson));
   }
+ 
 
   return (
     <div className="login-form-container">
@@ -29,6 +30,7 @@ function LoginForm() {
       <form
         className="login-form-container__form"
         action=""
+        data-test="form"
         onSubmit={handleSubmit}
       >
         <div className="login-form-container__field-box">
@@ -45,6 +47,7 @@ function LoginForm() {
               placeholder="Enter login"
               id="login"
               name="login"
+              data-test="login"
               value={username}
               onChange={(e) => setUsername(e.target.value.trim())}
             />
@@ -64,12 +67,14 @@ function LoginForm() {
               className="login-form-container__input"
               placeholder="Enter password"
               id="password"
+              data-test="password"
               name="password"
               value={password}
               onChange={(e) => setPassword(e.target.value.trim())}
             />
             <Button
               type="button"
+              
               className="button--eye login-form-container__password-switch-btn"
               onClick={() => setPasswordShown(!isPasswordShown)}
             >
@@ -81,16 +86,17 @@ function LoginForm() {
         <Button
           type="submit"
           className="button--bright"
+          data-test="submit-button"
           disabled={isUsernameInvalid || isPasswordInvalid}
         >
           Sign in
         </Button>
 
       </form>
-      <Error
+      {/* <Error
         error="Incorrect login or password."
         className="login-form-container__error"
-      />
+      /> */}
     </div>
 
   );

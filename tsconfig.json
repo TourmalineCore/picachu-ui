@@ -20,6 +20,8 @@
     "src",
     "src/@types/global.d.ts",
     "vite.config.ts",
+    "./.eslintrc.json",
+    "cypress"
   ],
   "references": [{ "path": "./tsconfig.node.json" }]
 }

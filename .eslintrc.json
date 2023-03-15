@@ -1,19 +1,22 @@
 {
   "plugins": [
     "@typescript-eslint",
-    "react"
+    "react",
+    "eslint-plugin-cypress"
   ],
   "env": {
     "browser": true,
-    "es2021": true
+    "es2021": true,
+    "cypress/globals":true
   },
   "extends": [
       "plugin:react/recommended",
       "airbnb",
-      "airbnb-typescript"
+      "airbnb-typescript",
+      "plugin:cypress/recommended"
   ],
   "parserOptions": {
-    "project": "./tsconfig.json",
+    // "project": "./tsconfig.json",
     "ecmaFeatures": {
       "tsx": true
     },
