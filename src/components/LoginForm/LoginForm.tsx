@@ -1,10 +1,13 @@
 import { FormEvent, useState } from "react";
 import Button from "../Button/Button";
-import Error from "../Error/Error";
 import { ReactComponent as EyeClosed } from '../../assets/icons/icon-closed-eye.svg';
 import { ReactComponent as EyeOpened } from '../../assets/icons/icon-opened-eye.svg';
 
-function LoginForm(){
+function LoginForm({
+  handleSubmit,
+}: {
+  handleSubmit?: (e: FormEvent<HTMLFormElement>) => void;
+}) {
   const [isPasswordShown, setPasswordShown] = useState(false);
 
   const [username, setUsername] = useState(``);
@@ -12,17 +15,6 @@ function LoginForm(){
 
   const isUsernameInvalid = !username || !username.length;
   const isPasswordInvalid = !password || !password.length;
-
-  function handleSubmit(e: FormEvent<HTMLFormElement>) {
-    e.preventDefault();
-
-    const form = e.currentTarget;
-    const formData = new FormData(form);
-
-    const formJson = Object.fromEntries(formData.entries());
-    alert(JSON.stringify(formJson));
-  }
- 
 
   return (
     <div className="login-form-container">
@@ -74,7 +66,6 @@ function LoginForm(){
             />
             <Button
               type="button"
-              
               className="button--eye login-form-container__password-switch-btn"
               onClick={() => setPasswordShown(!isPasswordShown)}
             >
