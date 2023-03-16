@@ -1,0 +1,103 @@
+.login-form-container {
+  position: relative;
+  margin: 0;
+  margin-top: 56px;
+  padding-bottom: 76px;
+  width: 100%;
+
+  &__title {
+    margin: 0;
+    margin-bottom: 40px;
+    font-weight: 500;
+    font-size: 22px;
+    line-height: 1.8;
+    text-align: left;
+    color: #06040e;
+
+    @include desktop {
+      margin-bottom: 56px;
+      font-size: 36px;
+    }
+  }
+
+  &__error {
+    position: absolute;
+    bottom: 0;
+  }
+
+  &__input {
+    width: 100%;
+    color: $color-grey-label;
+
+    &::placeholder {
+      color: $color-grey-input;
+    }
+
+    &[type="password"] {
+      &::placeholder {
+        color: $color-grey-input;
+      }
+    }
+  }
+
+  &__password-switch-btn {
+    position: absolute;
+    right: 5%;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+
+  &__field-box {
+    position: relative;
+    margin-bottom: 56px;
+    width: 100%;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 1.4;
+    text-align: left;
+
+    &:first-child {
+      margin-bottom: 24px;
+    }
+  }
+
+  &__input-wrapper {
+    position: relative;
+    outline: 1px solid $color-grey-input;
+    border-radius: 6px;
+    padding: 16px;
+    width: 100%;
+    box-sizing: border-box;
+    color: $color-grey-label;
+    transition: all 0.2s ease-in-out;
+
+    &:focus-within {
+      outline: 2px solid $primary-color-default;
+    }
+
+    &--password {
+      padding: 16px 45px 16px 16px;
+    }
+  }
+
+  &__form {
+    position: relative;
+    width: 100%;
+  }
+
+  &__label {
+    display: block;
+    margin-bottom: 8px;
+    color: $color-grey-label;
+  }
+
+  @include tablet {
+    margin: 56px auto;
+    width: 60%;
+  }
+
+  @include desktop {
+    margin: 0;
+    width: 30%;
+  }
+}

@@ -1,6 +1,8 @@
 @import "breakpoints";
 @import "globals";
 @import "variables";
-
-// Components
+@import "mixins";
 @import "../pages/Login/LoginPage";
+@import "../components/Button/Button.scss";
+@import "../components/Error/Error.scss";
+@import "../components/LoginForm/LoginForm.scss";

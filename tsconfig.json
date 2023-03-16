@@ -18,7 +18,8 @@
   },
   "include": [
     "src",
-    "vite.config.ts"
+    "src/@types/global.d.ts",
+    "vite.config.ts",
   ],
   "references": [{ "path": "./tsconfig.node.json" }]
 }
