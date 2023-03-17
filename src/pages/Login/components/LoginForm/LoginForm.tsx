@@ -1,5 +1,5 @@
 import { FormEvent, useState } from "react";
-import Button from "../Button/Button";
+import Button from "../../../../components/Button/Button";
 import { ReactComponent as EyeClosed } from '../../assets/icons/icon-closed-eye.svg';
 import { ReactComponent as EyeOpened } from '../../assets/icons/icon-opened-eye.svg';
 

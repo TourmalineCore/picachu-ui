@@ -1,5 +1,5 @@
 import LoginForm from './LoginForm';
-import '../../../cypress/support/commands.ts';
+import '../../../../../cypress/support/commands';
 
 describe(`<LoginForm />`, () => {
   beforeEach(() => {
