@@ -15,7 +15,7 @@ function Error({ error, removeError, className }: IError) {
       </p>
       <Button
         type="button"
-        className="button--close"
+        className="button button--close"
         onClick={removeError}
       >
         <CloseIcon />
