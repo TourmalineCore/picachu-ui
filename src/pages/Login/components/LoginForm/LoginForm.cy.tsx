@@ -3,34 +3,74 @@ import '../../../../../cypress/support/commands';
 
 describe(`<LoginForm />`, () => {
   beforeEach(() => {
-    const onHandleSubmit = cy.spy().as(`onHandleSubmit`);
-    cy.mount(<LoginForm handleSubmit={onHandleSubmit} />);
+    const onLogin = cy.spy().as(`onLogin`);
+    cy.mount(<LoginForm onLogin={onLogin} />);
   });
 
-  it(`form fields SHOULD be empty by default`, () => [cy.getByData(`login`), cy.getByData(`password`)].forEach((field) => field.should(`be.empty`)));
+  it(`form fields SHOULD be empty by default`, () => {
+    [cy.getByData(`login-input`),
+      cy.getByData(`password-input`)]
+      .forEach((field) => field
+        .should(`be.empty`));
+  });
 
-  it(`submit button SHOULD be disabled if login has value and password not`, () => {
-    cy.getByData(`login`).type(`admin`);
-    cy.getByData(`submit-button`).should(`be.disabled`);
+  it(`login-button SHOULD be disabled if login has value and password not`, () => {
+    cy.getByData(`login-input`)
+      .type(`admin`);
+
+    cy.getByData(`login-button`)
+      .should(`be.disabled`);
   });
-  it(`submit button SHOULD be disabled if password has value and login not`, () => {
-    cy.getByData(`password`).type(`123`);
-    cy.getByData(`submit-button`).should(`be.disabled`);
+  it(`login-button SHOULD be disabled if password has value and login not`, () => {
+    cy.getByData(`password-input`)
+      .type(`123`);
+
+    cy.getByData(`login-button`)
+      .should(`be.disabled`);
   });
-  it(`submit button SHOULD be disabled if password has space value and login has space value`, () => {
-    cy.getByData(`login`).type(`  `);
-    cy.getByData(`password`).type(`  `);
-    cy.getByData(`submit-button`).should(`be.disabled`);
+
+  it(`login-button SHOULD be disabled if password has space value and login has space value`, () => {
+    cy.getByData(`login-input`)
+      .type(`  `);
+
+    cy.getByData(`password-input`)
+      .type(`  `);
+
+    cy.getByData(`login-button`)
+      .should(`be.disabled`);
   });
-  it(`submit button SHOULD NOT be disabled if password has value and login has value`, () => {
-    cy.getByData(`login`).type(`admin`);
-    cy.getByData(`password`).type(`123`);
-    cy.getByData(`submit-button`).should(`not.be.disabled`);
+
+  it(`login-button SHOULD NOT be disabled if password has value and login has value`, () => {
+    cy.getByData(`login-input`)
+      .type(`admin`);
+
+    cy.getByData(`password-input`)
+      .type(`123`);
+
+    cy.getByData(`login-button`)
+      .should(`not.be.disabled`);
   });
-  it(`submit button SHOULD call handleSubmit function only once`, () => {
-    cy.getByData(`login`).type(`admin`);
-    cy.getByData(`password`).type(`123`);
-    cy.getByData(`form`).submit();
-    cy.get(`@onHandleSubmit`).should(`have.been.called`, 1);
+
+  it(`login-button SHOULD call onLogin function only once`, () => {
+    cy.getByData(`login-input`)
+      .type(`admin`);
+
+    cy.getByData(`password-input`)
+      .type(`123`);
+
+    cy.getByData(`login-button`)
+      .click();
+
+    cy.get(`@onLogin`)
+      .should(`have.been.called`, 1);
+  });
+
+  it(`disabled login-button SHOULD NOT call onLogin function `, () => {
+    cy.getByData(`login-button`)
+      .should(`be.disabled`)
+      .click({ force: true });
+
+    cy.get(`@onLogin`)
+      .should(`not.have.been.called`);
   });
 });

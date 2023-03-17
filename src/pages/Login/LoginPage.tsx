@@ -1,4 +1,3 @@
-import { FormEvent } from 'react';
 import MountainImage from '../../assets/images/Mountain.png';
 import LoginForm from './components/LoginForm/LoginForm';
 
@@ -13,18 +12,15 @@ function LoginPage() {
           draggable={false}
         />
       </div>
-      <LoginForm handleSubmit={() => handleSubmit} />
+      <LoginForm onLogin={onLogin} />
     </div>
   );
 
-  function handleSubmit(e: FormEvent<HTMLFormElement>) {
-    e.preventDefault();
-
-    const form = e.currentTarget;
-    const formData = new FormData(form);
-
-    const formJson = Object.fromEntries(formData.entries());
-    alert(JSON.stringify(formJson));
+  function onLogin({ login, password }: { login: string; password: string }) {
+    console.log({
+      login,
+      password,
+    });
   }
 }
 

@@ -1,19 +1,19 @@
-import { FormEvent, useState } from "react";
+import { useState } from "react";
 import Button from "../../../../components/Button/Button";
-import { ReactComponent as EyeClosed } from '../../assets/icons/icon-closed-eye.svg';
-import { ReactComponent as EyeOpened } from '../../assets/icons/icon-opened-eye.svg';
+import { ReactComponent as EyeClosed } from "../../../../assets/icons/icon-closed-eye.svg";
+import { ReactComponent as EyeOpened } from "../../../../assets/icons/icon-opened-eye.svg";
 
 function LoginForm({
-  handleSubmit,
+  onLogin,
 }: {
-  handleSubmit?: (e: FormEvent<HTMLFormElement>) => void;
+  onLogin: ({ login, password }: { login: string; password: string }) => void;
 }) {
   const [isPasswordShown, setPasswordShown] = useState(false);
 
-  const [username, setUsername] = useState(``);
+  const [login, setLogin] = useState(``);
   const [password, setPassword] = useState(``);
 
-  const isUsernameInvalid = !username || !username.length;
+  const isLoginInvalid = !login || !login.length;
   const isPasswordInvalid = !password || !password.length;
 
   return (
@@ -21,9 +21,13 @@ function LoginForm({
       <h1 className="login-form-container__title">Sign in</h1>
       <form
         className="login-form-container__form"
-        action=""
-        data-test="form"
-        onSubmit={handleSubmit}
+        onSubmit={(e) => {
+          e.preventDefault();
+          onLogin({
+            login,
+            password,
+          });
+        }}
       >
         <div className="login-form-container__field-box">
           <label
@@ -39,9 +43,10 @@ function LoginForm({
               placeholder="Enter login"
               id="login"
               name="login"
-              data-test="login"
-              value={username}
-              onChange={(e) => setUsername(e.target.value.trim())}
+              data-test="login-input"
+              value={login}
+              required
+              onChange={(e) => setLogin(e.target.value.trim())}
             />
           </div>
         </div>
@@ -59,9 +64,10 @@ function LoginForm({
               className="login-form-container__input"
               placeholder="Enter password"
               id="password"
-              data-test="password"
+              data-test="password-input"
               name="password"
               value={password}
+              required
               onChange={(e) => setPassword(e.target.value.trim())}
             />
             <Button
@@ -77,17 +83,13 @@ function LoginForm({
         <Button
           type="submit"
           className="button--bright"
-          data-test="submit-button"
-          disabled={isUsernameInvalid || isPasswordInvalid}
+          data-test="login-button"
+          disabled={isLoginInvalid || isPasswordInvalid}
         >
           Sign in
         </Button>
 
       </form>
-      {/* <Error
-        error="Incorrect login or password."
-        className="login-form-container__error"
-      /> */}
     </div>
 
   );
