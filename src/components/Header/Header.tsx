@@ -9,40 +9,42 @@ function Header() {
   const [openPopup, setOpenPopup] = useState(false);
   return (
     <div className="header">
-      <Logo />
-      <Button
-        type="button"
-        onClick={() => setOpenPopup(!openPopup)}
-        className="button header__profile"
-      >
-        <div className="header__profile-image-container">
-          <img
-            src={ProfileCircle}
-            className="header__profile-image"
-            alt="ProfileCircle"
-            draggable={false}
-          />
-        </div>
-        <div className="header__arrow-icon-container">
-          <DropArrow />
-        </div>
-
-      </Button>
-      {openPopup && (
-        <div className="header__popup">
-          <Button
-            type="button"
-            className="button header__popup-container"
-          >
-            <div className="header__logout-icon-container">
-              <LogOut />
+      <div className="header__container">
+        <Logo />
+        <Button
+          type="button"
+          onClick={() => setOpenPopup(!openPopup)}
+          className="button"
+        >
+          <div className="header__profile">
+            <div className="header__profile-image-container">
+              <img
+                src={ProfileCircle}
+                className="header__profile-image"
+                alt="ProfileCircle"
+                draggable={false}
+              />
             </div>
-            <span className="header__logout-text">
-              Log out
-            </span>
-          </Button>
+            <div className="header__arrow-icon-container">
+              <DropArrow />
+            </div>
+          </div>
 
-        </div>
+        </Button>
+      </div>
+
+      {openPopup && (
+        <Button
+          type="button"
+          className="button header__popup-container"
+        >
+          <div className="header__logout-icon-container">
+            <LogOut />
+          </div>
+          <span className="header__logout-text">
+            Log out
+          </span>
+        </Button>
       )}
     </div>
   );
