@@ -62,7 +62,10 @@ describe(`<LoginForm />`, () => {
       .click();
 
     cy.get(`@onLogin`)
-      .should(`have.been.called`, 1);
+      .should(`have.been.calledOnceWith`, {
+        login: `admin`,
+        password: `123`,
+      });
   });
 
   it(`disabled login-button SHOULD NOT call onLogin function `, () => {
