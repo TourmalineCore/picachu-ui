@@ -5,11 +5,60 @@
   z-index: 10;
   padding: 16px 24px;
   width: 100%;
-  box-shadow: 1px 4px 16px rgb(180 173 189 / 15%);
   background-color: $color-white;
 
-  &__container {
+  &__menu-container {
     position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 30px;
+    height: 30px;
+  }
+
+  &__menu-burger {
+    position: relative;
+    border-radius: 5px;
+    width: 21px;
+    height: 2px;
+    background: $color-grey-label;
+    transition: all 0.3s ease-in-out;
+
+    &::after,
+    &::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      border-radius: 5px;
+      width: 21px;
+      height: 2px;
+      background: $color-grey-label;
+      transition: all 0.3s ease-in-out;
+    }
+
+    &::before {
+      transform: translateY(-7px);
+    }
+
+    &::after {
+      transform: translateY(7px);
+    }
+
+    &--active {
+      background: transparent;
+      transform: translateX(-10px);
+
+      &::before {
+        transform: rotate(45deg) translate(7px, -7px);
+      }
+
+      &::after {
+        transform: rotate(-45deg) translate(7px, 7px);
+      }
+    }
+  }
+
+  &__container {
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -20,21 +69,7 @@
   }
 
   &__profile {
-    display: flex;
-    align-items: center;
-    cursor: pointer;
-
-    &:hover {
-      .header__arrow-icon-container {
-        color: $color-grey-label;
-      }
-    }
-
-    &:active {
-      .header__arrow-icon-container {
-        transform: translateY(3px);
-      }
-    }
+    display: none;
   }
 
   &__profile-image-container {
@@ -89,8 +124,34 @@
     color: $color-grey-label;
   }
 
+  &--active {
+    box-shadow: 1px 4px 16px rgb(180 173 189 / 15%);
+  }
+
   @include desktop {
     padding: 20px 32px;
     box-shadow: none;
+
+    &__profile {
+      display: flex;
+      align-items: center;
+      cursor: pointer;
+
+      &:hover {
+        .header__arrow-icon-container {
+          color: $color-grey-label;
+        }
+      }
+
+      &:active {
+        .header__arrow-icon-container {
+          transform: translateY(3px);
+        }
+      }
+    }
+
+    &__menu-container {
+      display: none;
+    }
   }
 }

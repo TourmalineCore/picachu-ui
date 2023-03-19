@@ -8,9 +8,10 @@ import Button from '../Button/Button';
 function Header() {
   const [openPopup, setOpenPopup] = useState(false);
   return (
-    <div className="header">
+    <div className={openPopup ? `header header--active` : `header`}>
       <div className="header__container">
         <Logo />
+
         <Button
           type="button"
           onClick={() => setOpenPopup(!openPopup)}
@@ -28,6 +29,10 @@ function Header() {
             <div className="header__arrow-icon-container">
               <DropArrow />
             </div>
+          </div>
+
+          <div className="header__menu-container">
+            <div className={openPopup ? `header__menu-burger header__menu-burger--active` : `header__menu-burger`} />
           </div>
 
         </Button>
