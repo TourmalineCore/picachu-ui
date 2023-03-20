@@ -8,20 +8,21 @@ describe(`<LoginForm />`, () => {
   });
 
   it(`form fields SHOULD be empty by default`, () => {
-    [cy.getByData(`login-input`),
-      cy.getByData(`password-input`)]
-      .forEach((field) => field
-        .should(`be.empty`));
+    cy.getByData(`login-input`)
+      .should(`be.empty`);
+
+    cy.getByData(`password-input`)
+      .should(`be.empty`);
   });
 
-  it(`login-button SHOULD be disabled if login has value and password not`, () => {
+  it(`login button SHOULD be disabled if login has value and password not`, () => {
     cy.getByData(`login-input`)
       .type(`admin`);
 
     cy.getByData(`login-button`)
       .should(`be.disabled`);
   });
-  it(`login-button SHOULD be disabled if password has value and login not`, () => {
+  it(`login button SHOULD be disabled if password has value and login not`, () => {
     cy.getByData(`password-input`)
       .type(`123`);
 
@@ -29,7 +30,7 @@ describe(`<LoginForm />`, () => {
       .should(`be.disabled`);
   });
 
-  it(`login-button SHOULD be disabled if password has space value and login has space value`, () => {
+  it(`login button SHOULD be disabled if password has space value and login has space value`, () => {
     cy.getByData(`login-input`)
       .type(`  `);
 
@@ -40,7 +41,7 @@ describe(`<LoginForm />`, () => {
       .should(`be.disabled`);
   });
 
-  it(`login-button SHOULD NOT be disabled if password has value and login has value`, () => {
+  it(`login button SHOULD NOT be disabled if password has value and login has value`, () => {
     cy.getByData(`login-input`)
       .type(`admin`);
 
@@ -51,7 +52,7 @@ describe(`<LoginForm />`, () => {
       .should(`not.be.disabled`);
   });
 
-  it(`login-button SHOULD call onLogin function only once`, () => {
+  it(`login button SHOULD call onLogin function only once`, () => {
     cy.getByData(`login-input`)
       .type(`admin`);
 
@@ -68,7 +69,7 @@ describe(`<LoginForm />`, () => {
       });
   });
 
-  it(`disabled login-button SHOULD NOT call onLogin function `, () => {
+  it(`disabled login button SHOULD NOT call onLogin function `, () => {
     cy.getByData(`login-button`)
       .should(`be.disabled`)
       .click({ force: true });
