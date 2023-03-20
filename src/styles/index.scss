@@ -2,7 +2,7 @@
 @import "globals";
 @import "variables";
 @import "mixins";
-@import "../pages/Login/LoginPage";
+@import "../pages/Login/LoginPage.scss";
 @import "../components/Button/Button.scss";
 @import "../components/Error/Error.scss";
-@import "../components/LoginForm/LoginForm.scss";
+@import "../pages/Login/components/LoginForm/LoginForm.scss";

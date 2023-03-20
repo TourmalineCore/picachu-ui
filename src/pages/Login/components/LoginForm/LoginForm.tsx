@@ -1,35 +1,33 @@
-import { FormEvent, useState } from "react";
-import Button from "../Button/Button";
-import Error from "../Error/Error";
-import { ReactComponent as EyeClosed } from '../../assets/icons/icon-closed-eye.svg';
-import { ReactComponent as EyeOpened } from '../../assets/icons/icon-opened-eye.svg';
+import { useState } from "react";
+import Button from "../../../../components/Button/Button";
+import { ReactComponent as EyeClosed } from "../../../../assets/icons/icon-closed-eye.svg";
+import { ReactComponent as EyeOpened } from "../../../../assets/icons/icon-opened-eye.svg";
 
-function LoginForm() {
+function LoginForm({
+  onLogin,
+}: {
+  onLogin: ({ login, password }: { login: string; password: string }) => unknown;
+}) {
   const [isPasswordShown, setPasswordShown] = useState(false);
 
-  const [username, setUsername] = useState(``);
+  const [login, setLogin] = useState(``);
   const [password, setPassword] = useState(``);
 
-  const isUsernameInvalid = !username || !username.length;
+  const isLoginInvalid = !login || !login.length;
   const isPasswordInvalid = !password || !password.length;
-
-  function handleSubmit(e: FormEvent<HTMLFormElement>) {
-    e.preventDefault();
-
-    const form = e.currentTarget;
-    const formData = new FormData(form);
-
-    const formJson = Object.fromEntries(formData.entries());
-    alert(JSON.stringify(formJson));
-  }
 
   return (
     <div className="login-form-container">
       <h1 className="login-form-container__title">Sign in</h1>
       <form
         className="login-form-container__form"
-        action=""
-        onSubmit={handleSubmit}
+        onSubmit={(e) => {
+          e.preventDefault();
+          onLogin({
+            login,
+            password,
+          });
+        }}
       >
         <div className="login-form-container__field-box">
           <label
@@ -45,8 +43,10 @@ function LoginForm() {
               placeholder="Enter login"
               id="login"
               name="login"
-              value={username}
-              onChange={(e) => setUsername(e.target.value.trim())}
+              data-test="login-input"
+              value={login}
+              required
+              onChange={(e) => setLogin(e.target.value.trim())}
             />
           </div>
         </div>
@@ -64,8 +64,10 @@ function LoginForm() {
               className="login-form-container__input"
               placeholder="Enter password"
               id="password"
+              data-test="password-input"
               name="password"
               value={password}
+              required
               onChange={(e) => setPassword(e.target.value.trim())}
             />
             <Button
@@ -81,16 +83,13 @@ function LoginForm() {
         <Button
           type="submit"
           className="button--bright"
-          disabled={isUsernameInvalid || isPasswordInvalid}
+          data-test="login-button"
+          disabled={isLoginInvalid || isPasswordInvalid}
         >
           Sign in
         </Button>
 
       </form>
-      <Error
-        error="Incorrect login or password."
-        className="login-form-container__error"
-      />
     </div>
 
   );

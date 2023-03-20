@@ -1,5 +1,5 @@
 import MountainImage from '../../assets/images/Mountain.png';
-import LoginForm from '../../components/LoginForm/LoginForm';
+import LoginForm from './components/LoginForm/LoginForm';
 
 function LoginPage() {
   return (
@@ -12,10 +12,16 @@ function LoginPage() {
           draggable={false}
         />
       </div>
-      <LoginForm />
-
+      <LoginForm onLogin={onLogin} />
     </div>
   );
+
+  function onLogin({ login, password }: { login: string; password: string }) {
+    console.log({
+      login,
+      password,
+    });
+  }
 }
 
 export default LoginPage;
