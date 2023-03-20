@@ -1,19 +1,26 @@
 .header {
+  $this: &;
+
   position: fixed;
   left: 0;
   top: 0;
-  z-index: 10;
+  z-index: $layer-header;
   padding: 16px 24px;
   width: 100%;
   background-color: $color-white;
+
+  &__logo {
+    width: 106px;
+    height: 24px;
+  }
 
   &__menu-container {
     position: relative;
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 30px;
-    height: 30px;
+    width: 32px;
+    height: 32px;
   }
 
   &__menu-burger {
@@ -65,28 +72,11 @@
   }
 
   &__arrow-icon-container {
-    @include icon-container(12px,6px,$color-grey-input);
+    @include icon-container(8px,12px,$color-grey-input);
   }
 
   &__profile {
     display: none;
-  }
-
-  &__profile-image-container {
-    position: relative;
-    overflow: hidden;
-    margin-right: 8px;
-    border-radius: 100px;
-    width: 32px;
-    height: 32px;
-  }
-
-  &__profile-image {
-    position: absolute;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
   }
 
   &__popup-container {
@@ -115,6 +105,7 @@
   &__logout-icon-container {
     @include icon-container(18px,18px,$color-grey-label);
 
+    flex: none;
     margin-right: 20px;
   }
 
@@ -138,16 +129,33 @@
       cursor: pointer;
 
       &:hover {
-        .header__arrow-icon-container {
+        #{$this}__arrow-icon-container {
           color: $color-grey-label;
         }
       }
 
       &:active {
-        .header__arrow-icon-container {
+        #{$this}__arrow-icon-container {
           transform: translateY(3px);
         }
       }
+    }
+
+    &__profile-image-container {
+      position: relative;
+      overflow: hidden;
+      margin-right: 8px;
+      border-radius: 100px;
+      width: 32px;
+      height: 32px;
+    }
+
+    &__profile-image {
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
     }
 
     &__menu-container {

@@ -1,55 +1,79 @@
-import { useState } from 'react';
+import {
+  useRef,
+  useState,
+} from 'react';
+import clsx from 'clsx';
+import { Link } from 'react-router-dom';
 import { ReactComponent as Logo } from '../../assets/icons/icon-logo.svg';
 import { ReactComponent as DropArrow } from '../../assets/icons/icon-arrow-down.svg';
 import { ReactComponent as LogOut } from '../../assets/icons/icon-logout.svg';
 import ProfileCircle from '../../assets/images/profile-bg.png';
-import Button from '../Button/Button';
+import { useOnClickOutside } from '../../common/hooks/useOnClickOutside';
 
 function Header() {
-  const [openPopup, setOpenPopup] = useState(false);
+  const [isPopupOpen, setOpenPopup] = useState(false);
+  const ref = useRef<HTMLDivElement>(null);
+  useOnClickOutside(ref, () => setOpenPopup(false));
   return (
-    <div className={openPopup ? `header header--active` : `header`}>
+    <div
+      className={clsx(`header`, {
+        'header header--active': isPopupOpen,
+      })}
+      ref={ref}
+    >
       <div className="header__container">
-        <Logo />
+        <Link
+          to="/"
+          className="header__logo"
+        >
+          <Logo />
+        </Link>
 
-        <Button
+        <button
           type="button"
-          onClick={() => setOpenPopup(!openPopup)}
+          onClick={() => setOpenPopup(!isPopupOpen)}
           className="button"
         >
-          <div className="header__profile">
-            <div className="header__profile-image-container">
+          <span
+            className="header__profile"
+
+          >
+            <span className="header__profile-image-container">
               <img
                 src={ProfileCircle}
                 className="header__profile-image"
                 alt="ProfileCircle"
                 draggable={false}
               />
-            </div>
-            <div className="header__arrow-icon-container">
+            </span>
+            <span className="header__arrow-icon-container">
               <DropArrow />
-            </div>
-          </div>
+            </span>
+          </span>
 
-          <div className="header__menu-container">
-            <div className={openPopup ? `header__menu-burger header__menu-burger--active` : `header__menu-burger`} />
-          </div>
+          <span className="header__menu-container">
+            <span className={clsx(`header__menu-burger`, {
+              "header__menu-burger--active": isPopupOpen,
+            })}
+            />
+          </span>
 
-        </Button>
+        </button>
       </div>
 
-      {openPopup && (
-        <Button
+      {isPopupOpen && (
+        <button
           type="button"
           className="button header__popup-container"
+          onClick={() => setOpenPopup(!isPopupOpen)}
         >
-          <div className="header__logout-icon-container">
+          <span className="header__logout-icon-container">
             <LogOut />
-          </div>
+          </span>
           <span className="header__logout-text">
             Log out
           </span>
-        </Button>
+        </button>
       )}
     </div>
   );
