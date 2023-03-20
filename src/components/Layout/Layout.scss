@@ -1,10 +1,20 @@
-.layout {
+// probably makes sense to move this file to the styles folder to make it shared
+
+.main {
   display: flex;
   flex-direction: column;
-  padding: 0 24px;
-  height: 100vh;
+  margin-top: $top-menu-height;
+  min-height: 100vh;
+}
+
+.container {
+  margin-right: auto;
+  margin-left: auto;
+  padding: 0 $side-paddings-mobile;
+  width: 100%;
+  max-width: $container-max-width;
 
   @include desktop {
-    padding: 0 32px;
+    padding: 0 $side-paddings-desktop;
   }
 }

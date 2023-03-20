@@ -6,14 +6,14 @@ function Layout({
   children: ReactNode;
 }) {
   return (
-    <div className="layout">
+    <>
       <header>Header</header>
-
-      <main>
-        {children}
+      <main className="main">
+        <div className="container">
+          {children}
+        </div>
       </main>
-
-    </div>
+    </>
   );
 }
 
