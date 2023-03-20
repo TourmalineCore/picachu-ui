@@ -6,7 +6,7 @@ import { ReactComponent as EyeOpened } from "../../../../assets/icons/icon-opene
 function LoginForm({
   onLogin,
 }: {
-  onLogin: ({ login, password }: { login: string; password: string }) => void;
+  onLogin: ({ login, password }: { login: string; password: string }) => unknown;
 }) {
   const [isPasswordShown, setPasswordShown] = useState(false);
 
