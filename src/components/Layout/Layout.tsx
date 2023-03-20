@@ -1,16 +1,12 @@
-import { ReactNode } from "react";
+import { Outlet } from "react-router-dom";
 
-function Layout({
-  children,
-}: {
-  children: ReactNode;
-}) {
+function Layout() {
   return (
     <div className="layout">
       <header>Header</header>
 
       <main>
-        {children}
+        <Outlet />
       </main>
 
     </div>
