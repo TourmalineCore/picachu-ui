@@ -1,15 +1,16 @@
-import { ButtonProps } from './Button.types';
+/* eslint-disable react/button-has-type */
+
+import { ButtonHTMLAttributes } from "react";
 
 function Button({
   className,
   children,
-  ...props
-}: ButtonProps) {
+  ...rest
+}: ButtonHTMLAttributes<HTMLButtonElement>) {
   return (
     <button
-      type="button"
-      className={`button ${className}`}
-      {...props}
+      className={className}
+      {...rest}
     >
       {children}
     </button>
