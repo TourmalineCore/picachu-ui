@@ -12,10 +12,10 @@ import { useOnClickOutside } from '../../common/hooks/useOnClickOutside';
 
 function Header() {
   const [isPopupOpen, setOpenPopup] = useState(false);
-  const ref = useRef<HTMLDivElement>(null);
+  const ref = useRef<HTMLElement>(null);
   useOnClickOutside(ref, () => setOpenPopup(false));
   return (
-    <div
+    <header
       className={clsx(`header`, {
         'header header--active': isPopupOpen,
       })}
@@ -75,7 +75,7 @@ function Header() {
           </span>
         </button>
       )}
-    </div>
+    </header>
   );
 }
 
