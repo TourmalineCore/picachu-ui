@@ -54,3 +54,22 @@ body {
   white-space: nowrap;
   clip-path: inset(100%);
 }
+
+.main {
+  display: flex;
+  flex-direction: column;
+  margin-top: $top-menu-height;
+  min-height: 100vh;
+}
+
+.container {
+  margin-right: auto;
+  margin-left: auto;
+  padding: 0 $side-paddings-mobile;
+  width: 100%;
+  max-width: $container-max-width;
+
+  @include desktop {
+    padding: 0 $side-paddings-desktop;
+  }
+}

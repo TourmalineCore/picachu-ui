@@ -4,6 +4,7 @@ function Layout() {
   return (
     <>
       <header>Header</header>
+
       <main className="main">
         <div className="container">
           <Outlet />
