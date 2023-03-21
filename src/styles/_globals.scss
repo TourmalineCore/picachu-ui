@@ -42,8 +42,34 @@ body {
   font-family: var(font-family);
 }
 
-ul {
-  list-style-type: none;
-  margin: 0;
+.visually-hidden {
+  position: absolute;
+  clip: rect(0 0 0 0);
+  overflow: hidden;
+  margin: -1px;
+  border: 0;
   padding: 0;
+  width: 1px;
+  height: 1px;
+  white-space: nowrap;
+  clip-path: inset(100%);
+}
+
+.main {
+  display: flex;
+  flex-direction: column;
+  margin-top: $top-menu-height;
+  min-height: 100vh;
+}
+
+.container {
+  margin-right: auto;
+  margin-left: auto;
+  padding: 0 $side-paddings-mobile;
+  width: 100%;
+  max-width: $container-max-width;
+
+  @include desktop {
+    padding: 0 $side-paddings-desktop;
+  }
 }
