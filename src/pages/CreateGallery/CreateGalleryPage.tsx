@@ -34,35 +34,35 @@ function CreateGalleryPage() {
     },
   ];
   return (
-    <div className="create-gallery">
-      <div className="create-gallery__container">
-        <div className="create-gallery__image-row">
-          {
-            imageArray.map((image) => (
-              <img
-                key={image.id}
-                src={image.src}
-                alt={image.alt}
-                draggable={false}
-                className="create-gallery__image"
-              />
-            ))
-          }
-        </div>
-        <div className="create-gallery__text">
-          <h1 className="create-gallery__title">Create a gallery to get started</h1>
-          <p className="create-gallery__decription">
-            With galleries you can group photos by category or event
-          </p>
-        </div>
+    <div className="create-gallery-page">
 
-        <Button
-          type="button"
-          className="button button--bright create-gallery__position-btn"
-        >
-          Create a gallery
-        </Button>
+      <div className="create-gallery-page__image-row">
+        {
+          imageArray.map((image) => (
+            <img
+              key={image.id}
+              src={image.src}
+              alt={image.alt}
+              draggable={false}
+              className="create-gallery-page__image"
+            />
+          ))
+        }
       </div>
+      <div className="create-gallery-page__text">
+        <h1 className="create-gallery-page__title">Create a gallery to get started</h1>
+        <p className="create-gallery-page__decription">
+          With galleries you can group photos by category or event
+        </p>
+      </div>
+
+      <Button
+        type="button"
+        className="button button--bright create-gallery-page__position-btn"
+      >
+        Create a gallery
+      </Button>
+
     </div>
   );
 }

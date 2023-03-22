@@ -1,42 +1,28 @@
-.create-gallery {
+.create-gallery-page {
   position: relative;
   display: flex;
-  align-items: center;
+  flex-direction: column;
   justify-content: center;
-  overflow-x: hidden;
-  padding-top: $top-menu-height;
-  height: 100vh;
+  padding-top: 65px;
+  min-height: 100vh;
 
   &__text {
     position: relative;
     display: inline-block;
-    width: 45%;
-    text-align: center;
-
-    @include tablet {
-      width: 100%;
-    }
-
-    @include desktop {
-      width: 100%;
-    }
-  }
-
-  &__container {
-    position: relative;
-    display: inline-block;
+    margin-bottom: 32px;
     text-align: center;
   }
 
   &__image-row {
     display: flex;
     align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    margin: 0 -24px;
     margin-bottom: 56px;
   }
 
   &__image {
-    @include noselect;
-
     border-radius: 10px;
 
     &:first-child {
@@ -58,13 +44,9 @@
     }
 
     &:nth-child(3) {
+      margin: 0 16px;
       width: 156px;
       height: 208px;
-    }
-
-    &:nth-child(2),
-    &:nth-child(3) {
-      margin-right: 16px;
     }
   }
 
@@ -83,7 +65,6 @@
   }
 
   &__decription {
-    margin-bottom: 32px;
     font-weight: 500;
     font-size: 14px;
     line-height: 1.4;
