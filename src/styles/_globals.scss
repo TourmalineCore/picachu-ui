@@ -4,6 +4,19 @@
   box-sizing: border-box;
 }
 
+html::-webkit-scrollbar {
+  width: 5px;
+}
+
+html::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+html::-webkit-scrollbar-thumb {
+  border-radius: 5px;
+  background: $primary-color-default;
+}
+
 :root {
   font-family: Inter, Avenir, Helvetica, Arial, sans-serif;
   font-weight: 400;
@@ -58,14 +71,18 @@ body {
 .main {
   display: flex;
   flex-direction: column;
-  margin-top: $top-menu-height;
+
+  // Calls the scroll bar
+  // margin-top: $top-menu-height;
   min-height: 100vh;
 }
 
 .container {
   margin-right: auto;
   margin-left: auto;
-  padding: 0 $side-paddings-mobile;
+
+  // There is no padding in the design on the mobile create-gallery-page
+  // padding: 0 $side-paddings-mobile;
   width: 100%;
   max-width: $container-max-width;
 

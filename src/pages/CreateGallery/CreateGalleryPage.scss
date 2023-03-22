@@ -1,0 +1,93 @@
+.create-gallery {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow-x: hidden;
+  padding-top: $top-menu-height;
+  height: 100vh;
+
+  &__text {
+    position: relative;
+    display: inline-block;
+    width: 45%;
+    text-align: center;
+
+    @include tablet {
+      width: 100%;
+    }
+
+    @include desktop {
+      width: 100%;
+    }
+  }
+
+  &__container {
+    position: relative;
+    display: inline-block;
+    text-align: center;
+  }
+
+  &__image-row {
+    display: flex;
+    align-items: center;
+    margin-bottom: 56px;
+  }
+
+  &__image {
+    @include noselect;
+
+    border-radius: 10px;
+
+    &:first-child {
+      margin-right: 8px;
+      width: 96px;
+      height: 128px;
+    }
+
+    &:last-child {
+      margin-left: 8px;
+      width: 96px;
+      height: 128px;
+    }
+
+    &:nth-child(2),
+    &:nth-child(4) {
+      width: 134px;
+      height: 178px;
+    }
+
+    &:nth-child(3) {
+      width: 156px;
+      height: 208px;
+    }
+
+    &:nth-child(2),
+    &:nth-child(3) {
+      margin-right: 16px;
+    }
+  }
+
+  &__title {
+    margin-bottom: 16px;
+    min-width: 100%;
+    font-weight: 500;
+    font-size: 22px;
+    line-height: 1.5;
+    color: $color-black;
+  }
+
+  &__position-btn {
+    margin: 0 auto;
+    width: 186px;
+  }
+
+  &__decription {
+    margin-bottom: 32px;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 1.4;
+    text-align: center;
+    color: $color-grey-label;
+  }
+}

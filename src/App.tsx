@@ -1,5 +1,6 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Layout from './components/Layout/Layout';
+import CreateGalleryPage from './pages/CreateGallery/CreateGalleryPage';
 import LoginPage from './pages/Login/LoginPage';
 
 export function App() {
@@ -11,9 +12,16 @@ export function App() {
           element={<LoginPage />}
         />
         <Route
-          path="/*"
+          path="/"
           element={<Layout />}
-        />
+        >
+          <Route
+            path=""
+            element={<CreateGalleryPage />}
+            index
+          />
+
+        </Route>
       </Routes>
     </BrowserRouter>
   );
