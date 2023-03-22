@@ -1,6 +1,7 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Layout from './components/Layout/Layout';
 import CreateGalleryPage from './pages/CreateGallery/CreateGalleryPage';
+import GalleryPage from './pages/Gallery/Gallery';
 import LoginPage from './pages/Login/LoginPage';
 
 export function App() {
@@ -19,6 +20,10 @@ export function App() {
             path=""
             element={<CreateGalleryPage />}
             index
+          />
+          <Route
+            path="create-gallery/galleries"
+            element={<GalleryPage />}
           />
 
         </Route>

@@ -57,4 +57,45 @@
       pointer-events: none;
     }
   }
+
+  &--light {
+    $this: &;
+
+    display: flex;
+    align-items: center;
+    outline: 1px solid $color-grey-light-200;
+    padding: 16px 24px;
+    width: 100%;
+    max-width: 288px;
+    transition: all 0.3s ease-in-out;
+
+    &__title {
+      margin-right: 9px;
+      width: 100%;
+      font-weight: 500;
+      font-size: 14px;
+      line-height: 1.4;
+      text-align: left;
+      color: $color-black;
+    }
+
+    &__icon-container {
+      @include icon-container(14px,14px,$color-grey-label);
+
+      flex: none;
+    }
+
+    &:hover {
+      background-color: $color-grey-light-100;
+      #{$this}__icon-container {
+        color: $color-black;
+        transition: color 0.3s ease-in-out;
+
+        svg {
+          transform: rotate(180deg);
+          transition: transform 0.5s ease-in-out;
+        }
+      }
+    }
+  }
 }

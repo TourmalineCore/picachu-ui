@@ -4,6 +4,7 @@ import image2 from "../../assets/images/create-gallery-2-image.png";
 import image3 from "../../assets/images/create-gallery-3-image.png";
 import image4 from "../../assets/images/create-gallery-4-image.png";
 import image5 from "../../assets/images/create-gallery-5-image.png";
+import Breadcrumb from "../../components/Breadcrumb/Breadcrumb";
 
 function CreateGalleryPage() {
   const imageArray = [
@@ -35,7 +36,7 @@ function CreateGalleryPage() {
   ];
   return (
     <div className="create-gallery-page">
-
+      <Breadcrumb />
       <div className="create-gallery-page__image-row">
         {
           imageArray.map((image) => (
