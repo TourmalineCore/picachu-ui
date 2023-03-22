@@ -72,7 +72,7 @@ function LoginForm({
             />
             <Button
               type="button"
-              className=" button button--eye login-form__password-switch-btn"
+              className="button button--eye login-form__password-switch-btn"
               onClick={() => setPasswordShown(!isPasswordShown)}
             >
               {isPasswordShown ? <EyeClosed /> : <EyeOpened />}
@@ -82,7 +82,7 @@ function LoginForm({
 
         <Button
           type="submit"
-          className="button button--bright"
+          className="button button--bright login-form__submit-btn"
           data-test="login-button"
           disabled={isLoginInvalid || isPasswordInvalid}
         >

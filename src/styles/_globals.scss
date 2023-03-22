@@ -4,6 +4,19 @@
   box-sizing: border-box;
 }
 
+html::-webkit-scrollbar {
+  width: 5px;
+}
+
+html::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+html::-webkit-scrollbar-thumb {
+  border-radius: 5px;
+  background: $color-grey-input;
+}
+
 :root {
   font-family: Inter, Avenir, Helvetica, Arial, sans-serif;
   font-weight: 400;
@@ -15,6 +28,14 @@
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   text-size-adjust: 100%;
+}
+
+h1,
+h2,
+h3,
+h4,
+p {
+  margin: 0;
 }
 
 #root {
@@ -58,7 +79,6 @@ body {
 .main {
   display: flex;
   flex-direction: column;
-  margin-top: $top-menu-height;
   min-height: 100vh;
 }
 
