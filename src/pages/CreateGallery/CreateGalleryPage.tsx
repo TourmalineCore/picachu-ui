@@ -51,7 +51,7 @@ function CreateGalleryPage() {
       </div>
       <div className="create-gallery-page__text">
         <h1 className="create-gallery-page__title">Create a gallery to get started</h1>
-        <p className="create-gallery-page__decription">
+        <p className="create-gallery-page__description">
           With galleries you can group photos by category or event
         </p>
       </div>
