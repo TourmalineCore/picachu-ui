@@ -14,6 +14,8 @@
   }
 
   &__image-row {
+    @include noselect;
+
     display: flex;
     align-items: center;
     justify-content: center;
