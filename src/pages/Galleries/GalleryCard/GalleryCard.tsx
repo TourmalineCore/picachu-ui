@@ -1,19 +1,31 @@
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable jsx-a11y/no-static-element-interactions */
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { ReactComponent as DeleteIcon } from "../../../assets/icons/icon-delete.svg";
 
 function GalleryCard({
+  name,
+  newlyCreated,
   imagePath,
   imageAlt,
   photosCount,
 }: {
+  name: string;
+  newlyCreated: boolean;
   imagePath: string;
   imageAlt: string;
   photosCount: number;
 }) {
-  const [isEditing, setEditing] = useState(false);
-  const [galleryName, setGalleryName] = useState(`new gallery`);
+  const nameRef = useRef<HTMLInputElement>();
+
+  useEffect(() => {
+    if (newlyCreated) {
+      nameRef.current!.focus();
+    }
+  }, [newlyCreated]);
+
+  const [isEditing, setEditing] = useState(newlyCreated);
+  const [galleryName, setGalleryName] = useState(name);
 
   // Event handler while pressing any key while editing
   const handleKeyDown = (event: any) => {
@@ -45,6 +57,8 @@ function GalleryCard({
               onKeyDown={(e) => handleKeyDown(e)}
             >
               <input
+                ref={nameRef}
+                data-cy="gallery-name-input"
                 type="text"
                 value={galleryName}
                 onChange={(e) => setGalleryName(e.target.value)}
