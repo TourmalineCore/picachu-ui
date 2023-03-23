@@ -1,6 +1,8 @@
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable jsx-a11y/no-static-element-interactions */
-import { useEffect, useRef, useState } from "react";
+import {
+  KeyboardEvent, useEffect, useRef, useState,
+} from "react";
 import { ReactComponent as DeleteIcon } from "../../../assets/icons/icon-delete.svg";
 
 function GalleryCard({
@@ -50,7 +52,7 @@ function GalleryCard({
                 type="text"
                 value={galleryName}
                 onChange={(e) => setGalleryName(e.target.value)}
-                onBlur={(e) => onNameChange(galleryName)}
+                onBlur={() => onNameChange(galleryName)}
                 onKeyDown={onNameKeyDown}
               />
             </div>
@@ -79,10 +81,9 @@ function GalleryCard({
     </div>
   );
 
-  function onNameKeyDown(e) {
-    if (e.key === `Enter`) {
-      // 👇 Get input value
-      onNameChange(e.target.value);
+  function onNameKeyDown(e: KeyboardEvent<HTMLInputElement>) {
+    if (e.key === `Enter` || e.key === `Tab`) {
+      onNameChange((e.target as HTMLInputElement).value);
     }
   }
 }
