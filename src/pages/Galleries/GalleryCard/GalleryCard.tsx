@@ -64,6 +64,7 @@ function GalleryCard({
                 type="text"
                 value={galleryName}
                 onChange={(e) => setGalleryName(e.target.value)}
+                onBlur={(e) => onNameChange(galleryName)}
                 onKeyDown={onNameKeyDown}
               />
             </div>
