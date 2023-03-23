@@ -29,17 +29,6 @@ function GalleryCard({
   const [isEditing, setEditing] = useState(newlyCreated);
   const [galleryName, setGalleryName] = useState(name);
 
-  // Event handler while pressing any key while editing
-  const handleKeyDown = (event: any) => {
-    const { key } = event;
-    const keys = [`Escape`, `Tab`, `Enter`];
-    if (
-      (keys.indexOf(key) > -1)
-    ) {
-      setEditing(false);
-    }
-  };
-
   return (
     <div className="gallery-card">
       <div className="gallery-card__image-container">
@@ -54,10 +43,7 @@ function GalleryCard({
       <div className="gallery-card__inner">
         <div className="gallery-card__wrapper">
           {isEditing ? (
-            <div
-              onBlur={() => setEditing(false)}
-              onKeyDown={(e) => handleKeyDown(e)}
-            >
+            <div>
               <input
                 ref={nameRef}
                 data-cy="gallery-name-input"
