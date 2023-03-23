@@ -70,5 +70,28 @@ describe(`GalleryCard`, () => {
       cy.get(`@onNameChange`)
         .should(`have.been.calledOnceWith`, `new gallery!!!`);
     });
+
+    it(`SHOULD discard changes to name WHEN pressing Escape in focused name`, () => {
+      const onNameChangeSpy = cy.spy().as(`onNameChange`);
+
+      cy.mount(
+        <GalleryCard
+          imagePath="#"
+          imageAlt=""
+          photosCount={0}
+          name="new gallery"
+          newlyCreated
+          onNameChange={onNameChangeSpy}
+        />,
+      );
+
+      cy
+        .getByData(`gallery-name-input`)
+        .type(`777`)
+        .type(`{esc}`);
+
+      cy.get(`@onNameChange`)
+        .should(`have.not.been.called`);
+    });
   });
 });
