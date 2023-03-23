@@ -1,4 +1,6 @@
 .button {
+  $this: &;
+
   @include reset-button;
 
   border-radius: 8px;
@@ -8,6 +10,19 @@
   line-height: 1.4;
   background-color: transparent;
   transition: all 0.3s ease-in-out;
+
+  &__title {
+    margin-right: 9px;
+    width: 100%;
+    text-align: left;
+    color: $color-black;
+  }
+
+  &__icon-container {
+    @include icon-container(14px,14px,$color-grey-label);
+
+    flex: none;
+  }
 
   &--close {
     width: 9px;
@@ -59,8 +74,6 @@
   }
 
   &--light {
-    $this: &;
-
     display: flex;
     align-items: center;
     outline: 1px solid $color-grey-light-200;
@@ -68,22 +81,6 @@
     width: 100%;
     max-width: 288px;
     transition: all 0.3s ease-in-out;
-
-    &__title {
-      margin-right: 9px;
-      width: 100%;
-      font-weight: 500;
-      font-size: 14px;
-      line-height: 1.4;
-      text-align: left;
-      color: $color-black;
-    }
-
-    &__icon-container {
-      @include icon-container(14px,14px,$color-grey-label);
-
-      flex: none;
-    }
 
     &:hover {
       background-color: $color-grey-light-100;

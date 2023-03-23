@@ -4,35 +4,28 @@ import { ReactComponent as ArrowRight } from '../../assets/icons/icon-breadcrumb
 function Breadcrumb() {
   const location = useLocation();
 
-  let currentLink = ``;
-
   const crumbs = location.pathname.split(`/`)
-    .filter((crumb) => crumb !== ``)
-    .map((crumb) => {
-      currentLink += `/${crumb}`;
+    .filter((crumb) => crumb !== ``);
 
-      return (
-        <div
-          className="breadcrumb__crumb"
+  return (
+    <ul className="breadcrumbs">
+      {crumbs.map((crumb) => (
+        <li
+          className="breadcrumbs__item"
           key={crumb}
         >
           <Link
-            className="breadcrumb__link"
-            to={currentLink}
+            className="breadcrumbs__link"
+            to={`/${crumb}`}
           >
             {crumb}
           </Link>
-          <div className="breadcrumb__icon-container">
+          <div className="breadcrumbs__icon">
             <ArrowRight />
           </div>
-        </div>
-      );
-    });
-
-  return (
-    <div className="breadcrumb">
-      {crumbs}
-    </div>
+        </li>
+      ))}
+    </ul>
   );
 }
 

@@ -1,8 +1,7 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Layout from './components/Layout/Layout';
-import CreateGalleryPage from './pages/CreateGallery/CreateGalleryPage';
-import GalleryPage from './pages/Gallery/Gallery';
-import LoginPage from './pages/Login/LoginPage';
+import GalleryPage from './pages/Gallery/GalleryPage';
+import LoginPage from './pages/LoginPage/LoginPage';
 
 export function App() {
   return (
@@ -17,15 +16,10 @@ export function App() {
           element={<Layout />}
         >
           <Route
-            path=""
-            element={<CreateGalleryPage />}
+            path="galleries"
+            element={<GalleryPage />}
             index
           />
-          <Route
-            path="create-gallery/galleries"
-            element={<GalleryPage />}
-          />
-
         </Route>
       </Routes>
     </BrowserRouter>

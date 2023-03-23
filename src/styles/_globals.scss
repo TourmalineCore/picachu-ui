@@ -35,8 +35,11 @@ h2,
 h3,
 h4,
 p,
-span {
+span,
+ul,
+li {
   margin: 0;
+  padding: 0;
 }
 
 #root {

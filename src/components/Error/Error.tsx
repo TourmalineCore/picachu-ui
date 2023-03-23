@@ -1,5 +1,4 @@
 import { ReactComponent as CloseIcon } from '../../assets/icons/icon-close-error.svg';
-import Button from '../Button/Button';
 
 type IError = {
   error: string;
@@ -13,13 +12,13 @@ function Error({ error, removeError, className }: IError) {
       <p className="error-message__title">
         {error}
       </p>
-      <Button
+      <button
         type="button"
         className="button button--close"
         onClick={removeError}
       >
         <CloseIcon />
-      </Button>
+      </button>
     </div>
   );
 }
