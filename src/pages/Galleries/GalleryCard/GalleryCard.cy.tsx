@@ -3,7 +3,6 @@ import '../../../../cypress/support/commands';
 
 describe(`GalleryCard`, () => {
   // beforeEach(() => {
-  //   // const onLogin = cy.spy().as(`onLogin`);
 
   // });
 
@@ -22,5 +21,31 @@ describe(`GalleryCard`, () => {
       .getByData(`gallery-name-input`)
       .should(`have.value`, `new gallery`)
       .focused();
+  });
+
+  describe(`name editing`, () => {
+    it(`SHOULD apply changes to name WHEN pressing Enter in focused name`, () => {
+      const onNameChangeSpy = cy.spy().as(`onNameChange`);
+
+      cy.mount(
+        <GalleryCard
+          imagePath="#"
+          imageAlt=""
+          photosCount={0}
+          name="new gallery"
+          newlyCreated
+          onNameChange={onNameChangeSpy}
+        />,
+      );
+
+      cy
+        .getByData(`gallery-name-input`)
+        .type(`123`)
+        .should(`have.value`, `new gallery123`)
+        .type(`{enter}`);
+
+      cy.get(`@onNameChange`)
+        .should(`have.been.calledOnceWith`, `new gallery123`);
+    });
   });
 });
