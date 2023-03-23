@@ -1,6 +1,8 @@
 .breadcrumbs {
   $this: &;
 
+  @include reset-list;
+
   display: flex;
   align-items: center;
   margin: 16px 0 28px;
@@ -33,7 +35,7 @@
   }
 
   &__icon {
-    @include icon-container(12px,7px,$color-grey-label);
+    @include icon(12px,7px,$color-grey-label);
 
     flex: none;
   }

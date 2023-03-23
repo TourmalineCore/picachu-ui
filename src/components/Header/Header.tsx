@@ -46,9 +46,7 @@ function Header() {
                 draggable={false}
               />
             </span>
-            <span className="header__arrow-icon-container">
-              <DropArrow />
-            </span>
+            <DropArrow className="header__arrow-icon" />
           </span>
 
           <span className="header__menu-container">
@@ -67,9 +65,7 @@ function Header() {
           className="button header__popup-container"
           onClick={() => setOpenPopup(!isPopupOpen)}
         >
-          <span className="header__logout-icon-container">
-            <LogOut />
-          </span>
+          <LogOut className="header__logout-icon" />
           <span className="header__logout-text">
             Log out
           </span>

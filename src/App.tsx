@@ -12,11 +12,11 @@ export function App() {
           element={<LoginPage />}
         />
         <Route
-          path="/"
+          path="/galleries"
           element={<Layout />}
         >
           <Route
-            path="galleries"
+            path=""
             element={<GalleryPage />}
             index
           />

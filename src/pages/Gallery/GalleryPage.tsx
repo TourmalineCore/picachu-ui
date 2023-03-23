@@ -5,7 +5,7 @@ function GalleryPage() {
   return (
     <div>
       {/* A stub for changing the page */}
-      {false ? (<EmptyGallery />) : (<Gallery />)}
+      {true ? (<EmptyGallery />) : (<Gallery />)}
     </div>
   );
 }

@@ -20,9 +20,9 @@ function Breadcrumb() {
           >
             {crumb}
           </Link>
-          <div className="breadcrumbs__icon">
-            <ArrowRight />
-          </div>
+
+          <ArrowRight className="breadcrumbs__icon" />
+
         </li>
       ))}
     </ul>

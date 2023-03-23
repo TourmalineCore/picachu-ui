@@ -13,10 +13,8 @@ function OutlineButton({
       className={`button button--light ${className}`}
       {...rest}
     >
-      <span className="button__title">{children}</span>
-      <span className="button__icon-container">
-        <IconPlus />
-      </span>
+      {children}
+      <IconPlus />
     </button>
   );
 }

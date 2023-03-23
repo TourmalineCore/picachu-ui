@@ -1,10 +1,10 @@
-import Breadcrumb from '../../../../components/Breadcrumb/Breadcrumb';
+import Breadcrumbs from '../../../../components/Breadcrumbs/Breadcrumbs';
 import OutlineButton from '../../../../components/OutlineButton/OutlineButton';
 
 function Gallery() {
   return (
     <div className="gallery">
-      <Breadcrumb />
+      <Breadcrumbs />
       <OutlineButton type="button">Create new</OutlineButton>
       <div className="gallery__container">
         <div className="gallery__card" />
