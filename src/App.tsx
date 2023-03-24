@@ -3,8 +3,7 @@ import GalleryCard from './pages/Galleries/components/GalleryCard/GalleryCard';
 import LoginPage from './pages/Login/LoginPage';
 
 const galleryCardInfo = {
-  imagePath: `src/assets/images/dummy-image.png`,
-  imageAlt: `image1`,
+  photos: [],
   photosCount: 0,
 };
 export function App() {
@@ -19,8 +18,7 @@ export function App() {
           path="/galleries"
           element={(
             <GalleryCard
-              imagePath={galleryCardInfo.imagePath}
-              imageAlt={galleryCardInfo.imageAlt}
+              photos={galleryCardInfo.photos}
               photosCount={galleryCardInfo.photosCount}
               newlyCreated
               name="new gallery"

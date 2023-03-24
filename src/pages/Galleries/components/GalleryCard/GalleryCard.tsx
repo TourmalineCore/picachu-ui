@@ -3,20 +3,20 @@ import {
 } from "react";
 import { ReactComponent as DeleteIcon } from "../../../../assets/icons/icon-delete.svg";
 
+type Photo = {};
+
 function GalleryCard({
   name,
   newlyCreated,
   onNameApply,
-  imagePath,
-  imageAlt,
   photosCount,
+  photos,
 }: {
   name: string;
   newlyCreated: boolean;
   onNameApply: (newName: string) => unknown;
-  imagePath: string;
-  imageAlt: string;
   photosCount: number;
+  photos: Photo[];
 }) {
   const nameRef = useRef<HTMLInputElement>(null);
 
@@ -32,11 +32,16 @@ function GalleryCard({
     <div className="gallery-card">
       <div className="gallery-card__image-container">
         <a href="/">
-          <img
-            className="gallery-card__image"
-            src={imagePath}
-            alt={imageAlt}
-          />
+          {
+            !photos.length && (
+              <img
+                className="gallery-card__image"
+                src="src/assets/images/dummy-image.png"
+                alt={`No images have been added to ${name} yet`}
+                data-cy="gallery-photo-preview"
+              />
+            )
+          }
         </a>
       </div>
       <div className="gallery-card__inner">
