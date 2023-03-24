@@ -2,7 +2,7 @@ import '../../../../../cypress/support/commands';
 import GalleriesList from './GalleriesList';
 
 describe(`GalleriesList`, () => {
-  it(`newly created gallery card SHOULD have name field filled and focused`, () => {
+  it(`SHOULD render call to action message WHEN there are no galleries`, () => {
     mountComponent({
       galleries: [],
     });
@@ -10,6 +10,15 @@ describe(`GalleriesList`, () => {
     cy
       .getByData(`no-galleries`)
       .contains(`Create a gallery to get started`);
+  });
+
+  it(`SHOULD NOT render call to action message WHEN there are galleries`, () => {
+    mountComponent({
+      galleries: [{}],
+    });
+
+    cy.contains(`Create a gallery to get started`)
+      .should(`not.exist`);
   });
 });
 
@@ -20,7 +29,7 @@ function mountComponent({
 }) {
   cy.mount(
     <GalleriesList
-      Galleries={galleries}
+      galleries={galleries}
     />,
   );
 }
