@@ -71,7 +71,7 @@ describe(`GalleryCard`, () => {
         .should(`have.been.calledOnceWith`, `new gallery!!!`);
     });
 
-    it(`SHOULD discard changes to name WHEN pressing Escape in focused name`, () => {
+    it(`SHOULD discard changes to name and apply it with original name WHEN pressing Escape in focused name`, () => {
       const onNameApplySpy = cy.spy().as(`onNameApply`);
 
       cy.mount(
@@ -91,7 +91,7 @@ describe(`GalleryCard`, () => {
         .type(`{esc}`);
 
       cy.get(`@onNameApply`)
-        .should(`have.not.been.called`);
+        .should(`have.been.calledOnceWith`, `new gallery`);
     });
   });
 });
