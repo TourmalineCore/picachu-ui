@@ -1,8 +1,10 @@
 function GalleriesList({
+  galleries,
 }: {
+  galleries: any[];
 }) {
-  return (
-    <span data-cy="no-galleries">Create a gallery to get started</span>
+  return (galleries.length === 0
+    && <span data-cy="no-galleries">Create a gallery to get started</span>
   );
 }
 
