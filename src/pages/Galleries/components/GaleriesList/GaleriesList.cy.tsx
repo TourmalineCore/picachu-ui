@@ -1,4 +1,5 @@
 import '../../../../../cypress/support/commands';
+import GalleriesList from './GalleriesList';
 
 describe(`GalleriesList`, () => {
   it(`newly created gallery card SHOULD have name field filled and focused`, () => {
