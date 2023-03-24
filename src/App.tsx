@@ -24,7 +24,7 @@ export function App() {
               photosCount={galleryCardInfo.photosCount}
               newlyCreated
               name="new gallery"
-              onNameChange={() => {}}
+              onNameApply={() => {}}
             />
           )}
         />

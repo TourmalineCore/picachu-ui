@@ -25,7 +25,7 @@ describe(`GalleryCard`, () => {
 
   describe(`name editing`, () => {
     it(`SHOULD apply changes to name WHEN pressing Enter in focused name`, () => {
-      const onNameChangeSpy = cy.spy().as(`onNameChange`);
+      const onNameApplySpy = cy.spy().as(`onNameApply`);
 
       cy.mount(
         <GalleryCard
@@ -34,7 +34,7 @@ describe(`GalleryCard`, () => {
           photosCount={0}
           name="new gallery"
           newlyCreated
-          onNameChange={onNameChangeSpy}
+          onNameApply={onNameApplySpy}
         />,
       );
 
@@ -44,12 +44,12 @@ describe(`GalleryCard`, () => {
         .should(`have.value`, `new gallery123`)
         .type(`{enter}`);
 
-      cy.get(`@onNameChange`)
+      cy.get(`@onNameApply`)
         .should(`have.been.calledOnceWith`, `new gallery123`);
     });
 
     it(`SHOULD apply changes to name WHEN focus out in focused name`, () => {
-      const onNameChangeSpy = cy.spy().as(`onNameChange`);
+      const onNameApplySpy = cy.spy().as(`onNameApply`);
 
       cy.mount(
         <GalleryCard
@@ -58,7 +58,7 @@ describe(`GalleryCard`, () => {
           photosCount={0}
           name="new gallery"
           newlyCreated
-          onNameChange={onNameChangeSpy}
+          onNameApply={onNameApplySpy}
         />,
       );
 
@@ -67,12 +67,12 @@ describe(`GalleryCard`, () => {
         .type(`!!!`)
         .blur();
 
-      cy.get(`@onNameChange`)
+      cy.get(`@onNameApply`)
         .should(`have.been.calledOnceWith`, `new gallery!!!`);
     });
 
     it(`SHOULD discard changes to name WHEN pressing Escape in focused name`, () => {
-      const onNameChangeSpy = cy.spy().as(`onNameChange`);
+      const onNameApplySpy = cy.spy().as(`onNameApply`);
 
       cy.mount(
         <GalleryCard
@@ -81,7 +81,7 @@ describe(`GalleryCard`, () => {
           photosCount={0}
           name="new gallery"
           newlyCreated
-          onNameChange={onNameChangeSpy}
+          onNameApply={onNameApplySpy}
         />,
       );
 
@@ -90,7 +90,7 @@ describe(`GalleryCard`, () => {
         .type(`777`)
         .type(`{esc}`);
 
-      cy.get(`@onNameChange`)
+      cy.get(`@onNameApply`)
         .should(`have.not.been.called`);
     });
   });

@@ -6,14 +6,14 @@ import { ReactComponent as DeleteIcon } from "../../../assets/icons/icon-delete.
 function GalleryCard({
   name,
   newlyCreated,
-  onNameChange,
+  onNameApply,
   imagePath,
   imageAlt,
   photosCount,
 }: {
   name: string;
   newlyCreated: boolean;
-  onNameChange: (newName: string) => unknown;
+  onNameApply: (newName: string) => unknown;
   imagePath: string;
   imageAlt: string;
   photosCount: number;
@@ -50,7 +50,7 @@ function GalleryCard({
               type="text"
               value={galleryName}
               onChange={(e) => setGalleryName(e.target.value)}
-              onBlur={() => onNameChange(galleryName)}
+              onBlur={() => onNameApply(galleryName)}
               onKeyDown={onNameKeyDown}
             />
           </h3>
@@ -72,7 +72,7 @@ function GalleryCard({
 
   function onNameKeyDown(e: KeyboardEvent<HTMLInputElement>) {
     if (e.key === `Enter` || e.key === `Tab`) {
-      onNameChange((e.target as HTMLInputElement).value);
+      onNameApply((e.target as HTMLInputElement).value);
     }
   }
 }
