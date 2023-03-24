@@ -73,6 +73,8 @@ function GalleryCard({
   function onNameKeyDown(e: KeyboardEvent<HTMLInputElement>) {
     if (e.key === `Enter` || e.key === `Tab`) {
       onNameApply((e.target as HTMLInputElement).value);
+    } else if (e.key === `Escape`) {
+      onNameApply(name);
     }
   }
 }
