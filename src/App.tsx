@@ -1,5 +1,5 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import GalleryCard from './pages/Galleries/GalleryCard/GalleryCard';
+import GalleryCard from './pages/Galleries/components/GalleryCard/GalleryCard';
 import LoginPage from './pages/Login/LoginPage';
 
 const galleryCardInfo = {

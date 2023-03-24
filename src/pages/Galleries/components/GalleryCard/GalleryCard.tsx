@@ -1,7 +1,7 @@
 import {
   KeyboardEvent, useEffect, useRef, useState,
 } from "react";
-import { ReactComponent as DeleteIcon } from "../../../assets/icons/icon-delete.svg";
+import { ReactComponent as DeleteIcon } from "../../../../assets/icons/icon-delete.svg";
 
 function GalleryCard({
   name,
