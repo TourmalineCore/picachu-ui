@@ -86,21 +86,36 @@ describe(`GalleryCard`, () => {
         .should(`have.been.calledOnceWith`, `my super duper`);
     });
   });
+
+  describe(`photo preview`, () => {
+    it(`SHOULD show dummy picture WHEN no image is available`, () => {
+      mountComponent({
+        newlyCreated: true,
+        photos: [],
+      });
+
+      cy
+        .getByData(`gallery-photo-preview`)
+        .should(`have.attr`, `alt`)
+        .and(`equal`, `No images have been added to new gallery yet`);
+    });
+  });
 });
 
 function mountComponent({
   name = `new gallery`,
   newlyCreated,
   onNameApply = () => {},
+  photos = [],
 }: {
   name?: string;
   newlyCreated: boolean;
   onNameApply?: (newName: string) => unknown;
+  photos?: [];
 }) {
   cy.mount(
     <GalleryCard
-      imagePath="#"
-      imageAlt=""
+      photos={photos}
       photosCount={0}
       name={name}
       newlyCreated={newlyCreated}
