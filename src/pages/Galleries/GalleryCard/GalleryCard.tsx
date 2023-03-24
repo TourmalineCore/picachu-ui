@@ -1,5 +1,3 @@
-/* eslint-disable jsx-a11y/click-events-have-key-events */
-/* eslint-disable jsx-a11y/no-static-element-interactions */
 import {
   KeyboardEvent, useEffect, useRef, useState,
 } from "react";
@@ -28,7 +26,6 @@ function GalleryCard({
     }
   }, [newlyCreated]);
 
-  const [isEditing, setEditing] = useState(newlyCreated);
   const [galleryName, setGalleryName] = useState(name);
 
   return (
@@ -44,27 +41,19 @@ function GalleryCard({
       </div>
       <div className="gallery-card__inner">
         <div className="gallery-card__wrapper">
-          {isEditing ? (
-            <div>
-              <input
-                ref={nameRef}
-                data-cy="gallery-name-input"
-                type="text"
-                value={galleryName}
-                onChange={(e) => setGalleryName(e.target.value)}
-                onBlur={() => onNameChange(galleryName)}
-                onKeyDown={onNameKeyDown}
-              />
-            </div>
-          ) : (
-            <div
-              className="gallery-card__editable"
-              onClick={() => setEditing(true)}
-            >
-              <h3 className="gallery-card__name">{galleryName}</h3>
-            </div>
-          )}
-
+          <h3
+            className="gallery-card__name"
+          >
+            <input
+              ref={nameRef}
+              data-cy="gallery-name-input"
+              type="text"
+              value={galleryName}
+              onChange={(e) => setGalleryName(e.target.value)}
+              onBlur={() => onNameChange(galleryName)}
+              onKeyDown={onNameKeyDown}
+            />
+          </h3>
           <span className="gallery-card__count">
             {photosCount}
             {` `}

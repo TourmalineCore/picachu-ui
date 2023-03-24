@@ -1,7 +1,7 @@
 .gallery-card {
   margin-top: 100px;
   width: 155px;
-  color: black;
+  color: #000;
 
   &__image-container {
     position: relative;
@@ -30,10 +30,6 @@
     align-items: flex-start;
     flex-direction: column;
     margin-right: 10px;
-  }
-
-  &__editable {
-    // text-align: left;
   }
 
   &__delete-btn {
