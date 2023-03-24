@@ -66,6 +66,25 @@ describe(`GalleryCard`, () => {
       cy.get(`@onNameApply`)
         .should(`have.been.calledOnceWith`, `new gallery`);
     });
+
+    it(`SHOULD have the possibility to edit name WHEN it is not a newly created one`, () => {
+      const onNameApplySpy = cy.spy().as(`onNameApply`);
+
+      mountComponent({
+        name: `my super`,
+        newlyCreated: false,
+        onNameApply: onNameApplySpy,
+      });
+
+      cy
+        .getByData(`gallery-name-input`)
+        .click()
+        .type(` duper`)
+        .blur();
+
+      cy.get(`@onNameApply`)
+        .should(`have.been.calledOnceWith`, `my super duper`);
+    });
   });
 });
 
