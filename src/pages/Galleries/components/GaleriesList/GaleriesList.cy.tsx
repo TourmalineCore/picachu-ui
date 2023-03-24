@@ -1,5 +1,6 @@
 import '../../../../../cypress/support/commands';
 import GalleriesList from './GalleriesList';
+import Gallery from './Gallery';
 
 describe(`GalleriesList`, () => {
   it(`SHOULD render call to action message WHEN there are no galleries`, () => {
@@ -14,7 +15,10 @@ describe(`GalleriesList`, () => {
 
   it(`SHOULD NOT render call to action message WHEN there are galleries`, () => {
     mountComponent({
-      galleries: [{}],
+      galleries: [{
+        id: 1,
+        name: `Am`,
+      }],
     });
 
     cy.contains(`Create a gallery to get started`)
@@ -24,6 +28,7 @@ describe(`GalleriesList`, () => {
   it(`SHOULD render a gallery WHEN there is a single gallery`, () => {
     mountComponent({
       galleries: [{
+        id: 1,
         name: `My Gallery is Awesome`,
       }],
     });
@@ -35,9 +40,11 @@ describe(`GalleriesList`, () => {
   it(`SHOULD render all galleries WHEN there are several of them`, () => {
     mountComponent({
       galleries: [{
+        id: 1,
         name: `My Gallery is Awesome`,
       },
       {
+        id: 1,
         name: `My Awful Gallery`,
       }],
     });
@@ -93,12 +100,12 @@ describe(`GalleriesList`, () => {
 });
 
 function mountComponent({
-  newlyCreatedGalleryId,
+  newlyCreatedGalleryId = null,
   galleries,
   onNameApply = () => {},
 }: {
-  newlyCreatedGalleryId?: number;
-  galleries: any[];
+  newlyCreatedGalleryId?: number | null;
+  galleries: Gallery[];
   onNameApply?: ({ galleryId, newName }: { galleryId: number; newName: string }) => unknown;
 }) {
   cy.mount(
