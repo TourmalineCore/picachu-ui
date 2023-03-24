@@ -37,7 +37,7 @@ function GalleryCard({
               <img
                 className="gallery-card__image"
                 src="src/assets/images/dummy-image.png"
-                alt={`No images have been added to ${name} yet`}
+                alt={`No photos have been added to ${name} yet`}
                 data-cy="gallery-photo-preview"
               />
             )

@@ -97,7 +97,7 @@ describe(`GalleryCard`, () => {
       cy
         .getByData(`gallery-photo-preview`)
         .should(`have.attr`, `alt`)
-        .and(`equal`, `No images have been added to new gallery yet`);
+        .and(`equal`, `No photos have been added to new gallery yet`);
     });
   });
 });
