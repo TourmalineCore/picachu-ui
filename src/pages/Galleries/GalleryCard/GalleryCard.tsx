@@ -18,7 +18,7 @@ function GalleryCard({
   imageAlt: string;
   photosCount: number;
 }) {
-  const nameRef = useRef<HTMLInputElement>();
+  const nameRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
     if (newlyCreated) {
