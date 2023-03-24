@@ -59,19 +59,53 @@ describe(`GalleriesList`, () => {
       .getByData(`gallery-name-input`)
       .focused();
   });
+
+  it(`SHOULD call on name apply WHEN we focus out from newly created gallery changed name`, () => {
+    const onNameApplySpy = cy.spy().as(`onNameApply`);
+
+    mountComponent({
+      newlyCreatedGalleryId: 2,
+      galleries: [
+        {
+          id: 1,
+          name: `First Gallery`,
+        },
+        {
+          id: 2,
+          name: `Second Gallery`,
+        },
+      ],
+      onNameApply: onNameApplySpy,
+    });
+
+    cy
+      .getByData(`gallery-name-input`)
+      .last()
+      .type(` Ever`)
+      .blur();
+
+    cy.get(`@onNameApply`)
+      .should(`have.been.calledOnceWith`, {
+        galleryId: 2,
+        newName: `Second Gallery Ever`,
+      });
+  });
 });
 
 function mountComponent({
   newlyCreatedGalleryId,
   galleries,
+  onNameApply = () => {},
 }: {
   newlyCreatedGalleryId?: number;
   galleries: any[];
+  onNameApply?: ({ galleryId, newName }: { galleryId: number; newName: string }) => unknown;
 }) {
   cy.mount(
     <GalleriesList
       newlyCreatedGalleryId={newlyCreatedGalleryId}
       galleries={galleries}
+      onNameApply={onNameApply}
     />,
   );
 }
