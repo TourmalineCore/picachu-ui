@@ -20,6 +20,17 @@ describe(`GalleriesList`, () => {
     cy.contains(`Create a gallery to get started`)
       .should(`not.exist`);
   });
+
+  it(`SHOULD render a gallery WHEN there is a single gallery`, () => {
+    mountComponent({
+      galleries: [{
+        name: `My Gallery is Awesome`,
+      }],
+    });
+
+    cy.getByData(`gallery-name-input`)
+      .should(`have.value`, `My Gallery is Awesome`);
+  });
 });
 
 function mountComponent({
