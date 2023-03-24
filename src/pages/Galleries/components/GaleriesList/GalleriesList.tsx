@@ -8,14 +8,17 @@ function GalleriesList({
   return (galleries.length === 0
     ? <span data-cy="no-galleries">Create a gallery to get started</span>
     : (
-      <GalleryCard
-        name={galleries[0].name}
-        newlyCreated={false}
-        onNameApply={(newName) => {
-        }}
-        photosCount={0}
-        photos={[]}
-      />
+      galleries.map((gallery) => (
+        <GalleryCard
+          name={gallery.name}
+          newlyCreated={false}
+          onNameApply={(newName) => {
+          }}
+          photosCount={0}
+          photos={[]}
+        />
+      ))
+
     )
   );
 }
