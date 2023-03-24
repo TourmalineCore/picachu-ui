@@ -45,15 +45,32 @@ describe(`GalleriesList`, () => {
     cy.getByData(`gallery-name-input`)
       .should(`have.length`, 2);
   });
+
+  it(`SHOULD focus name of the gallery WHEN we just created a new first one`, () => {
+    mountComponent({
+      newlyCreatedGalleryId: 1,
+      galleries: [{
+        id: 1,
+        name: `My Gallery is Awesome`,
+      }],
+    });
+
+    cy
+      .getByData(`gallery-name-input`)
+      .focused();
+  });
 });
 
 function mountComponent({
+  newlyCreatedGalleryId,
   galleries,
 }: {
+  newlyCreatedGalleryId?: number;
   galleries: any[];
 }) {
   cy.mount(
     <GalleriesList
+      newlyCreatedGalleryId={newlyCreatedGalleryId}
       galleries={galleries}
     />,
   );
