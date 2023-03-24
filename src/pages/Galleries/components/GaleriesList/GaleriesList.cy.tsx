@@ -31,6 +31,20 @@ describe(`GalleriesList`, () => {
     cy.getByData(`gallery-name-input`)
       .should(`have.value`, `My Gallery is Awesome`);
   });
+
+  it(`SHOULD render all galleries WHEN there are several of them`, () => {
+    mountComponent({
+      galleries: [{
+        name: `My Gallery is Awesome`,
+      },
+      {
+        name: `My Awful Gallery`,
+      }],
+    });
+
+    cy.getByData(`gallery-name-input`)
+      .should(`have.length`, 2);
+  });
 });
 
 function mountComponent({
