@@ -1,7 +1,7 @@
 import LoginForm from './LoginForm';
 import '../../../../../cypress/support/commands';
 
-describe(`<LoginForm />`, () => {
+describe(`LoginForm`, () => {
   beforeEach(() => {
     const onLogin = cy.spy().as(`onLogin`);
     cy.mount(<LoginForm onLogin={onLogin} />);
