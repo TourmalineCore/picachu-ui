@@ -1,21 +1,12 @@
-import GalleryCard from './GalleryCard';
 import '../../../../cypress/support/commands';
 
+import GalleryCard from './GalleryCard';
+
 describe(`GalleryCard`, () => {
-  // beforeEach(() => {
-
-  // });
-
   it(`newly created gallery card SHOULD have name field filled and focused`, () => {
-    cy.mount(
-      <GalleryCard
-        imagePath="#"
-        imageAlt=""
-        photosCount={0}
-        name="new gallery"
-        newlyCreated
-      />,
-    );
+    mountComponent({
+      newlyCreated: true,
+    });
 
     cy
       .getByData(`gallery-name-input`)
@@ -27,16 +18,10 @@ describe(`GalleryCard`, () => {
     it(`SHOULD apply changes to name WHEN pressing Enter in focused name`, () => {
       const onNameApplySpy = cy.spy().as(`onNameApply`);
 
-      cy.mount(
-        <GalleryCard
-          imagePath="#"
-          imageAlt=""
-          photosCount={0}
-          name="new gallery"
-          newlyCreated
-          onNameApply={onNameApplySpy}
-        />,
-      );
+      mountComponent({
+        newlyCreated: true,
+        onNameApply: onNameApplySpy,
+      });
 
       cy
         .getByData(`gallery-name-input`)
@@ -51,16 +36,10 @@ describe(`GalleryCard`, () => {
     it(`SHOULD apply changes to name WHEN focus out in focused name`, () => {
       const onNameApplySpy = cy.spy().as(`onNameApply`);
 
-      cy.mount(
-        <GalleryCard
-          imagePath="#"
-          imageAlt=""
-          photosCount={0}
-          name="new gallery"
-          newlyCreated
-          onNameApply={onNameApplySpy}
-        />,
-      );
+      mountComponent({
+        newlyCreated: true,
+        onNameApply: onNameApplySpy,
+      });
 
       cy
         .getByData(`gallery-name-input`)
@@ -74,16 +53,10 @@ describe(`GalleryCard`, () => {
     it(`SHOULD discard changes to name and apply it with original name WHEN pressing Escape in focused name`, () => {
       const onNameApplySpy = cy.spy().as(`onNameApply`);
 
-      cy.mount(
-        <GalleryCard
-          imagePath="#"
-          imageAlt=""
-          photosCount={0}
-          name="new gallery"
-          newlyCreated
-          onNameApply={onNameApplySpy}
-        />,
-      );
+      mountComponent({
+        newlyCreated: true,
+        onNameApply: onNameApplySpy,
+      });
 
       cy
         .getByData(`gallery-name-input`)
@@ -95,3 +68,24 @@ describe(`GalleryCard`, () => {
     });
   });
 });
+
+function mountComponent({
+  name = `new gallery`,
+  newlyCreated,
+  onNameApply = () => {},
+}: {
+  name?: string;
+  newlyCreated: boolean;
+  onNameApply?: (newName: string) => unknown;
+}) {
+  cy.mount(
+    <GalleryCard
+      imagePath="#"
+      imageAlt=""
+      photosCount={0}
+      name={name}
+      newlyCreated={newlyCreated}
+      onNameApply={onNameApply}
+    />,
+  );
+}
