@@ -78,13 +78,19 @@ function GalleryCard({
   );
 
   function onNameBlur() {
-    onNameApply(tryToApplyEmptyName ? name : newGalleryName);
+    if (tryToApplyEmptyName) {
+      onNameApply(name);
+      setNewGalleryName(name);
+    } else {
+      onNameApply(newGalleryName);
+    }
   }
 
   function onNameKeyDown(e: KeyboardEvent<HTMLInputElement>) {
     if (e.key === `Enter` || e.key === `Tab`) {
       if (tryToApplyEmptyName) {
         onNameApply(name);
+        setNewGalleryName(name);
       } else {
         onNameApply((e.target as HTMLInputElement).value);
       }
