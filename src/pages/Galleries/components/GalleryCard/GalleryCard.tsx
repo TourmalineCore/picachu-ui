@@ -26,7 +26,7 @@ function GalleryCard({
     }
   }, [newlyCreated]);
 
-  const [galleryName, setGalleryName] = useState(name);
+  const [newGalleryName, setGalleryName] = useState(name);
 
   return (
     <div className="gallery-card">
@@ -53,9 +53,9 @@ function GalleryCard({
               ref={nameRef}
               data-cy="gallery-name-input"
               type="text"
-              value={galleryName}
+              value={newGalleryName}
               onChange={(e) => setGalleryName(e.target.value)}
-              onBlur={() => onNameApply(galleryName)}
+              onBlur={() => onNameApply(newGalleryName)}
               onKeyDown={onNameKeyDown}
             />
           </h3>
@@ -77,7 +77,8 @@ function GalleryCard({
 
   function onNameKeyDown(e: KeyboardEvent<HTMLInputElement>) {
     if (e.key === `Enter` || e.key === `Tab`) {
-      if (!galleryName.trim().length) {
+      const tryToApplyEmptyName = !newGalleryName.trim().length;
+      if (tryToApplyEmptyName) {
         onNameApply(name);
       } else {
         onNameApply((e.target as HTMLInputElement).value);
