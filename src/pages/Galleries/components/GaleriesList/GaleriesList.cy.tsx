@@ -44,7 +44,7 @@ describe(`GalleriesList`, () => {
         name: `My Gallery is Awesome`,
       },
       {
-        id: 1,
+        id: 2,
         name: `My Awful Gallery`,
       }],
     });
