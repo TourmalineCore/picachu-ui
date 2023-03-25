@@ -65,6 +65,10 @@ describe(`GalleryCard`, () => {
 
       cy.get(`@onNameApply`)
         .should(`have.been.calledOnceWith`, `new gallery`);
+
+      cy
+        .getByData(`gallery-name-input`)
+        .should(`have.value`, `new gallery`);
     });
 
     it(`SHOULD discard changes to name and apply it with original name WHEN pressing Enter in focused empty name`, () => {

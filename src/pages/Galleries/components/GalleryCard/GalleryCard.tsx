@@ -26,7 +26,7 @@ function GalleryCard({
     }
   }, [newlyCreated]);
 
-  const [newGalleryName, setGalleryName] = useState(name);
+  const [newGalleryName, setNewGalleryName] = useState(name);
 
   const tryToApplyEmptyName = !newGalleryName.trim().length;
 
@@ -56,7 +56,7 @@ function GalleryCard({
               data-cy="gallery-name-input"
               type="text"
               value={newGalleryName}
-              onChange={(e) => setGalleryName(e.target.value)}
+              onChange={(e) => setNewGalleryName(e.target.value)}
               onBlur={() => onNameBlur()}
               onKeyDown={onNameKeyDown}
             />
@@ -90,6 +90,7 @@ function GalleryCard({
       }
     } else if (e.key === `Escape`) {
       onNameApply(name);
+      setNewGalleryName(name);
     }
   }
 }
