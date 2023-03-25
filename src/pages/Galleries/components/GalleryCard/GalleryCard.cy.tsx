@@ -84,6 +84,23 @@ describe(`GalleryCard`, () => {
         .should(`have.been.calledOnceWith`, `new gallery`);
     });
 
+    it(`SHOULD discard changes to name and apply it with original name WHEN focus out in focused empty name`, () => {
+      const onNameApplySpy = cy.spy().as(`onNameApply`);
+
+      mountComponent({
+        newlyCreated: true,
+        onNameApply: onNameApplySpy,
+      });
+
+      cy
+        .getByData(`gallery-name-input`)
+        .clear()
+        .blur();
+
+      cy.get(`@onNameApply`)
+        .should(`have.been.calledOnceWith`, `new gallery`);
+    });
+
     it(`SHOULD have the possibility to edit name WHEN it is not a newly created one`, () => {
       const onNameApplySpy = cy.spy().as(`onNameApply`);
 
