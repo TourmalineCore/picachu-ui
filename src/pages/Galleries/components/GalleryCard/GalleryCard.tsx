@@ -28,6 +28,8 @@ function GalleryCard({
 
   const [newGalleryName, setGalleryName] = useState(name);
 
+  const tryToApplyEmptyName = !newGalleryName.trim().length;
+
   return (
     <div className="gallery-card">
       <div className="gallery-card__image-container">
@@ -55,7 +57,7 @@ function GalleryCard({
               type="text"
               value={newGalleryName}
               onChange={(e) => setGalleryName(e.target.value)}
-              onBlur={() => onNameApply(newGalleryName)}
+              onBlur={() => onNameBlur()}
               onKeyDown={onNameKeyDown}
             />
           </h3>
@@ -75,9 +77,12 @@ function GalleryCard({
     </div>
   );
 
+  function onNameBlur() {
+    onNameApply(tryToApplyEmptyName ? name : newGalleryName);
+  }
+
   function onNameKeyDown(e: KeyboardEvent<HTMLInputElement>) {
     if (e.key === `Enter` || e.key === `Tab`) {
-      const tryToApplyEmptyName = !newGalleryName.trim().length;
       if (tryToApplyEmptyName) {
         onNameApply(name);
       } else {
