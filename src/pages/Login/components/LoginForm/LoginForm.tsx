@@ -42,7 +42,7 @@ function LoginForm({
               placeholder="Enter login"
               id="login"
               name="login"
-              data-test="login-input"
+              data-cy="login-input"
               value={login}
               required
               onChange={(e) => setLogin(e.target.value.trim())}
@@ -63,7 +63,7 @@ function LoginForm({
               className="login-form__input"
               placeholder="Enter password"
               id="password"
-              data-test="password-input"
+              data-cy="password-input"
               name="password"
               value={password}
               required
@@ -82,7 +82,7 @@ function LoginForm({
         <button
           type="submit"
           className="button button--bright login-form__submit-btn"
-          data-test="login-button"
+          data-cy="login-button"
           disabled={isLoginInvalid || isPasswordInvalid}
         >
           Sign in
