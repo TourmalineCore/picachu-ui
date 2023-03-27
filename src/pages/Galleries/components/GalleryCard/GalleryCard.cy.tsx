@@ -31,8 +31,9 @@ describe(`GalleryCard`, () => {
         .should(`have.value`, `new gallery123`)
         .type(`{enter}`);
 
-      cy.get(`@onNameApply`)
-        .should(`have.been.calledOnceWith`, `new gallery123`);
+      checkOnApplyCalledOnce({
+        expectedName: `new gallery123`,
+      });
     });
 
     it(`SHOULD apply changes to name WHEN focus out in focused name`, () => {
@@ -49,8 +50,9 @@ describe(`GalleryCard`, () => {
         .type(`!!!`)
         .blur();
 
-      cy.get(`@onNameApply`)
-        .should(`have.been.calledOnceWith`, `new gallery!!!`);
+      checkOnApplyCalledOnce({
+        expectedName: `new gallery!!!`,
+      });
     });
 
     it(`SHOULD discard changes to name and apply it with original name WHEN pressing Escape in focused name`, () => {
@@ -67,8 +69,9 @@ describe(`GalleryCard`, () => {
         .type(`777`)
         .type(`{esc}`);
 
-      cy.get(`@onNameApply`)
-        .should(`have.been.calledOnceWith`, `new gallery`);
+      checkOnApplyCalledOnce({
+        expectedName: `new gallery`,
+      });
 
       cy
         .getByData(`gallery-name-input`)
@@ -89,8 +92,9 @@ describe(`GalleryCard`, () => {
         .clear()
         .type(`{enter}`);
 
-      cy.get(`@onNameApply`)
-        .should(`have.been.calledOnceWith`, `new gallery`);
+      checkOnApplyCalledOnce({
+        expectedName: `new gallery`,
+      });
 
       cy
         .getByData(`gallery-name-input`)
@@ -111,9 +115,9 @@ describe(`GalleryCard`, () => {
         .clear()
         .blur();
 
-      cy.get(`@onNameApply`)
-        .should(`have.been.calledOnceWith`, `new gallery`);
-
+      checkOnApplyCalledOnce({
+        expectedName: `new gallery`,
+      });
       cy
         .getByData(`gallery-name-input`)
         .should(`have.value`, `new gallery`);
@@ -135,8 +139,9 @@ describe(`GalleryCard`, () => {
         .type(` duper`)
         .blur();
 
-      cy.get(`@onNameApply`)
-        .should(`have.been.calledOnceWith`, `my super duper`);
+      checkOnApplyCalledOnce({
+        expectedName: `my super duper`,
+      });
     });
   });
 
@@ -173,6 +178,17 @@ describe(`GalleryCard`, () => {
     });
   });
 });
+
+function checkOnApplyCalledOnce(
+  {
+    expectedName,
+  }: {
+    expectedName: string;
+  },
+) {
+  cy.get(`@onNameApply`)
+    .should(`have.been.calledOnceWith`, expectedName);
+}
 
 function mountComponent({
   id,
