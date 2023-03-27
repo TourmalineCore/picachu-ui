@@ -36,10 +36,9 @@ function nameEditingTests() {
       onNameApply: onNameApplySpy,
     });
 
-    cy
-      .getByData(`gallery-name-input`)
-      .type(`123`)
-      .should(`have.value`, `new gallery123`)
+    typeTextInNameField({
+      expectedText: `123`,
+    }).should(`have.value`, `new gallery123`)
       .type(`{enter}`);
 
     checkOnApplyCalledOnce({
@@ -56,10 +55,9 @@ function nameEditingTests() {
       onNameApply: onNameApplySpy,
     });
 
-    cy
-      .getByData(`gallery-name-input`)
-      .type(`!!!`)
-      .blur();
+    typeTextInNameField({
+      expectedText: `!!!`,
+    }).blur();
 
     checkOnApplyCalledOnce({
       expectedName: `new gallery!!!`,
@@ -75,12 +73,9 @@ function nameEditingTests() {
       onNameApply: onNameApplySpy,
     });
 
-    // typeTextInName(`777`)
-    //   .type(`{esc}`);
-
-    cy
-      .getByData(`gallery-name-input`)
-      .type(`777`)
+    typeTextInNameField({
+      expectedText: `777`,
+    })
       .type(`{esc}`);
 
     checkOnApplyCalledOnce({
@@ -201,6 +196,20 @@ function checkOnApplyCalledOnce(
 ) {
   cy.get(`@onNameApply`)
     .should(`have.been.calledOnceWith`, expectedName);
+}
+
+function typeTextInNameField(
+  {
+    expectedText,
+  }: {
+    expectedText: string;
+  },
+) {
+  return (
+    cy
+      .getByData(`gallery-name-input`)
+      .type(expectedText)
+  );
 }
 
 function mountComponent({
