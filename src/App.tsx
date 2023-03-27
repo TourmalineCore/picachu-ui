@@ -5,6 +5,7 @@ import CreateGalleryPage from './pages/CreateGallery/CreateGalleryPage';
 import LoginPage from './pages/Login/LoginPage';
 
 const galleryCardInfo = {
+  id: 1,
   photos: [],
   photosCount: 0,
 };
@@ -25,20 +26,21 @@ export function App() {
             element={<CreateGalleryPage />}
             index
           />
-
+          <Route
+            path="/galleries"
+            element={(
+              <GalleryCard
+                id={galleryCardInfo.id}
+                photos={galleryCardInfo.photos}
+                photosCount={galleryCardInfo.photosCount}
+                newlyCreated
+                name="new gallery"
+                onNameApply={() => {}}
+                onDelete={() => {}}
+              />
+            )}
+          />
         </Route>
-        <Route
-          path="/galleries"
-          element={(
-            <GalleryCard
-              photos={galleryCardInfo.photos}
-              photosCount={galleryCardInfo.photosCount}
-              newlyCreated
-              name="new gallery"
-              onNameApply={() => {}}
-            />
-          )}
-        />
       </Routes>
     </BrowserRouter>
   );

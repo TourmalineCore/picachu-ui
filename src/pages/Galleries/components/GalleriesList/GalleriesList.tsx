@@ -1,4 +1,3 @@
-import { useState } from "react";
 import GalleryCard from "../GalleryCard/GalleryCard";
 import Gallery from "./Gallery";
 
@@ -6,6 +5,7 @@ function GalleriesList({
   newlyCreatedGalleryId,
   galleries,
   onNameApply,
+  handleGalleryDelete,
 }: {
   newlyCreatedGalleryId: number | null;
   galleries: Gallery[];
@@ -16,13 +16,12 @@ function GalleriesList({
     galleryId: number;
     newName: string;
   }) => unknown;
+  handleGalleryDelete: (id: number) => unknown;
 }) {
-  const [filteredGalleriesList, setFilteredGalleriesList] = useState(galleries);
-
   return (
     <div>
       {
-        filteredGalleriesList.length === 0
+        galleries.length === 0
           ? <span data-cy="no-galleries">Create a gallery to get started</span>
           : (
             galleries.map(({
@@ -48,12 +47,6 @@ function GalleriesList({
       }
     </div>
   );
-
-  function handleGalleryDelete(id: number) {
-    const newGalleriesList = filteredGalleriesList.filter((item) => item.id !== id);
-
-    setFilteredGalleriesList(newGalleriesList);
-  }
 }
 
 export default GalleriesList;

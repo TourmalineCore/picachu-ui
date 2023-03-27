@@ -36,6 +36,7 @@ function GalleryCard({
 
   return (
     <div
+      id={id.toString()}
       className="gallery-card"
       data-cy="gallery-card"
     >

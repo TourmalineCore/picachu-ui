@@ -5,6 +5,7 @@ import GalleryCard from './GalleryCard';
 describe(`GalleryCard`, () => {
   it(`newly created gallery card SHOULD have name field filled and focused`, () => {
     mountComponent({
+      id: 1,
       newlyCreated: true,
     });
 
@@ -19,6 +20,7 @@ describe(`GalleryCard`, () => {
       const onNameApplySpy = cy.spy().as(`onNameApply`);
 
       mountComponent({
+        id: 1,
         newlyCreated: true,
         onNameApply: onNameApplySpy,
       });
@@ -37,6 +39,7 @@ describe(`GalleryCard`, () => {
       const onNameApplySpy = cy.spy().as(`onNameApply`);
 
       mountComponent({
+        id: 1,
         newlyCreated: true,
         onNameApply: onNameApplySpy,
       });
@@ -54,6 +57,7 @@ describe(`GalleryCard`, () => {
       const onNameApplySpy = cy.spy().as(`onNameApply`);
 
       mountComponent({
+        id: 1,
         newlyCreated: true,
         onNameApply: onNameApplySpy,
       });
@@ -75,6 +79,7 @@ describe(`GalleryCard`, () => {
       const onNameApplySpy = cy.spy().as(`onNameApply`);
 
       mountComponent({
+        id: 1,
         newlyCreated: true,
         onNameApply: onNameApplySpy,
       });
@@ -96,6 +101,7 @@ describe(`GalleryCard`, () => {
       const onNameApplySpy = cy.spy().as(`onNameApply`);
 
       mountComponent({
+        id: 1,
         newlyCreated: true,
         onNameApply: onNameApplySpy,
       });
@@ -117,6 +123,7 @@ describe(`GalleryCard`, () => {
       const onNameApplySpy = cy.spy().as(`onNameApply`);
 
       mountComponent({
+        id: 1,
         name: `my super`,
         newlyCreated: false,
         onNameApply: onNameApplySpy,
@@ -136,6 +143,7 @@ describe(`GalleryCard`, () => {
   describe(`photo preview`, () => {
     it(`SHOULD show dummy picture WHEN no image is available`, () => {
       mountComponent({
+        id: 1,
         newlyCreated: true,
         photos: [],
       });
@@ -152,6 +160,7 @@ describe(`GalleryCard`, () => {
       const onDeleteSpy = cy.spy().as(`onDelete`);
 
       mountComponent({
+        id: 1,
         newlyCreated: false,
         photos: [],
         onDelete: onDeleteSpy,
@@ -166,12 +175,14 @@ describe(`GalleryCard`, () => {
 });
 
 function mountComponent({
+  id,
   name = `new gallery`,
   newlyCreated,
   onNameApply = () => {},
   onDelete = () => {},
   photos = [],
 }: {
+  id: number;
   name?: string;
   newlyCreated: boolean;
   onNameApply?: (newName: string) => unknown;
@@ -180,6 +191,7 @@ function mountComponent({
 }) {
   cy.mount(
     <GalleryCard
+      id={id}
       photos={photos}
       photosCount={0}
       name={name}
