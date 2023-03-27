@@ -28,12 +28,9 @@ function defaultNameRenderingTests() {
 
 function nameEditingTests() {
   it(`SHOULD apply changes to name WHEN pressing Enter in focused name`, () => {
-    const onNameApplySpy = cy.spy().as(`onNameApply`);
-
     mountComponent({
       id: 1,
       newlyCreated: true,
-      onNameApply: onNameApplySpy,
     });
 
     typeTextInNameField({
@@ -47,12 +44,9 @@ function nameEditingTests() {
   });
 
   it(`SHOULD apply changes to name WHEN focus out in focused name`, () => {
-    const onNameApplySpy = cy.spy().as(`onNameApply`);
-
     mountComponent({
       id: 1,
       newlyCreated: true,
-      onNameApply: onNameApplySpy,
     });
 
     typeTextInNameField({
@@ -65,12 +59,9 @@ function nameEditingTests() {
   });
 
   it(`SHOULD discard changes to name and apply it with original name WHEN pressing Escape in focused name`, () => {
-    const onNameApplySpy = cy.spy().as(`onNameApply`);
-
     mountComponent({
       id: 1,
       newlyCreated: true,
-      onNameApply: onNameApplySpy,
     });
 
     typeTextInNameField({
@@ -88,12 +79,9 @@ function nameEditingTests() {
   });
 
   it(`SHOULD discard changes to name and apply it with original name WHEN pressing Enter in focused empty name`, () => {
-    const onNameApplySpy = cy.spy().as(`onNameApply`);
-
     mountComponent({
       id: 1,
       newlyCreated: true,
-      onNameApply: onNameApplySpy,
     });
 
     cy
@@ -111,12 +99,9 @@ function nameEditingTests() {
   });
 
   it(`SHOULD discard changes to name and apply it with original name WHEN focus out in focused empty name`, () => {
-    const onNameApplySpy = cy.spy().as(`onNameApply`);
-
     mountComponent({
       id: 1,
       newlyCreated: true,
-      onNameApply: onNameApplySpy,
     });
 
     cy
@@ -127,19 +112,17 @@ function nameEditingTests() {
     checkOnApplyCalledOnce({
       expectedName: `new gallery`,
     });
+
     cy
       .getByData(`gallery-name-input`)
       .should(`have.value`, `new gallery`);
   });
 
   it(`SHOULD have the possibility to edit name WHEN it is not a newly created one`, () => {
-    const onNameApplySpy = cy.spy().as(`onNameApply`);
-
     mountComponent({
       id: 1,
       name: `my super`,
       newlyCreated: false,
-      onNameApply: onNameApplySpy,
     });
 
     cy
@@ -171,14 +154,12 @@ function photoPreviewTests() {
 
 function deleteGalleryTests() {
   it(`SHOULD delete a gallery WHEN this gallery's Delete button is clicked`, () => {
-    const onDeleteSpy = cy.spy().as(`onDelete`);
-
     mountComponent({
       id: 1,
       newlyCreated: false,
       photos: [],
-      onDelete: onDeleteSpy,
     });
+
     cy
       .getByData(`delete-gallery`).click();
 
@@ -216,8 +197,6 @@ function mountComponent({
   id,
   name = `new gallery`,
   newlyCreated,
-  onNameApply = () => {},
-  onDelete = () => {},
   photos = [],
 }: {
   id: number;
@@ -227,6 +206,9 @@ function mountComponent({
   onDelete?: () => unknown;
   photos?: [];
 }) {
+  const onNameApplySpy = cy.spy().as(`onNameApply`);
+  const onDeleteSpy = cy.spy().as(`onDelete`);
+
   cy.mount(
     <GalleryCard
       id={id}
@@ -234,8 +216,8 @@ function mountComponent({
       photosCount={0}
       name={name}
       newlyCreated={newlyCreated}
-      onNameApply={onNameApply}
-      onDelete={onDelete}
+      onNameApply={onNameApplySpy}
+      onDelete={onDeleteSpy}
     />,
   );
 }
