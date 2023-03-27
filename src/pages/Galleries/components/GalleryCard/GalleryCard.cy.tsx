@@ -33,9 +33,10 @@ function nameEditingTests() {
       newlyCreated: true,
     });
 
-    typeTextInNameField({
-      expectedText: `123`,
-    }).should(`have.value`, `new gallery123`)
+    cy
+      .getByData(`gallery-name-input`)
+      .type(`123`)
+      .should(`have.value`, `new gallery123`)
       .type(`{enter}`);
 
     checkOnApplyCalledOnce({
@@ -49,9 +50,10 @@ function nameEditingTests() {
       newlyCreated: true,
     });
 
-    typeTextInNameField({
-      expectedText: `!!!`,
-    }).blur();
+    cy
+      .getByData(`gallery-name-input`)
+      .type(`!!!`)
+      .blur();
 
     checkOnApplyCalledOnce({
       expectedName: `new gallery!!!`,
@@ -64,9 +66,9 @@ function nameEditingTests() {
       newlyCreated: true,
     });
 
-    typeTextInNameField({
-      expectedText: `777`,
-    })
+    cy
+      .getByData(`gallery-name-input`)
+      .type(`777`)
       .type(`{esc}`);
 
     checkOnApplyCalledOnce({
@@ -177,20 +179,6 @@ function checkOnApplyCalledOnce(
 ) {
   cy.get(`@onNameApply`)
     .should(`have.been.calledOnceWith`, expectedName);
-}
-
-function typeTextInNameField(
-  {
-    expectedText,
-  }: {
-    expectedText: string;
-  },
-) {
-  return (
-    cy
-      .getByData(`gallery-name-input`)
-      .type(expectedText)
-  );
 }
 
 function mountComponent({
