@@ -71,8 +71,8 @@
     justify-content: space-between;
   }
 
-  &__arrow-icon-container {
-    @include icon-container(8px,12px,$color-grey-input);
+  &__arrow-icon {
+    @include icon(8px,12px,$color-grey-input);
   }
 
   &__profile {
@@ -102,8 +102,8 @@
     }
   }
 
-  &__logout-icon-container {
-    @include icon-container(18px,18px,$color-grey-label);
+  &__logout-icon {
+    @include icon(18px,18px,$color-grey-label);
 
     flex: none;
     margin-right: 20px;
@@ -120,7 +120,7 @@
   }
 
   @include desktop {
-    padding: 20px 32px;
+    padding: 16px 32px;
     box-shadow: none;
 
     &__profile {
@@ -129,13 +129,13 @@
       cursor: pointer;
 
       &:hover {
-        #{$this}__arrow-icon-container {
+        #{$this}__arrow-icon {
           color: $color-grey-label;
         }
       }
 
       &:active {
-        #{$this}__arrow-icon-container {
+        #{$this}__arrow-icon {
           transform: translateY(3px);
         }
       }

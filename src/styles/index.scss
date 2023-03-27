@@ -2,12 +2,19 @@
 @import "variables";
 @import "globals";
 @import "mixins";
+@import "buttons";
 
 // pages
-@import "../pages/Login/LoginPage.scss";
-@import "../components/Button/Button.scss";
+@import "../pages/LoginPage/LoginPage.scss";
+@import "../pages/LoginPage/components/LoginForm/LoginForm.scss";
+@import "../pages/Gallery/components/CreateGallery/CreateGallery.scss";
+@import "../pages/Gallery/components/Gallery/Gallery.scss";
+
+// components
 @import "../components/Error/Error.scss";
-@import "../pages/Login/components/LoginForm/LoginForm.scss";
 @import "../components/Header/Header.scss";
+
+@import "../components/Breadcrumbs/Breadcrumbs.scss";
 @import "../pages/CreateGallery/CreateGalleryPage.scss";
 @import "../pages/Galleries/components/GalleryCard/GalleryCard.scss";
+

@@ -1,5 +1,4 @@
 import { useState } from "react";
-import Button from "../../../../components/Button/Button";
 import { ReactComponent as EyeClosed } from "../../../../assets/icons/icon-closed-eye.svg";
 import { ReactComponent as EyeOpened } from "../../../../assets/icons/icon-opened-eye.svg";
 
@@ -70,24 +69,24 @@ function LoginForm({
               required
               onChange={(e) => setPassword(e.target.value.trim())}
             />
-            <Button
+            <button
               type="button"
               className="button button--eye login-form__password-switch-btn"
               onClick={() => setPasswordShown(!isPasswordShown)}
             >
               {isPasswordShown ? <EyeClosed /> : <EyeOpened />}
-            </Button>
+            </button>
           </div>
         </div>
 
-        <Button
+        <button
           type="submit"
           className="button button--bright login-form__submit-btn"
           data-cy="login-button"
           disabled={isLoginInvalid || isPasswordInvalid}
         >
           Sign in
-        </Button>
+        </button>
 
       </form>
     </div>

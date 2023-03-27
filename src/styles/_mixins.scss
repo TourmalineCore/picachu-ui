@@ -12,18 +12,13 @@
   cursor: pointer;
 }
 
-@mixin icon-container($height, $width, $color) {
+@mixin icon($height, $width, $color) {
   position: relative;
   width: $width;
   height: $height;
   line-height: 0;
   color: $color;
   transition: all 0.3s ease-in-out;
-
-  svg {
-    width: 100%;
-    height: 100%;
-  }
 }
 
 @mixin noselect {

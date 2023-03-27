@@ -1,9 +1,9 @@
-.create-gallery-page {
+.empty-gallery {
   position: relative;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  padding-top: 65px;
+  padding-top: $top-menu-height;
   min-height: 100vh;
 
   &__text {
