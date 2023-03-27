@@ -146,17 +146,36 @@ describe(`GalleryCard`, () => {
         .and(`equal`, `No photos have been added to new gallery yet`);
     });
   });
+
+  describe(`delete gallery`, () => {
+    it(`SHOULD delete a gallery WHEN this gallery's Delete button is clicked`, () => {
+      const onDeleteSpy = cy.spy().as(`onDelete`);
+
+      mountComponent({
+        newlyCreated: false,
+        photos: [],
+        onDelete: onDeleteSpy,
+      });
+      cy
+        .getByData(`delete-gallery`).click();
+
+      cy.get(`@onDelete`)
+        .should(`have.been.calledOnce`);
+    });
+  });
 });
 
 function mountComponent({
   name = `new gallery`,
   newlyCreated,
   onNameApply = () => {},
+  onDelete = () => {},
   photos = [],
 }: {
   name?: string;
   newlyCreated: boolean;
   onNameApply?: (newName: string) => unknown;
+  onDelete?: () => unknown;
   photos?: [];
 }) {
   cy.mount(
@@ -166,6 +185,7 @@ function mountComponent({
       name={name}
       newlyCreated={newlyCreated}
       onNameApply={onNameApply}
+      onDelete={onDelete}
     />,
   );
 }

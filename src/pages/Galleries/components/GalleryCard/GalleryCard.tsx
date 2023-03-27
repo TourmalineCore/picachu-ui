@@ -9,12 +9,14 @@ function GalleryCard({
   name,
   newlyCreated,
   onNameApply,
+  onDelete,
   photosCount,
   photos,
 }: {
   name: string;
   newlyCreated: boolean;
   onNameApply: (newName: string) => unknown;
+  onDelete: () => unknown;
   photosCount: number;
   photos: Photo[];
 }) {
@@ -31,7 +33,10 @@ function GalleryCard({
   const tryToApplyEmptyName = !newGalleryName.trim().length;
 
   return (
-    <div className="gallery-card">
+    <div
+      className="gallery-card"
+      data-cy="gallery-card"
+    >
       <div className="gallery-card__image-container">
         <a href="/">
           {
@@ -68,8 +73,10 @@ function GalleryCard({
           </span>
         </div>
         <button
+          data-cy="delete-gallery"
           type="button"
           className="button gallery-card__delete-btn"
+          onClick={() => onDelete()}
         >
           <DeleteIcon />
         </button>
