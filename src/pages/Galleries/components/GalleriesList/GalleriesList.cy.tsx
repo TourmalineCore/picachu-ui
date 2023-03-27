@@ -100,7 +100,10 @@ describe(`GalleriesList`, () => {
 
   describe(`delete gallery`, () => {
     it(`SHOULD delete a gallery from the list WHEN Delete button is clicked on that gallery`, () => {
+      const onDeleteSpy = cy.spy().as(`onDelete`);
+
       mountComponent({
+        handleGalleryDelete: onDeleteSpy,
         galleries: [
           {
             id: 1,
@@ -110,12 +113,11 @@ describe(`GalleriesList`, () => {
       });
 
       cy
-        .getByData(`delete-gallery`)
+        .get(`#1 [data-cy="delete-gallery"]`)
         .click();
 
-      cy
-        .getByData(`gallery-card`)
-        .should(`not.exist`);
+      cy.get(`@onDelete`)
+        .should(`have.been.calledOnceWith`, 1);
     });
   });
 });
@@ -124,17 +126,20 @@ function mountComponent({
   newlyCreatedGalleryId = null,
   galleries,
   onNameApply = () => {},
+  handleGalleryDelete = () => {},
 }: {
   newlyCreatedGalleryId?: number | null;
   galleries: Gallery[];
   onNameApply?: ({ galleryId, newName }: { galleryId: number; newName: string }) => unknown;
   onDelete?: ({ galleryId }: { galleryId: number }) => unknown;
+  handleGalleryDelete?: (id: number) => unknown;
 }) {
   cy.mount(
     <GalleriesList
       newlyCreatedGalleryId={newlyCreatedGalleryId}
       galleries={galleries}
       onNameApply={onNameApply}
+      handleGalleryDelete={handleGalleryDelete}
     />,
   );
 }
