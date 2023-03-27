@@ -1,4 +1,4 @@
-import EmptyGallery from "./components/EmptyGallery/EmptyGallery";
+import EmptyGallery from "./components/CreateGallery/CreateGallery";
 import Gallery from "./components/Gallery/Gallery";
 
 function GalleryPage() {
