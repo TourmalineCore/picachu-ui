@@ -30,7 +30,6 @@ function GalleriesPage() {
           )
           : (
             <>
-              {` `}
               <Breadcrumb />
               <AddButton type="button">Create new</AddButton>
               <GalleriesList
