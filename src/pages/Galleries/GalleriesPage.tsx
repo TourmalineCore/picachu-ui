@@ -3,7 +3,7 @@
 import { useState } from "react";
 import AddButton from "../../components/AddButton/AddButton";
 import Breadcrumb from "../../components/Breadcrumbs/Breadcrumbs";
-import CreateGallery from "./components/CreateGallery/CreateGallery";
+import NoGalleries from "./components/NoGalleries/NoGalleries";
 import GalleriesList from "./components/GalleriesList/GalleriesList";
 
 // const mockGalleries = [
@@ -26,7 +26,7 @@ function GalleriesPage() {
       {
         galleries.length === 0
           ? (
-            <CreateGallery />
+            <NoGalleries />
           )
           : (
             <>
