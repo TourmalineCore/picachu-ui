@@ -1,25 +1,29 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable no-unused-vars */
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import axios from "axios";
 import AddButton from "../../components/AddButton/AddButton";
 import Breadcrumb from "../../components/Breadcrumbs/Breadcrumbs";
 import NoGalleries from "./components/NoGalleries/NoGalleries";
 import GalleriesList from "./components/GalleriesList/GalleriesList";
 
-// const mockGalleries = [
-//   {
-//     id: 1,
-//     name: `one`,
-//   },
-//   {
-//     id: 2,
-//     name: `two`,
-//   },
-// ];
-
 function GalleriesPage() {
-  // const [galleries, setGalleries] = useState(mockGalleries);
   const [galleries, setGalleries] = useState([]);
+
+  useEffect(
+    () => {
+      async function loadGalleries() {
+        const {
+          data: loadedGalleries,
+        } = await axios.get(`/galleries`); // ToDo add TS type for response data
+
+        setGalleries(loadedGalleries);
+      }
+
+      loadGalleries();
+    },
+    [],
+  );
 
   return (
     <div>
