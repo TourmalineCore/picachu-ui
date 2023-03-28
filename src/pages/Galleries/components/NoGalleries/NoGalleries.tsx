@@ -33,7 +33,10 @@ function NoGalleries() {
     },
   ];
   return (
-    <div className="no-galleries">
+    <div
+      data-cy="no-galleries"
+      className="no-galleries"
+    >
       <div className="no-galleries__image-row">
         {
           imageArray.map((image) => (
