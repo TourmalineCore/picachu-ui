@@ -60,6 +60,7 @@ function NoGalleries() {
       <button
         type="button"
         className="button button--bright no-galleries__position-btn"
+        data-cy="no-galleries-create-gallery-button"
       >
         Create a gallery
       </button>
