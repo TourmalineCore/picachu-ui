@@ -1,0 +1,42 @@
+.breadcrumbs {
+  $this: &;
+
+  @include reset-list;
+
+  display: flex;
+  align-items: center;
+  margin: 16px 0 28px;
+  width: 100%;
+
+  &__item {
+    position: relative;
+    display: flex;
+    align-items: center;
+    margin-right: 15px;
+
+    &:last-child {
+      #{$this}__icon {
+        display: none;
+      }
+      #{$this}__link {
+        color: $color-grey-label;
+        cursor: default;
+        pointer-events: none;
+      }
+    }
+  }
+
+  &__link {
+    margin-right: 15px;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 20px;
+    color: $color-grey-input;
+  }
+
+  &__icon {
+    @include icon(12px,7px,$color-grey-label);
+
+    flex: none;
+  }
+}

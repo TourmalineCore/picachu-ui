@@ -36,6 +36,7 @@ h3,
 h4,
 p {
   margin: 0;
+  padding: 0;
 }
 
 #root {
@@ -83,11 +84,8 @@ body {
 }
 
 .container {
-  margin-right: auto;
-  margin-left: auto;
   padding: 0 $side-paddings-mobile;
   width: 100%;
-  max-width: $container-max-width;
 
   @include desktop {
     padding: 0 $side-paddings-desktop;
