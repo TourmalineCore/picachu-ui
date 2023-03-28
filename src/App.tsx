@@ -2,7 +2,7 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import GalleryCard from './pages/Galleries/components/GalleryCard/GalleryCard';
 import Layout from './components/Layout/Layout';
 import GalleryPage from './pages/Gallery/GalleryPage';
-import LoginPage from './pages/LoginPage/LoginPage';
+import LoginPage from './pages/Login/LoginPage';
 
 const galleryCardInfo = {
   id: 1,
