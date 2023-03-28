@@ -4,7 +4,7 @@ import image3 from "../../../../assets/images/create-gallery-3-image.png";
 import image4 from "../../../../assets/images/create-gallery-4-image.png";
 import image5 from "../../../../assets/images/create-gallery-5-image.png";
 
-function EmptyGallery() {
+function NoGalleries() {
   const imageArray = [
     {
       id: 1,
@@ -33,8 +33,11 @@ function EmptyGallery() {
     },
   ];
   return (
-    <div className="empty-gallery">
-      <div className="empty-gallery__image-row">
+    <div
+      data-cy="no-galleries"
+      className="no-galleries"
+    >
+      <div className="no-galleries__image-row">
         {
           imageArray.map((image) => (
             <img
@@ -42,21 +45,21 @@ function EmptyGallery() {
               src={image.src}
               alt={image.alt}
               draggable={false}
-              className="empty-gallery__image"
+              className="no-galleries__image"
             />
           ))
         }
       </div>
-      <div className="empty-gallery__text">
-        <h1 className="empty-gallery__title">Create a gallery to get started</h1>
-        <p className="empty-gallery__description">
+      <div className="no-galleries__text">
+        <h1 className="no-galleries__title">Create a gallery to get started</h1>
+        <p className="no-galleries__description">
           With galleries you can group photos by category or event
         </p>
       </div>
 
       <button
         type="button"
-        className="button button--bright empty-gallery__position-btn"
+        className="button button--bright no-galleries__position-btn"
       >
         Create a gallery
       </button>
@@ -64,4 +67,4 @@ function EmptyGallery() {
     </div>
   );
 }
-export default EmptyGallery;
+export default NoGalleries;

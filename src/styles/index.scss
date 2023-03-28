@@ -5,16 +5,13 @@
 @import "buttons";
 
 // pages
-@import "../pages/LoginPage/LoginPage.scss";
-@import "../pages/LoginPage/components/LoginForm/LoginForm.scss";
-@import "../pages/Gallery/components/CreateGallery/CreateGallery.scss";
-@import "../pages/Gallery/components/Gallery/Gallery.scss";
+@import "../pages/Login/LoginPage.scss";
 
 // components
 @import "../components/Error/Error.scss";
 @import "../components/Header/Header.scss";
-
 @import "../components/Breadcrumbs/Breadcrumbs.scss";
-@import "../pages/CreateGallery/CreateGalleryPage.scss";
+@import "../pages/Login/components/LoginForm/LoginForm.scss";
+@import "../pages/Galleries/components/NoGalleries/NoGalleries.scss";
 @import "../pages/Galleries/components/GalleryCard/GalleryCard.scss";
-
+@import "../pages/Galleries/components/GalleriesList/GalleriesList.scss";

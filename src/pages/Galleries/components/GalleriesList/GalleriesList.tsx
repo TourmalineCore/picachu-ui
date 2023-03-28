@@ -5,6 +5,7 @@ function GalleriesList({
   newlyCreatedGalleryId,
   galleries,
   onNameApply,
+  onGalleryDelete,
 }: {
   newlyCreatedGalleryId: number | null;
   galleries: Gallery[];
@@ -15,18 +16,22 @@ function GalleriesList({
     galleryId: number;
     newName: string;
   }) => unknown;
+  onGalleryDelete: (id: number) => unknown;
 }) {
   return (
-    <div>
-      {
-        galleries.length === 0
-          ? <span data-cy="no-galleries">Create a gallery to get started</span>
-          : (
-            galleries.map(({
-              id,
-              name,
-            }) => (
+    <div className="galleries-list">
+      <ul className="galleries-list__list">
+        {
+          galleries.map(({
+            id,
+            name,
+          }) => (
+            <li
+              className="galleries-list__item"
+              key={`${id}-${name}`}
+            >
               <GalleryCard
+                id={id}
                 name={name}
                 newlyCreated={newlyCreatedGalleryId === id}
                 onNameApply={(newName) => {
@@ -35,13 +40,16 @@ function GalleriesList({
                     newName,
                   });
                 }}
+                onDelete={onGalleryDelete}
                 photosCount={0}
                 photos={[]}
               />
-            ))
-          )
-      }
+            </li>
+          ))
+        }
+      </ul>
     </div>
+
   );
 }
 

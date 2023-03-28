@@ -97,22 +97,49 @@ describe(`GalleriesList`, () => {
         newName: `Second Gallery Ever`,
       });
   });
+
+  describe(`delete gallery`, () => {
+    it(`SHOULD delete a gallery from the list WHEN Delete button is clicked on that gallery`, () => {
+      const onDeleteSpy = cy.spy().as(`onDelete`);
+
+      mountComponent({
+        onGalleryDelete: onDeleteSpy,
+        galleries: [
+          {
+            id: 1,
+            name: `First Gallery`,
+          },
+        ],
+      });
+
+      cy
+        .get(`#1 [data-cy="delete-gallery"]`)
+        .click();
+
+      cy.get(`@onDelete`)
+        .should(`have.been.calledOnceWith`, 1);
+    });
+  });
 });
 
 function mountComponent({
   newlyCreatedGalleryId = null,
   galleries,
   onNameApply = () => {},
+  onGalleryDelete = () => {},
 }: {
   newlyCreatedGalleryId?: number | null;
   galleries: Gallery[];
   onNameApply?: ({ galleryId, newName }: { galleryId: number; newName: string }) => unknown;
+  onDelete?: ({ galleryId }: { galleryId: number }) => unknown;
+  onGalleryDelete?: (id: number) => unknown;
 }) {
   cy.mount(
     <GalleriesList
       newlyCreatedGalleryId={newlyCreatedGalleryId}
       galleries={galleries}
       onNameApply={onNameApply}
+      onGalleryDelete={onGalleryDelete}
     />,
   );
 }
