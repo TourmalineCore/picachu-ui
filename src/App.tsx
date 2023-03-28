@@ -1,8 +1,8 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import GalleryCard from './pages/Galleries/components/GalleryCard/GalleryCard';
 import Layout from './components/Layout/Layout';
-import GalleryPage from './pages/Gallery/GalleryPage';
 import LoginPage from './pages/Login/LoginPage';
+import GalleriesPage from './pages/Galleries/GalleriesPage';
 
 const galleryCardInfo = {
   id: 1,
@@ -23,7 +23,7 @@ export function App() {
         >
           <Route
             path=""
-            element={<GalleryPage />}
+            element={<GalleriesPage />}
             index
           />
           <Route

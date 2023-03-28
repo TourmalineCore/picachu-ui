@@ -103,7 +103,7 @@ describe(`GalleriesList`, () => {
       const onDeleteSpy = cy.spy().as(`onDelete`);
 
       mountComponent({
-        handleGalleryDelete: onDeleteSpy,
+        onGalleryDelete: onDeleteSpy,
         galleries: [
           {
             id: 1,
@@ -126,20 +126,20 @@ function mountComponent({
   newlyCreatedGalleryId = null,
   galleries,
   onNameApply = () => {},
-  handleGalleryDelete = () => {},
+  onGalleryDelete = () => {},
 }: {
   newlyCreatedGalleryId?: number | null;
   galleries: Gallery[];
   onNameApply?: ({ galleryId, newName }: { galleryId: number; newName: string }) => unknown;
   onDelete?: ({ galleryId }: { galleryId: number }) => unknown;
-  handleGalleryDelete?: (id: number) => unknown;
+  onGalleryDelete?: (id: number) => unknown;
 }) {
   cy.mount(
     <GalleriesList
       newlyCreatedGalleryId={newlyCreatedGalleryId}
       galleries={galleries}
       onNameApply={onNameApply}
-      handleGalleryDelete={handleGalleryDelete}
+      onGalleryDelete={onGalleryDelete}
     />,
   );
 }

@@ -1,8 +1,8 @@
-.gallery {
+.galleries-list {
   padding-top: $top-menu-height;
   min-height: 100vh;
 
-  &__container {
+  &__list {
     display: grid;
     margin-top: 20px;
     gap: 16px;
@@ -14,7 +14,7 @@
     }
   }
 
-  &__card {
+  &__item {
     width: 156px;
     height: 164px;
     background-color: $color-grey-light-200;

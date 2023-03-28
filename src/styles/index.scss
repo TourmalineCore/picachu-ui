@@ -6,13 +6,13 @@
 
 // pages
 @import "../pages/Login/LoginPage.scss";
-@import "../pages/Login/components/LoginForm/LoginForm.scss";
-@import "../pages/Gallery/components/CreateGallery/CreateGallery.scss";
-@import "../pages/Gallery/components/Gallery/Gallery.scss";
 
 // components
 @import "../components/Error/Error.scss";
 @import "../components/Header/Header.scss";
 @import "../components/Breadcrumbs/Breadcrumbs.scss";
-@import "../pages/Gallery/components/CreateGallery/CreateGallery.scss";
+@import "../pages/Login/components/LoginForm/LoginForm.scss";
+@import "../pages/Galleries/components/CreateGallery/CreateGallery.scss";
+@import "../pages/Galleries/components/CreateGallery/CreateGallery.scss";
 @import "../pages/Galleries/components/GalleryCard/GalleryCard.scss";
+@import "../pages/Galleries/components/GalleriesList/GalleriesList.scss";
