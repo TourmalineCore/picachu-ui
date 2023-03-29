@@ -80,6 +80,11 @@ function GalleriesPage() {
     galleryId: number;
     newName: string;
   }) {
+    const notTrackNewlyCreatedAnyLonger = galleryId === newlyCreatedGalleryId;
+    if (notTrackNewlyCreatedAnyLonger) {
+      setNewlyCreatedGalleryId(null);
+    }
+
     if (galleries.find(({ id }) => id === galleryId)!.name === newName) {
       return;
     }

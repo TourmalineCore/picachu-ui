@@ -27,6 +27,8 @@ function GalleryCard({
   useEffect(() => {
     if (newlyCreated) {
       nameRef.current!.focus();
+    } else {
+      nameRef.current!.blur();
     }
   }, [newlyCreated]);
 
