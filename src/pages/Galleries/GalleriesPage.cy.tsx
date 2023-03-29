@@ -6,7 +6,7 @@ import GalleriesPage from './GalleriesPage';
 
 describe(`GalleriesPage`, () => {
   it(`SHOULD render no galleries message WHEN there are no galleries`, () => {
-    cy.intercept(`GET`, `/api/galleries`, []);
+    cy.intercept(`GET`, `/api/galleries`, []).as(`call-1`);
 
     mountComponent();
 
@@ -19,7 +19,7 @@ describe(`GalleriesPage`, () => {
     cy.intercept(`GET`, `/api/galleries`, [{
       id: 1,
       name: `First Gallery`,
-    }]);
+    }]).as(`call-2`);
 
     mountComponent();
 
@@ -51,6 +51,12 @@ describe(`GalleriesPage`, () => {
       .type(`{enter}`);
 
     cy.get(`@onRenameBackendCallSpy`).should(`not.have.been.called`);
+
+    // we should check that the new card is not focused and name is the same
+    cy.getByData(`gallery-name-input`)
+      .last()
+      .should(`have.value`, `new gallery`)
+      .should(`not.be.focused`);
   });
 });
 
