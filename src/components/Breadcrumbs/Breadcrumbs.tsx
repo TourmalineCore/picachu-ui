@@ -1,7 +1,7 @@
 import { Link, useLocation } from "react-router-dom";
 import { ReactComponent as ArrowRight } from '../../assets/icons/icon-breadcrumbs-arrow-right.svg';
 
-function Breadcrumb() {
+function Breadcrumbs() {
   const location = useLocation();
 
   const crumbs = location.pathname.split(`/`)
@@ -29,4 +29,4 @@ function Breadcrumb() {
   );
 }
 
-export default Breadcrumb;
+export default Breadcrumbs;
