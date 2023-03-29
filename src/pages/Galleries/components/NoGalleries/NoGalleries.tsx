@@ -4,7 +4,11 @@ import image3 from "../../../../assets/images/create-gallery-3-image.png";
 import image4 from "../../../../assets/images/create-gallery-4-image.png";
 import image5 from "../../../../assets/images/create-gallery-5-image.png";
 
-function NoGalleries() {
+function NoGalleries({
+  onNewGalleryClick,
+}: {
+  onNewGalleryClick: () => unknown;
+}) {
   const imageArray = [
     {
       id: 1,
@@ -61,6 +65,7 @@ function NoGalleries() {
         type="button"
         className="button button--bright no-galleries__position-btn"
         data-cy="no-galleries-create-gallery-button"
+        onClick={onNewGalleryClick}
       >
         Create a gallery
       </button>
