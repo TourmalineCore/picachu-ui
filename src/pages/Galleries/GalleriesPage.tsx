@@ -6,6 +6,7 @@ import AddButton from "../../components/AddButton/AddButton";
 import NoGalleries from "./components/NoGalleries/NoGalleries";
 import GalleriesList from "./components/GalleriesList/GalleriesList";
 import Gallery from "./components/GalleriesList/Gallery";
+import Breadcrumb from "../../components/Breadcrumbs/Breadcrumbs";
 
 function GalleriesPage() {
   const [galleries, setGalleries] = useState<Gallery[]>([]);
@@ -36,7 +37,7 @@ function GalleriesPage() {
           : (
             <>
               {/* ToDo what to do with the breadcrumbs useLocation? maybe need to wrap in router for all cypress component tests */}
-              {/* <Breadcrumb /> */}
+              <Breadcrumb />
               <AddButton
                 type="button"
                 onClick={onNewGalleryClick}

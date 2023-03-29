@@ -1,7 +1,8 @@
-import './commands';
+import "./commands";
 
-import { mount } from 'cypress/react18';
+import { mount } from "cypress/react18";
 import "../../src/styles/index.scss";
+import mountWithRouter from "./mountWithRouter";
 
 declare global {
   namespace Cypress {
@@ -11,4 +12,4 @@ declare global {
   }
 }
 
-Cypress.Commands.add(`mount`, mount);
+Cypress.Commands.add(`mount`, mountWithRouter);
