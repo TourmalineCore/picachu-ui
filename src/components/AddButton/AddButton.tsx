@@ -3,7 +3,7 @@
 import { ButtonHTMLAttributes } from "react";
 import { ReactComponent as IconPlus } from '../../assets/icons/icon-plus.svg';
 
-function OutlineButton({
+function AddButton({
   className,
   children,
   ...rest
@@ -11,6 +11,7 @@ function OutlineButton({
   return (
     <button
       className={`button button--light ${className}`}
+      data-cy="add-button"
       {...rest}
     >
       {children}
@@ -19,4 +20,4 @@ function OutlineButton({
   );
 }
 
-export default OutlineButton;
+export default AddButton;

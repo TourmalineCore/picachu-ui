@@ -1,48 +1,52 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable no-unused-vars */
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import axios from "axios";
 import AddButton from "../../components/AddButton/AddButton";
-import Breadcrumb from "../../components/Breadcrumbs/Breadcrumbs";
 import NoGalleries from "./components/NoGalleries/NoGalleries";
 import GalleriesList from "./components/GalleriesList/GalleriesList";
-
-// const mockGalleries = [
-//   {
-//     id: 1,
-//     name: `one`,
-//   },
-//   {
-//     id: 2,
-//     name: `two`,
-//   },
-// ];
+import Gallery from "./components/GalleriesList/Gallery";
+import Breadcrumbs from "../../components/Breadcrumbs/Breadcrumbs";
 
 function GalleriesPage() {
-  // const [galleries, setGalleries] = useState(mockGalleries);
-  const [galleries, setGalleries] = useState([]);
+  const [galleries, setGalleries] = useState<Gallery[]>([]);
+  const [newlyCreatedGalleryId, setNewlyCreatedGalleryId] = useState<number | null>(null);
+
+  useEffect(
+    () => {
+      async function loadGalleries() {
+        const {
+          data: loadedGalleries,
+        } = await axios.get(`/api/galleries`); // ToDo add TS type for response data
+
+        setGalleries(loadedGalleries);
+      }
+
+      loadGalleries();
+    },
+    [],
+  );
 
   return (
     <div>
       {
         galleries.length === 0
           ? (
-            <NoGalleries />
+            <NoGalleries onNewGalleryClick={onNewGalleryClick} />
           )
           : (
             <>
-              <Breadcrumb />
-              <AddButton type="button">Create new</AddButton>
+              <Breadcrumbs />
+              <AddButton
+                type="button"
+                onClick={onNewGalleryClick}
+              >
+                Create new
+              </AddButton>
               <GalleriesList
                 galleries={galleries}
-                newlyCreatedGalleryId={null}
-                onNameApply={({
-                  galleryId,
-                  newName,
-                }: {
-                  galleryId: number;
-                  newName: string;
-                }) => {
-                }}
+                newlyCreatedGalleryId={newlyCreatedGalleryId}
+                onNameApply={onNameApply}
                 onGalleryDelete={(id: number) => {
                 }}
               />
@@ -51,6 +55,44 @@ function GalleriesPage() {
       }
     </div>
   );
+
+  async function onNewGalleryClick() {
+    const {
+      data: loadedNewlyCreatedGalleryId,
+    } = await axios.post(`/api/galleries`, {
+      name: `new gallery`,
+    });
+
+    setNewlyCreatedGalleryId(loadedNewlyCreatedGalleryId);
+    setGalleries([
+      ...galleries,
+      {
+        id: loadedNewlyCreatedGalleryId,
+        name: `new gallery`,
+      },
+    ]);
+  }
+
+  async function onNameApply({
+    galleryId,
+    newName,
+  }: {
+    galleryId: number;
+    newName: string;
+  }) {
+    const notTrackNewlyCreatedAnyLonger = galleryId === newlyCreatedGalleryId;
+    if (notTrackNewlyCreatedAnyLonger) {
+      setNewlyCreatedGalleryId(null);
+    }
+
+    if (galleries.find(({ id }) => id === galleryId)!.name === newName) {
+      return;
+    }
+
+    await axios.put(`/api/galleries/${galleryId}/update-name`, {
+      newName,
+    });
+  }
 }
 
 export default GalleriesPage;
