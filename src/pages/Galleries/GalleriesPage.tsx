@@ -7,26 +7,25 @@ import NoGalleries from "./components/NoGalleries/NoGalleries";
 import GalleriesList from "./components/GalleriesList/GalleriesList";
 import Gallery from "./components/GalleriesList/Gallery";
 import Breadcrumbs from "../../components/Breadcrumbs/Breadcrumbs";
+import { useGet } from "../../common/hooks/useGet";
 // import RestoreDeletedGallery from "./components/RestoreDeletedGallery/RestoreDeletedGallery";
 
 function GalleriesPage() {
   const [galleries, setGalleries] = useState<Gallery[]>([]);
   const [newlyCreatedGalleryId, setNewlyCreatedGalleryId] = useState<number | null>(null);
 
-  useEffect(
-    () => {
-      async function loadGalleries() {
-        const {
-          data: loadedGalleries,
-        } = await axios.get(`/api/galleries`); // ToDo add TS type for response data
+  const {
+    response: loadedGalleries,
+  } = useGet<Gallery[]>({
+    queryKey: [`galleries`],
+    url: `/api/galleries`,
+  });
 
-        setGalleries(loadedGalleries);
-      }
-
-      loadGalleries();
-    },
-    [],
-  );
+  useEffect(() => {
+    if (loadedGalleries) {
+      setGalleries(loadedGalleries);
+    }
+  }, [loadedGalleries]);
 
   return (
     <div>
