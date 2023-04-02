@@ -1,0 +1,30 @@
+.restore-deleted-gallery {
+  position: fixed;
+  left: 50%;
+  bottom: 20px;
+  border-radius: 6px;
+  padding: 16px 24px;
+  box-shadow: 1px 4px 16px rgb(180 173 189 / 15%);
+  transform: translateX(-50%);
+
+  &__text {
+    font-weight: 500;
+    font-size: 14px;
+  }
+
+  &__button {
+    margin-left: 10px;
+    color: $primary-color-default;
+
+    &:hover {
+      color: $primary-color-hover;
+      transition: $default-transition;
+    }
+  }
+
+  @include desktop {
+    display: flex;
+    justify-content: space-between;
+    min-width: 500px;
+  }
+}
