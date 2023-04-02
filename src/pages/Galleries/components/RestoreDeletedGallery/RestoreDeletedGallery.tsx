@@ -2,13 +2,15 @@ import React from 'react';
 
 function RestoreDeletedGallery({
   onRestoreGallery,
+  galleryName,
 }: {
   onRestoreGallery: () => unknown;
+  galleryName: string;
 }) {
   return (
     <div className="restore-deleted-gallery">
       <span className="restore-deleted-gallery__text">
-        The nature gallery has been deleted.
+        {`The ${galleryName} gallery has been deleted.`}
       </span>
       <button
         className="restore-deleted-gallery__button button"

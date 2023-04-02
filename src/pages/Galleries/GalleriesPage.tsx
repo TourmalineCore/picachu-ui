@@ -7,7 +7,7 @@ import NoGalleries from "./components/NoGalleries/NoGalleries";
 import GalleriesList from "./components/GalleriesList/GalleriesList";
 import Gallery from "./components/GalleriesList/Gallery";
 import Breadcrumbs from "../../components/Breadcrumbs/Breadcrumbs";
-import RestoreDeletedGallery from "./components/RestoreDeletedGallery/RestoreDeletedGallery";
+// import RestoreDeletedGallery from "./components/RestoreDeletedGallery/RestoreDeletedGallery";
 
 function GalleriesPage() {
   const [galleries, setGalleries] = useState<Gallery[]>([]);
@@ -51,7 +51,10 @@ function GalleriesPage() {
                 onGalleryDelete={(id: number) => {
                 }}
               />
-              <RestoreDeletedGallery onRestoreGallery={onRestoreGallery} />
+              {/* <RestoreDeletedGallery
+                onRestoreGallery={onRestoreGallery}
+                galleryName="town"
+              /> */}
             </>
           )
       }
