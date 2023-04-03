@@ -62,20 +62,10 @@ function GalleriesPage() {
   );
 
   async function onNewGalleryClick() {
-    // const {
-    //   data: loadedNewlyCreatedGalleryId,
-    // } = await axios.post(`/api/galleries`, {
-    //   name: `new gallery`,
-    // });
-
     const {
-      response: loadedNewlyCreatedGalleryId,
-    } = usePost<number, { name: string }>({
-      queryKey: [`galleries`],
-      url: `/api/galleries`,
-      data: {
-        name: `new gallery`,
-      },
+      data: loadedNewlyCreatedGalleryId,
+    } = await axios.post(`/api/galleries`, {
+      name: `new gallery`,
     });
 
     setNewlyCreatedGalleryId(loadedNewlyCreatedGalleryId);
