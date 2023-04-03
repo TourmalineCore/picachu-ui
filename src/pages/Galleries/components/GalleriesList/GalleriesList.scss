@@ -3,6 +3,8 @@
   min-height: 100vh;
 
   &__list {
+    @include reset-list;
+
     display: grid;
     margin-top: 20px;
     gap: 16px;

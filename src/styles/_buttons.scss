@@ -6,11 +6,10 @@
 
   border-radius: 8px;
   font-family: inherit;
-  font-weight: 500;
-  font-size: 14px;
-  line-height: 1.4;
+  font-weight: inherit;
+  color: inherit;
   background-color: transparent;
-  transition: all 0.3s ease-in-out;
+  transition: all $default-transition;
 
   &--light {
     display: flex;
@@ -20,10 +19,11 @@
     padding: 16px 24px;
     width: 100%;
     max-width: 288px;
-    transition: all 0.3s ease-in-out;
+    color: $color-dark-grey;
+    transition: all $default-transition;
 
     svg {
-      @include icon(14px,14px,$color-grey-label);
+      @include icon(14px,14px,$color-dark-grey);
 
       flex: none;
     }
@@ -34,7 +34,7 @@
       svg {
         color: $color-black;
         transform: rotate(180deg);
-        transition: color 0.3s ease-in-out;
+        transition: color $default-transition;
         transition: transform 0.5s ease-in-out;
       }
     }
@@ -54,7 +54,7 @@
   &--eye {
     width: 20px;
     height: 20px;
-    color: $color-grey-input;
+    color: $color-medium-grey;
 
     svg {
       width: 100%;
@@ -62,7 +62,7 @@
     }
 
     svg:hover {
-      color: $color-grey-label;
+      color: $color-dark-grey;
     }
   }
 
