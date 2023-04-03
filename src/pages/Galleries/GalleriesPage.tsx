@@ -8,6 +8,7 @@ import GalleriesList from "./components/GalleriesList/GalleriesList";
 import Gallery from "./components/GalleriesList/Gallery";
 import Breadcrumbs from "../../components/Breadcrumbs/Breadcrumbs";
 import { useGet } from "../../common/hooks/useGet";
+import { usePost } from "../../common/hooks/usePost";
 // import RestoreDeletedGallery from "./components/RestoreDeletedGallery/RestoreDeletedGallery";
 
 function GalleriesPage() {
@@ -61,10 +62,20 @@ function GalleriesPage() {
   );
 
   async function onNewGalleryClick() {
+    // const {
+    //   data: loadedNewlyCreatedGalleryId,
+    // } = await axios.post(`/api/galleries`, {
+    //   name: `new gallery`,
+    // });
+
     const {
-      data: loadedNewlyCreatedGalleryId,
-    } = await axios.post(`/api/galleries`, {
-      name: `new gallery`,
+      response: loadedNewlyCreatedGalleryId,
+    } = usePost<number, { name: string }>({
+      queryKey: [`galleries`],
+      url: `/api/galleries`,
+      data: {
+        name: `new gallery`,
+      },
     });
 
     setNewlyCreatedGalleryId(loadedNewlyCreatedGalleryId);
