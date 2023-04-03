@@ -9,7 +9,10 @@ function RestoreDeletedGallery({
 }) {
   return (
     <div className="restore-deleted-gallery">
-      <span className="restore-deleted-gallery__text">
+      <span
+        className="restore-deleted-gallery__text"
+        data-cy="restore-deleted-gallery-text"
+      >
         {`The ${galleryName} gallery has been deleted.`}
       </span>
       <button

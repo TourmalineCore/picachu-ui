@@ -5,8 +5,8 @@ describe(`RestoreDeletedGallery`, () => {
   it(`SHOULD call restore callback WHEN restore button is clicked`, () => {
     mountComponent();
 
-    cy
-      .getByData(`restore-gallery-button`).click();
+    cy.getByData(`restore-gallery-button`)
+      .click();
 
     cy.get(`@onRestoreGallery`)
       .should(`have.been.calledOnce`);
@@ -15,7 +15,8 @@ describe(`RestoreDeletedGallery`, () => {
   it(`SHOULD show corresponding gallery's name WHEN deleting a gallery`, () => {
     mountComponent();
 
-    cy.contains(`city`);
+    cy.getByData(`restore-deleted-gallery-text`)
+      .should(`have.text`, `The city gallery has been deleted.`);
   });
 });
 
