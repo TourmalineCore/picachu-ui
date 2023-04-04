@@ -28,8 +28,8 @@
     border-radius: 5px;
     width: 21px;
     height: 2px;
-    background: $color-grey-label;
-    transition: all 0.3s ease-in-out;
+    background: $color-dark-grey;
+    transition: all $default-transition;
 
     &::after,
     &::before {
@@ -39,8 +39,8 @@
       border-radius: 5px;
       width: 21px;
       height: 2px;
-      background: $color-grey-label;
-      transition: all 0.3s ease-in-out;
+      background: $color-dark-grey;
+      transition: all $default-transition;
     }
 
     &::before {
@@ -72,7 +72,7 @@
   }
 
   &__arrow-icon {
-    @include icon(8px,12px,$color-grey-input);
+    @include icon(8px,12px,$color-medium-grey);
   }
 
   &__profile {
@@ -103,16 +103,15 @@
   }
 
   &__logout-icon {
-    @include icon(18px,18px,$color-grey-label);
+    @include icon(18px,18px,$color-dark-grey);
 
     flex: none;
     margin-right: 20px;
   }
 
   &__logout-text {
-    font-weight: 500;
     line-height: 1.3;
-    color: $color-grey-label;
+    color: $color-dark-grey;
   }
 
   &--active {
@@ -130,7 +129,7 @@
 
       &:hover {
         #{$this}__arrow-icon {
-          color: $color-grey-label;
+          color: $color-dark-grey;
         }
       }
 

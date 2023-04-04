@@ -10,13 +10,10 @@
   }
 
   &__title {
-    margin: 0;
     margin-bottom: 40px;
-    font-weight: 500;
     font-size: 22px;
     line-height: 1.8;
     text-align: left;
-    color: #06040e;
 
     @include desktop {
       margin-bottom: 56px;
@@ -31,15 +28,15 @@
 
   &__input {
     width: 100%;
-    color: $color-grey-label;
+    color: $color-dark-grey;
 
     &::placeholder {
-      color: $color-grey-input;
+      color: $color-medium-grey;
     }
 
     &[type="password"] {
       &::placeholder {
-        color: $color-grey-input;
+        color: $color-medium-grey;
       }
     }
   }
@@ -55,9 +52,6 @@
     position: relative;
     margin-bottom: 56px;
     width: 100%;
-    font-weight: 500;
-    font-size: 14px;
-    line-height: 1.4;
     text-align: left;
 
     &:first-child {
@@ -67,13 +61,13 @@
 
   &__input-wrapper {
     position: relative;
-    outline: 1px solid $color-grey-input;
+    outline: 1px solid $color-medium-grey;
     border-radius: 6px;
     padding: 16px;
     width: 100%;
     box-sizing: border-box;
-    color: $color-grey-label;
-    transition: all 0.2s ease-in-out;
+    color: $color-dark-grey;
+    transition: all $default-transition;
 
     &:focus-within {
       outline: 2px solid $primary-color-default;
@@ -92,7 +86,7 @@
   &__label {
     display: block;
     margin-bottom: 8px;
-    color: $color-grey-label;
+    color: $color-dark-grey;
   }
 
   @include tablet {

@@ -7,10 +7,10 @@ $top-menu-height: 64px;
 $container-max-width: 1200px;
 
 // Color variables
-$color-black: #000;
+$color-black: #06040e;
 $color-white: #fff;
-$color-grey-label: #7f7d85;
-$color-grey-input: #d2d0dc;
+$color-dark-grey: #7f7d85;
+$color-medium-grey: #d2d0dc;
 $color-grey-light-200: #e8e7ed;
 $color-grey-light-100: #f9f9fc;
 $primary-color-disable: #4318f280;
@@ -22,4 +22,4 @@ $error-color: #ea334d;
 $layer-header: 100;
 
 // Animation variables
-$default-transition: color 0.3s ease-in-out;
+$default-transition: 0.3s ease-in-out;

@@ -19,7 +19,7 @@
         display: none;
       }
       #{$this}__link {
-        color: $color-grey-label;
+        color: $color-dark-grey;
         cursor: default;
         pointer-events: none;
       }
@@ -28,14 +28,11 @@
 
   &__link {
     margin-right: 15px;
-    font-weight: 500;
-    font-size: 14px;
-    line-height: 20px;
-    color: $color-grey-input;
+    color: $color-medium-grey;
   }
 
   &__icon {
-    @include icon(12px,7px,$color-grey-label);
+    @include icon(12px,7px,$color-dark-grey);
 
     flex: none;
   }
