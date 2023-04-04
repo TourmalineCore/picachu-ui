@@ -1,4 +1,5 @@
 import {
+  useContext,
   useRef,
   useState,
 } from 'react';
@@ -10,10 +11,20 @@ import { ReactComponent as LogOut } from '../../assets/icons/icon-logout.svg';
 import ProfileCircle from '../../assets/images/profile-bg.png';
 import { useOnClickOutside } from '../../common/hooks/useOnClickOutside';
 
+import { AuthContext } from '../../common/auth/authStateProvider/authContext';
+import { removeToken } from '../../common/auth/auth.helper';
+
 function Header() {
+  const { setIsAuthenticated } = useContext(AuthContext);
   const [isPopupOpen, setOpenPopup] = useState(false);
   const ref = useRef<HTMLElement>(null);
   useOnClickOutside(ref, () => setOpenPopup(false));
+
+  const logout = () => {
+    removeToken(`accessToken`);
+    setOpenPopup(!isPopupOpen);
+    setIsAuthenticated(false);
+  };
   return (
     <header
       className={clsx(`header`, {
@@ -33,10 +44,10 @@ function Header() {
           type="button"
           onClick={() => setOpenPopup(!isPopupOpen)}
           className="button"
+          data-cy="header-menu"
         >
           <span
             className="header__profile"
-
           >
             <span className="header__profile-image-container">
               <img
@@ -63,7 +74,8 @@ function Header() {
         <button
           type="button"
           className="button header__popup-container"
-          onClick={() => setOpenPopup(!isPopupOpen)}
+          onClick={logout}
+          data-cy="logout-btn"
         >
           <LogOut className="header__logout-icon" />
           <span className="header__logout-text">

@@ -1,11 +1,17 @@
 import { useState } from "react";
 import { ReactComponent as EyeClosed } from "../../../../assets/icons/icon-closed-eye.svg";
 import { ReactComponent as EyeOpened } from "../../../../assets/icons/icon-opened-eye.svg";
+import Error from "../../../../components/Error/Error";
+import { Loader } from "../../../../components/Loader/Loader";
 
 function LoginForm({
   onLogin,
+  isLoading,
+  errorMessage,
 }: {
   onLogin: ({ login, password }: { login: string; password: string }) => unknown;
+  isLoading?: boolean;
+  errorMessage?: string;
 }) {
   const [isPasswordShown, setPasswordShown] = useState(false);
 
@@ -85,10 +91,21 @@ function LoginForm({
           data-cy="login-button"
           disabled={isLoginInvalid || isPasswordInvalid}
         >
-          Sign in
+          {
+            isLoading ? (<Loader />) : <span>Sign in</span>
+          }
         </button>
 
       </form>
+
+      {
+        errorMessage !== `` && (
+          <Error
+            error={errorMessage || ``}
+            className="login-form__error"
+          />
+        )
+      }
     </div>
 
   );

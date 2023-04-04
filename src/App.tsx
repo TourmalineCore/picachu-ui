@@ -2,6 +2,9 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Layout from './components/Layout/Layout';
 import LoginPage from './pages/Login/LoginPage';
 import GalleriesPage from './pages/Galleries/GalleriesPage';
+import { withPrivateRoute } from './common/auth/authStateProvider/withPrivateRoute';
+
+const WithPrivateRoute = withPrivateRoute(Layout);
 
 export function App() {
   return (
@@ -13,7 +16,7 @@ export function App() {
         />
         <Route
           path="/galleries"
-          element={<Layout />}
+          element={<WithPrivateRoute />}
         >
           <Route
             path=""
