@@ -1,7 +1,5 @@
 import axios from "axios";
 
-import { getContentType } from "../api/api.helper";
-
 export const saveToken = (TokenKey: string, TokenValue: string) => {
   localStorage.setItem(TokenKey, TokenValue);
 };
@@ -11,15 +9,17 @@ export const removeToken = (TokenKey: string) => {
 };
 
 export const instance = axios.create({
-  baseURL: `http://localhost:7501/api/`,
-  headers: getContentType(),
+  baseURL: `${import.meta.env.VITE_SERVER_URL}`,
+  headers: {
+    'Content-Type': `application/json`,
+  },
 });
 
 instance.interceptors.request.use((config) => {
-  const accessToken = localStorage.get(`accessToken`);
+  const accessToken = localStorage.getItem(import.meta.env.VITE_TOKEN_KEY);
 
   if (config.headers && accessToken) {
-    config.headers.Authorization = `Bearer ${accessToken}`;
+    config.headers.Authorization = `Bearer ${import.meta.env.VITE_TOKEN_KEY}`;
   }
 
   return config;

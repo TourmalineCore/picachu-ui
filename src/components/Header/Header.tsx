@@ -16,15 +16,10 @@ import { removeToken } from '../../common/auth/auth.helper';
 
 function Header() {
   const { setIsAuthenticated } = useContext(AuthContext);
-  const [isPopupOpen, setOpenPopup] = useState(false);
+  const [isPopupOpen, setIsOpenPopup] = useState(false);
   const ref = useRef<HTMLElement>(null);
-  useOnClickOutside(ref, () => setOpenPopup(false));
+  useOnClickOutside(ref, () => setIsOpenPopup(false));
 
-  const logout = () => {
-    removeToken(`accessToken`);
-    setOpenPopup(!isPopupOpen);
-    setIsAuthenticated(false);
-  };
   return (
     <header
       className={clsx(`header`, {
@@ -42,7 +37,7 @@ function Header() {
 
         <button
           type="button"
-          onClick={() => setOpenPopup(!isPopupOpen)}
+          onClick={() => setIsOpenPopup(!isPopupOpen)}
           className="button"
           data-cy="header-menu"
         >
@@ -85,6 +80,12 @@ function Header() {
       )}
     </header>
   );
+
+  function logout() {
+    removeToken(import.meta.env.VITE_TOKEN_KEY);
+    setIsOpenPopup(!isPopupOpen);
+    setIsAuthenticated(false);
+  }
 }
 
 export default Header;

@@ -39,12 +39,12 @@ function LoginPage() {
   async function onLogin({ login, password }: { login: string; password: string }) {
     setIsLoading(true);
     try {
-      const response = await axios.post(`http://localhost:7501/api/auth/login`, {
+      const response = await axios.post(`${import.meta.env.VITE_SERVER_URL}auth/login`, {
         login,
         password,
       });
       if (response.data) {
-        saveToken(`accessToken`, response.data.accessToken.value);
+        saveToken(import.meta.env.VITE_TOKEN_KEY, response.data.accessToken.value);
         setIsAuthenticated(true);
       }
       return response.data;

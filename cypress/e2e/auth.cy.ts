@@ -1,6 +1,6 @@
 /* eslint-disable linebreak-style */
 describe(`auth login page`, () => {
-  it(`Url SHOULD BE LOGIN when we try to visit another page whiout auth`, () => {
+  it(`Url SHOULD be /login WHEN we try to visit another page wIthout auth`, () => {
     cy.visit(`http://localhost:5173/galleries`);
     // eslint-disable-next-line @typescript-eslint/no-unused-expressions
     expect(localStorage.getItem(`accessToken`)).to.be.null;

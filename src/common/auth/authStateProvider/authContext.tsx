@@ -8,8 +8,8 @@ import {
   };
 
 const AuthContext = createContext<AuthProviderProps>({
-  isAuthenticated: !!localStorage.getItem(`accessToken`),
-  setIsAuthenticated: () => !!localStorage.getItem(`accessToken`),
+  isAuthenticated: !!localStorage.getItem(import.meta.env.VITE_TOKEN_KEY),
+  setIsAuthenticated: () => !!localStorage.getItem(import.meta.env.VITE_TOKEN_KEY),
 });
 
 function AuthProvider({
@@ -17,7 +17,7 @@ function AuthProvider({
 }: {
   children: ReactNode;
 }) {
-  const [isAuthenticated, setIsAuthenticated] = useState(!!localStorage.getItem(`accessToken`));
+  const [isAuthenticated, setIsAuthenticated] = useState(!!localStorage.getItem(import.meta.env.VITE_TOKEN_KEY));
 
   const value = useMemo(() => ({
     isAuthenticated,

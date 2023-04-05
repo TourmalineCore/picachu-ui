@@ -2,7 +2,7 @@ import { useState } from "react";
 import { ReactComponent as EyeClosed } from "../../../../assets/icons/icon-closed-eye.svg";
 import { ReactComponent as EyeOpened } from "../../../../assets/icons/icon-opened-eye.svg";
 import Error from "../../../../components/Error/Error";
-import { Loader } from "../../../../components/Loader/Loader";
+import Loader from "../../../../components/Loader/Loader";
 
 function LoginForm({
   onLogin,

@@ -1,6 +1,4 @@
-import './Loader.scss';
-
-export function Loader() {
+function Loader() {
   return (
     <span
       className="loader"
@@ -8,3 +6,5 @@ export function Loader() {
     />
   );
 }
+
+export default Loader;

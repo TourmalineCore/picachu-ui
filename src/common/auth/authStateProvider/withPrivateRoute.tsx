@@ -13,14 +13,14 @@ export const withPrivateRoute = <Type extends Record<string, unknown>>(ComposedC
 
     useEffect(() => {
       if (!isAuthenticated) {
-        navigation(getAuthPathWithFromProperty(location.pathname));
+        navigation(redirectAuth(location.pathname));
       }
     }, [isAuthenticated]);
 
     return isAuthenticated ? <ComposedComponent {...props} /> : null;
   };
 
-  function getAuthPathWithFromProperty(from: string) {
+  function redirectAuth(from: string) {
     return `/login${from !== `/` && from ? `?from=${from}` : ``}`;
   }
 };
