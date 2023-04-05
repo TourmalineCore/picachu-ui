@@ -1,4 +1,6 @@
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import {
+  BrowserRouter, Route, Routes, Navigate,
+} from 'react-router-dom';
 import Layout from './components/Layout/Layout';
 import LoginPage from './pages/Login/LoginPage';
 import GalleriesPage from './pages/Galleries/GalleriesPage';
@@ -11,19 +13,22 @@ export function App() {
     <BrowserRouter>
       <Routes>
         <Route
-          path="/login"
-          element={<LoginPage />}
-        />
-        <Route
-          path="/galleries"
+          path="/*"
           element={<WithPrivateRoute />}
         >
           <Route
-            path=""
-            element={<GalleriesPage />}
             index
+            element={<Navigate to="/galleries" />}
+          />
+          <Route
+            path="galleries"
+            element={<GalleriesPage />}
           />
         </Route>
+        <Route
+          path="/login"
+          element={<LoginPage />}
+        />
       </Routes>
     </BrowserRouter>
   );

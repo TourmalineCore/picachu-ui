@@ -12,14 +12,14 @@ import ProfileCircle from '../../assets/images/profile-bg.png';
 import { useOnClickOutside } from '../../common/hooks/useOnClickOutside';
 
 import { AuthContext } from '../../common/auth/authStateProvider/authContext';
-import { removeToken } from '../../common/auth/auth.helper';
+import { AuthService } from '../../common/auth/auth.helper';
 
 function Header() {
   const { setIsAuthenticated } = useContext(AuthContext);
   const [isPopupOpen, setIsOpenPopup] = useState(false);
   const ref = useRef<HTMLElement>(null);
   useOnClickOutside(ref, () => setIsOpenPopup(false));
-
+  const authService = AuthService();
   return (
     <header
       className={clsx(`header`, {
@@ -82,7 +82,7 @@ function Header() {
   );
 
   function logout() {
-    removeToken(import.meta.env.VITE_TOKEN_KEY);
+    authService.removeToken();
     setIsAuthenticated(false);
   }
 }

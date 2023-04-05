@@ -4,13 +4,14 @@ import axios from 'axios';
 import MountainImage from '../../assets/images/Mountain.png';
 import LoginForm from './components/LoginForm/LoginForm';
 import { AuthContext } from '../../common/auth/authStateProvider/authContext';
-import { saveToken } from '../../common/auth/auth.helper';
+import { AuthService } from '../../common/auth/auth.helper';
 
 function LoginPage() {
   const { isAuthenticated, setIsAuthenticated } = useContext(AuthContext);
   const [isLoading, setIsLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState(``);
   const navigation = useNavigate();
+  const authService = AuthService();
 
   useEffect(() => {
     if (isAuthenticated) {
@@ -44,10 +45,11 @@ function LoginPage() {
         password,
       });
       if (response.data) {
-        saveToken(import.meta.env.VITE_TOKEN_KEY, JSON.stringify(response.data.accessToken));
+        authService.setToken(response.data.accessToken);
         setIsAuthenticated(true);
       }
       return response.data;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (error: any) {
       return setErrorMessage(error.response.data.msg);
     } finally {

@@ -1,11 +1,24 @@
 import axios from "axios";
 
-export const saveToken = (TokenKey: string, TokenValue: string) => {
-  localStorage.setItem(TokenKey, TokenValue);
-};
+const tokenKey = import.meta.env.VITE_TOKEN_KEY;
 
-export const removeToken = (TokenKey: string) => {
-  localStorage.removeItem(TokenKey);
+export const AuthService = () => {
+  function setToken(tokenValue: Record<string, string>) {
+    localStorage.setItem(tokenKey, JSON.stringify(tokenValue));
+  }
+  function removeToken() {
+    localStorage.removeItem(tokenKey);
+  }
+  function getToken() {
+    const accessToken = localStorage.getItem(tokenKey);
+    const tokeObj = JSON.parse(accessToken as string);
+    return tokeObj.value;
+  }
+  return {
+    setToken,
+    removeToken,
+    getToken,
+  };
 };
 
 export const instance = axios.create({
@@ -16,10 +29,10 @@ export const instance = axios.create({
 });
 
 instance.interceptors.request.use((config) => {
-  const accessToken = localStorage.getItem(import.meta.env.VITE_TOKEN_KEY);
+  const authService = AuthService();
 
-  if (config.headers && accessToken) {
-    config.headers.Authorization = `Bearer ${accessToken}`;
+  if (config.headers && authService.getToken()) {
+    config.headers.Authorization = `Bearer ${authService.getToken()}`;
   }
 
   return config;
