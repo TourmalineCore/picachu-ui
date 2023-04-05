@@ -38,6 +38,14 @@ class GalleriesPageState {
   stopTrackingNewlyCreatedGallery() {
     this._newlyCreatedGalleryId = null;
   }
+
+  deleteGallery({
+    galleryId,
+  }: {
+    galleryId: number;
+  }) {
+    this._galleries.splice(this._galleries.findIndex((gallery) => gallery.id === galleryId), 1);
+  }
 }
 
 export default GalleriesPageState;
