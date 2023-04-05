@@ -13,8 +13,6 @@ import GalleriesPageStateContext from "./state/GalleriesPageStateContext";
 // import RestoreDeletedGallery from "./components/RestoreDeletedGallery/RestoreDeletedGallery";
 
 function GalleriesPageContent() {
-  const [newlyCreatedGalleryId, setNewlyCreatedGalleryId] = useState<number | null>(null);
-
   const galleriesPageState = useContext(GalleriesPageStateContext);
 
   const {
@@ -48,7 +46,7 @@ function GalleriesPageContent() {
               </AddButton>
               <GalleriesList
                 galleries={galleriesPageState.galleries}
-                newlyCreatedGalleryId={newlyCreatedGalleryId}
+                newlyCreatedGalleryId={galleriesPageState.newlyCreatedGalleryId}
                 onNameApply={onNameApply}
                 onGalleryDelete={(id: number) => {
                 }}
@@ -70,7 +68,7 @@ function GalleriesPageContent() {
       name: `new gallery`,
     });
 
-    setNewlyCreatedGalleryId(loadedNewlyCreatedGalleryId);
+    galleriesPageState.setNewlyCreatedGalleryId(loadedNewlyCreatedGalleryId);
 
     galleriesPageState.addNewlyCreatedGallery({
       newlyCreatedGallery: {
@@ -87,9 +85,11 @@ function GalleriesPageContent() {
     galleryId: number;
     newName: string;
   }) {
-    const notTrackNewlyCreatedAnyLonger = galleryId === newlyCreatedGalleryId;
+    const notTrackNewlyCreatedAnyLonger = galleryId === galleriesPageState.newlyCreatedGalleryId;
     if (notTrackNewlyCreatedAnyLonger) {
-      setNewlyCreatedGalleryId(null);
+      galleriesPageState.setNewlyCreatedGalleryId({
+        newlyCreatedGalleryId: null,
+      });
     }
 
     if (galleriesPageState.galleries.find(({ id }) => id === galleryId)!.name === newName) {
