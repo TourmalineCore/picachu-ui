@@ -19,7 +19,7 @@ instance.interceptors.request.use((config) => {
   const accessToken = localStorage.getItem(import.meta.env.VITE_TOKEN_KEY);
 
   if (config.headers && accessToken) {
-    config.headers.Authorization = `Bearer ${import.meta.env.VITE_TOKEN_KEY}`;
+    config.headers.Authorization = `Bearer ${accessToken}`;
   }
 
   return config;

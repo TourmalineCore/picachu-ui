@@ -44,7 +44,7 @@ function LoginPage() {
         password,
       });
       if (response.data) {
-        saveToken(import.meta.env.VITE_TOKEN_KEY, response.data.accessToken.value);
+        saveToken(import.meta.env.VITE_TOKEN_KEY, JSON.stringify(response.data.accessToken));
         setIsAuthenticated(true);
       }
       return response.data;

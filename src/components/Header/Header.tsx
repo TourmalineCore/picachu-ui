@@ -83,7 +83,6 @@ function Header() {
 
   function logout() {
     removeToken(import.meta.env.VITE_TOKEN_KEY);
-    setIsOpenPopup(!isPopupOpen);
     setIsAuthenticated(false);
   }
 }
