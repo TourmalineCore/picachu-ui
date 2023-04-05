@@ -7,7 +7,6 @@ type Photo = {};
 
 function GalleryCard({
   name,
-  id,
   newlyCreated,
   onNameApply,
   onDelete,
@@ -15,10 +14,9 @@ function GalleryCard({
   photos,
 }: {
   name: string;
-  id: number;
   newlyCreated: boolean;
   onNameApply: (newName: string) => unknown;
-  onDelete: (id: number) => unknown;
+  onDelete: () => unknown;
   photosCount: number;
   photos: Photo[];
 }) {
@@ -38,7 +36,6 @@ function GalleryCard({
 
   return (
     <div
-      id={id.toString()}
       className="gallery-card"
       data-cy="gallery-card"
     >
@@ -78,10 +75,10 @@ function GalleryCard({
           </span>
         </div>
         <button
-          data-cy="delete-gallery"
+          data-cy="delete-gallery-button"
           type="button"
           className="button gallery-card__delete-btn"
-          onClick={() => onDelete(id)}
+          onClick={onDelete}
         >
           <DeleteIcon />
         </button>

@@ -45,8 +45,6 @@ function GalleriesPageContent() {
                 Create new
               </AddButton>
               <GalleriesList
-                galleries={galleriesPageState.galleries}
-                newlyCreatedGalleryId={galleriesPageState.newlyCreatedGalleryId}
                 onNameApply={onNameApply}
                 onGalleryDelete={(id: number) => {
                 }}

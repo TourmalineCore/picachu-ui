@@ -163,7 +163,7 @@ function deleteGalleryTests() {
     });
 
     cy
-      .getByData(`delete-gallery`).click();
+      .getByData(`delete-gallery-button`).click();
 
     cy.get(`@onDelete`)
       .should(`have.been.calledOnce`);
