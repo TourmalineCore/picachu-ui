@@ -35,12 +35,8 @@ class GalleriesPageState {
     this._newlyCreatedGalleryId = newlyCreatedGallery.id;
   }
 
-  setNewlyCreatedGalleryId({
-    newlyCreatedGalleryId,
-  }: {
-    newlyCreatedGalleryId: number | null;
-  }) {
-    this._newlyCreatedGalleryId = newlyCreatedGalleryId;
+  stopTrackingNewlyCreatedGallery() {
+    this._newlyCreatedGalleryId = null;
   }
 }
 

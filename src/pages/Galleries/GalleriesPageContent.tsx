@@ -85,9 +85,7 @@ function GalleriesPageContent() {
   }) {
     const notTrackNewlyCreatedAnyLonger = galleryId === galleriesPageState.newlyCreatedGalleryId;
     if (notTrackNewlyCreatedAnyLonger) {
-      galleriesPageState.setNewlyCreatedGalleryId({
-        newlyCreatedGalleryId: null,
-      });
+      galleriesPageState.stopTrackingNewlyCreatedGallery();
     }
 
     if (galleriesPageState.galleries.find(({ id }) => id === galleryId)!.name === newName) {
