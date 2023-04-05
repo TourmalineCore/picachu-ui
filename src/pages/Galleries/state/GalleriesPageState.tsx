@@ -6,6 +6,10 @@ class GalleriesPageState {
 
   _newlyCreatedGalleryId: number | null = null;
 
+  _lastDeletedGallery: Gallery | null = null;
+
+  _lastDeletedGalleryIndex: number | null = null;
+
   constructor() {
     makeAutoObservable(this);
   }
@@ -44,7 +48,15 @@ class GalleriesPageState {
   }: {
     galleryId: number;
   }) {
-    this._galleries.splice(this._galleries.findIndex((gallery) => gallery.id === galleryId), 1);
+    this._lastDeletedGalleryIndex = this._galleries.findIndex((gallery) => gallery.id === galleryId);
+
+    const [deletedGallery] = this._galleries.splice(this._lastDeletedGalleryIndex, 1);
+
+    this._lastDeletedGallery = deletedGallery;
+  }
+
+  restoreGallery() {
+    this._galleries.splice(this._lastDeletedGalleryIndex!, 0, this._lastDeletedGallery!);
   }
 }
 
