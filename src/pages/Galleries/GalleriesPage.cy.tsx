@@ -47,7 +47,8 @@ describe(`GalleriesPage`, () => {
     // and if press enter, rename shouldn't be called since the name is the same
     cy
       .getByData(`gallery-name-input`)
-      .focused()
+      .last()
+      .should(`be.focused`)
       .type(`{enter}`);
 
     cy.get(`@onRenameBackendCallSpy`).should(`not.have.been.called`);
