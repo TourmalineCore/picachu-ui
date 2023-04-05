@@ -32,6 +32,7 @@ class GalleriesPageState {
     newlyCreatedGallery: Gallery;
   }) {
     this._galleries.push(newlyCreatedGallery);
+    this._newlyCreatedGalleryId = newlyCreatedGallery.id;
   }
 
   setNewlyCreatedGalleryId({
