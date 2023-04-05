@@ -68,7 +68,9 @@ function GalleriesPageContent() {
       name: `new gallery`,
     });
 
-    galleriesPageState.setNewlyCreatedGalleryId(loadedNewlyCreatedGalleryId);
+    galleriesPageState.setNewlyCreatedGalleryId({
+      newlyCreatedGalleryId: loadedNewlyCreatedGalleryId,
+    });
 
     galleriesPageState.addNewlyCreatedGallery({
       newlyCreatedGallery: {
