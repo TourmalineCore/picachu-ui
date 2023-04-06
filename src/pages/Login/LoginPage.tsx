@@ -4,14 +4,13 @@ import axios from 'axios';
 import MountainImage from '../../assets/images/Mountain.png';
 import LoginForm from './components/LoginForm/LoginForm';
 import { AuthContext } from '../../common/auth/authStateProvider/authContext';
-import { AuthService } from '../../common/auth/auth.helper';
+import { authService } from '../../common/auth/auth.helper';
 
 function LoginPage() {
   const { isAuthenticated, setIsAuthenticated } = useContext(AuthContext);
   const [isLoading, setIsLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState(``);
   const navigation = useNavigate();
-  const authService = AuthService();
 
   useEffect(() => {
     if (isAuthenticated) {

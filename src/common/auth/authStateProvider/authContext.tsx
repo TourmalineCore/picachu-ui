@@ -1,6 +1,7 @@
 import {
   createContext, useState, useMemo, Dispatch, SetStateAction, ReactNode,
 } from 'react';
+import { authService } from '../auth.helper';
 
   type AuthProviderProps = {
     isAuthenticated: boolean;
@@ -8,8 +9,8 @@ import {
   };
 
 const AuthContext = createContext<AuthProviderProps>({
-  isAuthenticated: !!localStorage.getItem(import.meta.env.VITE_TOKEN_KEY),
-  setIsAuthenticated: () => !!localStorage.getItem(import.meta.env.VITE_TOKEN_KEY),
+  isAuthenticated: !!authService.getToken(),
+  setIsAuthenticated: () => !!authService.getToken(),
 });
 
 function AuthProvider({
@@ -17,7 +18,7 @@ function AuthProvider({
 }: {
   children: ReactNode;
 }) {
-  const [isAuthenticated, setIsAuthenticated] = useState(!!localStorage.getItem(import.meta.env.VITE_TOKEN_KEY));
+  const [isAuthenticated, setIsAuthenticated] = useState(!!authService.getToken());
 
   const value = useMemo(() => ({
     isAuthenticated,
