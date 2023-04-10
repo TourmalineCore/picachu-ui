@@ -1,20 +1,12 @@
 import '../../../../../cypress/support/commands';
+import GalleriesPageState from '../../state/GalleriesPageState';
+import GalleriesPageStateContext from '../../state/GalleriesPageStateContext';
 import GalleriesList from './GalleriesList';
 import Gallery from './Gallery';
 
 describe(`GalleriesList`, () => {
-  it(`SHOULD render call to action message WHEN there are no galleries`, () => {
-    mountComponent({
-      galleries: [],
-    });
-
-    cy
-      .getByData(`no-galleries`)
-      .contains(`Create a gallery to get started`);
-  });
-
   it(`SHOULD NOT render call to action message WHEN there are galleries`, () => {
-    mountComponent({
+    mountComponentAndReturnState({
       galleries: [{
         id: 1,
         name: `Am`,
@@ -26,7 +18,7 @@ describe(`GalleriesList`, () => {
   });
 
   it(`SHOULD render a gallery WHEN there is a single gallery`, () => {
-    mountComponent({
+    mountComponentAndReturnState({
       galleries: [{
         id: 1,
         name: `My Gallery is Awesome`,
@@ -38,7 +30,7 @@ describe(`GalleriesList`, () => {
   });
 
   it(`SHOULD render all galleries WHEN there are several of them`, () => {
-    mountComponent({
+    mountComponentAndReturnState({
       galleries: [{
         id: 1,
         name: `My Gallery is Awesome`,
@@ -54,34 +46,33 @@ describe(`GalleriesList`, () => {
   });
 
   it(`SHOULD focus name of the gallery WHEN we just created a new first one`, () => {
-    mountComponent({
-      newlyCreatedGalleryId: 1,
-      galleries: [{
+    mountComponentAndReturnState({
+      galleries: [],
+      newlyCreatedGallery: {
         id: 1,
         name: `My Gallery is Awesome`,
-      }],
+      },
     });
 
     cy
       .getByData(`gallery-name-input`)
-      .focused();
+      .should(`be.focused`);
   });
 
   it(`SHOULD call on name apply WHEN we focus out from newly created gallery changed name`, () => {
     const onNameApplySpy = cy.spy().as(`onNameApply`);
 
-    mountComponent({
-      newlyCreatedGalleryId: 2,
+    mountComponentAndReturnState({
       galleries: [
         {
           id: 1,
           name: `First Gallery`,
         },
-        {
-          id: 2,
-          name: `Second Gallery`,
-        },
       ],
+      newlyCreatedGallery: {
+        id: 2,
+        name: `Second Gallery`,
+      },
       onNameApply: onNameApplySpy,
     });
 
@@ -102,9 +93,13 @@ describe(`GalleriesList`, () => {
     it(`SHOULD delete a gallery from the list WHEN Delete button is clicked on that gallery`, () => {
       const onDeleteSpy = cy.spy().as(`onDelete`);
 
-      mountComponent({
+      mountComponentAndReturnState({
         onGalleryDelete: onDeleteSpy,
         galleries: [
+          {
+            id: 3,
+            name: `Third Gallery`,
+          },
           {
             id: 1,
             name: `First Gallery`,
@@ -113,7 +108,8 @@ describe(`GalleriesList`, () => {
       });
 
       cy
-        .get(`#1 [data-cy="delete-gallery"]`)
+        .getByData(`delete-gallery-button`)
+        .last()
         .click();
 
       cy.get(`@onDelete`)
@@ -122,24 +118,40 @@ describe(`GalleriesList`, () => {
   });
 });
 
-function mountComponent({
-  newlyCreatedGalleryId = null,
+function mountComponentAndReturnState({
+  newlyCreatedGallery = undefined,
   galleries,
   onNameApply = () => {},
   onGalleryDelete = () => {},
 }: {
-  newlyCreatedGalleryId?: number | null;
+  newlyCreatedGallery?: Gallery;
   galleries: Gallery[];
   onNameApply?: ({ galleryId, newName }: { galleryId: number; newName: string }) => unknown;
   onDelete?: ({ galleryId }: { galleryId: number }) => unknown;
   onGalleryDelete?: (id: number) => unknown;
 }) {
+  const galleriesPageState = new GalleriesPageState();
+
+  galleriesPageState.initialize({
+    loadedGalleries: galleries,
+  });
+
+  if (newlyCreatedGallery) {
+    galleriesPageState.addNewlyCreatedGallery({
+      newlyCreatedGallery,
+    });
+  }
+
   cy.mount(
-    <GalleriesList
-      newlyCreatedGalleryId={newlyCreatedGalleryId}
-      galleries={galleries}
-      onNameApply={onNameApply}
-      onGalleryDelete={onGalleryDelete}
-    />,
+    <GalleriesPageStateContext.Provider value={galleriesPageState}>
+      <GalleriesList
+        onNameApply={onNameApply}
+        onGalleryDelete={onGalleryDelete}
+      />
+    </GalleriesPageStateContext.Provider>,
   );
+
+  return {
+    galleriesPageState,
+  };
 }

@@ -1,14 +1,12 @@
+import { useContext } from "react";
+import { observer } from "mobx-react-lite";
+import GalleriesPageStateContext from "../../state/GalleriesPageStateContext";
 import GalleryCard from "../GalleryCard/GalleryCard";
-import Gallery from "./Gallery";
 
 function GalleriesList({
-  newlyCreatedGalleryId,
-  galleries,
   onNameApply,
   onGalleryDelete,
 }: {
-  newlyCreatedGalleryId: number | null;
-  galleries: Gallery[];
   onNameApply: ({
     galleryId,
     newName,
@@ -18,11 +16,13 @@ function GalleriesList({
   }) => unknown;
   onGalleryDelete: (id: number) => unknown;
 }) {
+  const galleriesPageState = useContext(GalleriesPageStateContext);
+
   return (
     <div className="galleries-list">
       <ul className="galleries-list__list">
         {
-          galleries.map(({
+          galleriesPageState.galleries.map(({
             id,
             name,
           }) => (
@@ -31,16 +31,17 @@ function GalleriesList({
               key={`${id}-${name}`}
             >
               <GalleryCard
-                id={id}
                 name={name}
-                newlyCreated={newlyCreatedGalleryId === id}
+                newlyCreated={galleriesPageState.newlyCreatedGalleryId === id}
                 onNameApply={(newName) => {
                   onNameApply({
                     galleryId: id,
                     newName,
                   });
                 }}
-                onDelete={onGalleryDelete}
+                onDelete={() => {
+                  onGalleryDelete(id);
+                }}
                 photosCount={0}
                 photos={[]}
               />
@@ -53,4 +54,4 @@ function GalleriesList({
   );
 }
 
-export default GalleriesList;
+export default observer(GalleriesList);
