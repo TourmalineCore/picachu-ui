@@ -46,8 +46,7 @@ function GalleriesPageContent() {
               </AddButton>
               <GalleriesList
                 onNameApply={onNameApply}
-                onGalleryDelete={(id: number) => {
-                }}
+                onGalleryDelete={onGalleryDelete}
               />
               {/* <RestoreDeletedGallery
                 onRestoreGallery={onRestoreGallery}
@@ -93,6 +92,11 @@ function GalleriesPageContent() {
     await axios.put(`/api/galleries/${galleryId}/update-name`, {
       newName,
     });
+  }
+
+  async function onGalleryDelete(galleryId: number) {
+    galleriesPageState.deleteGallery({ galleryId });
+    await axios.delete(`/api/galleries/${galleryId}`);
   }
 
   function onRestoreGallery() {
