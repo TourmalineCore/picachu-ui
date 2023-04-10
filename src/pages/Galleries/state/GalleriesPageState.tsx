@@ -30,6 +30,10 @@ class GalleriesPageState {
     return this._newlyCreatedGalleryId;
   }
 
+  get galleryToRestore() {
+    return this._lastDeletedGallery;
+  }
+
   addNewlyCreatedGallery({
     newlyCreatedGallery,
   }: {
@@ -57,6 +61,7 @@ class GalleriesPageState {
 
   restoreGallery() {
     this._galleries.splice(this._lastDeletedGalleryIndex!, 0, this._lastDeletedGallery!);
+    this._lastDeletedGallery = null;
   }
 }
 
