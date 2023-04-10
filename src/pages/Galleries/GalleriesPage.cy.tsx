@@ -59,6 +59,28 @@ describe(`GalleriesPage`, () => {
       .should(`have.value`, `new gallery`)
       .should(`not.be.focused`);
   });
+
+  it(`SHOULD call backend with DELETE method to delete a gallery WHEN delete button is clicked`, () => {
+    cy.intercept(`GET`, `/api/galleries`, [{
+      id: 1,
+      name: `First Gallery`,
+    },
+    ]).as(`call-3`);
+
+    mountComponent();
+
+    cy.intercept(`DELETE`, `/api/galleries/1`, {
+      body: {
+        id: 1,
+      },
+    });
+
+    cy.getByData(`delete-gallery-button`)
+      .click();
+
+    cy.getByData(`gallery-card`)
+      .should(`not.exist`);
+  });
 });
 
 function mountComponent() {
