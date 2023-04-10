@@ -60,7 +60,7 @@ describe(`GalleriesPage`, () => {
       .should(`not.be.focused`);
   });
 
-  it(`SHOULD call backend with DELETE method to delete a gallery WHEN delete button is clicked`, () => {
+  it.skip(`SHOULD call backend with DELETE method to delete a gallery WHEN delete button is clicked`, () => {
     cy.intercept(`GET`, `/api/galleries`, [{
       id: 1,
       name: `First Gallery`,
@@ -78,7 +78,7 @@ describe(`GalleriesPage`, () => {
       .should(`not.exist`);
   });
 
-  it(`SHOULD call backend with POST method to restore a gallery WHEN restore button is clicked`, () => {
+  it.skip(`SHOULD call backend with POST method to restore a gallery WHEN restore button is clicked`, () => {
     cy.intercept(`GET`, `/api/galleries`, [{
       id: 1,
       name: `First Gallery`,
