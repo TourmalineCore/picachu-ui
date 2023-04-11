@@ -1,4 +1,4 @@
-name: Cypress Tests
+name: Check lint and cypress components test 
 
 on:
   push:
