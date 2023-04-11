@@ -29,9 +29,9 @@ jobs:
         continue-on-error: false
 
   install:
-    runs-on: ${{ env.UBUNTU_VERSION }}
+    runs-on: $env.UBUNTU_VERSION
     container:
-      image: cypress/browsers:${{ env.NOVE_VERSION }}-chrome-111.0.5563.146-1-ff-111.0.1-edge-111.0.1661.54-1
+      image: cypress/browsers:$env.NOVE_VERSION-chrome-111.0.5563.146-1-ff-111.0.1-edge-111.0.1661.54-1
     steps:
       - name: Checkout
         uses: actions/checkout@v3
@@ -50,8 +50,8 @@ jobs:
           path: dist
   
   components-test:
-    runs-on: ${{ env.UBUNTU_VERSION }}
-    container: cypress/browsers:${{ env.NOVE_VERSION }}}-chrome-111.0.5563.146-1-ff-111.0.1-edge-111.0.1661.54-1
+    runs-on: $env.UBUNTU_VERSION
+    container: cypress/browsers:$env.NOVE_VERSION-chrome-111.0.5563.146-1-ff-111.0.1-edge-111.0.1661.54-1
     needs: install
     steps:
       - name: Checkout
