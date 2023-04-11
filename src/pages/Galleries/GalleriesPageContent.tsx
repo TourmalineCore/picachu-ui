@@ -10,6 +10,7 @@ import Gallery from "./components/GalleriesList/Gallery";
 import Breadcrumbs from "../../components/Breadcrumbs/Breadcrumbs";
 import { useGet } from "../../common/hooks/useGet";
 import GalleriesPageStateContext from "./state/GalleriesPageStateContext";
+import { api } from "../../common/utils/HttpClient";
 // import RestoreDeletedGallery from "./components/RestoreDeletedGallery/RestoreDeletedGallery";
 
 function GalleriesPageContent() {
@@ -62,7 +63,7 @@ function GalleriesPageContent() {
   async function onNewGalleryClick() {
     const {
       data: loadedNewlyCreatedGalleryId,
-    } = await axios.post(`/api/galleries`, {
+    } = await api.post(`/galleries`, {
       name: `new gallery`,
     });
 
@@ -90,7 +91,7 @@ function GalleriesPageContent() {
       return;
     }
 
-    await axios.put(`/api/galleries/${galleryId}/update-name`, {
+    await api.put(`/galleries/${galleryId}/update-name`, {
       newName,
     });
   }
