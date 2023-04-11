@@ -1,4 +1,5 @@
 import { defineConfig } from "cypress";
+import allureWriter from "@shelex/cypress-allure-plugin/writer";
 
 export default defineConfig({
   component: {
@@ -7,6 +8,10 @@ export default defineConfig({
       bundler: "vite",
     },
     viewportHeight: 600,
-    viewportWidth:1000
+    viewportWidth:1000,
+    setupNodeEvents(on, config) {
+      allureWriter(on, config);
+      return config;
+    }
   },
 });

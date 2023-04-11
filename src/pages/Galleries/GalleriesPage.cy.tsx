@@ -1,5 +1,6 @@
 import '../../../cypress/support/commands';
 import GalleriesPage from './GalleriesPage';
+const allure = Cypress.Allure.reporter.getInterface();
 
 // Found bugs/nuances ;)
 // explains partially why we need this different aliases https://stackoverflow.com/questions/66765452/intercept-the-same-api-call-multiple-times-in-cypress
@@ -7,7 +8,7 @@ import GalleriesPage from './GalleriesPage';
 describe(`GalleriesPage`, () => {
   it(`SHOULD render no galleries message WHEN there are no galleries`, () => {
     cy.intercept(`GET`, `/api/galleries`, []).as(`call-1`);
-
+    
     mountComponent();
 
     cy.getByData(`no-galleries`)
