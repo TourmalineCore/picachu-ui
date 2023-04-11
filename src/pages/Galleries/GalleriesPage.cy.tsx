@@ -10,8 +10,7 @@ describe(`GalleriesPage`, () => {
 
     mountComponent();
 
-    cy
-      .getByData(`no-galleries`)
+    cy.getByData(`no-galleries`)
       .contains(`Create a gallery to get started`);
   });
 
@@ -35,8 +34,7 @@ describe(`GalleriesPage`, () => {
     });
 
     // ask to create a new gallery
-    cy
-      .getByData(`add-button`)
+    cy.getByData(`add-button`)
       .click();
 
     const onRenameBackendCallSpy = cy.spy().as(`onRenameBackendCallSpy`);
@@ -45,9 +43,9 @@ describe(`GalleriesPage`, () => {
 
     // the gallery name has to be focused since we just created it
     // and if press enter, rename shouldn't be called since the name is the same
-    cy
-      .getByData(`gallery-name-input`)
-      .focused()
+    cy.getByData(`gallery-name-input`)
+      .last()
+      .should(`be.focused`)
       .type(`{enter}`);
 
     cy.get(`@onRenameBackendCallSpy`).should(`not.have.been.called`);

@@ -18,7 +18,7 @@
   height: $height;
   line-height: 0;
   color: $color;
-  transition: all 0.3s ease-in-out;
+  transition: all $default-transition;
 }
 
 @mixin noselect {
