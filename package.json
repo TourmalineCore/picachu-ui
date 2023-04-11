@@ -1,19 +1,22 @@
 {
-  "name": "vite-project",
+  "name": "picachu-ui",
   "private": true,
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "start": "vite",
-    "build": "tsc && vite build",
+    "start": "run-s create-config:local vite-start",
+    "start:dev": "run-s create-config:dev vite-start",
+    "build": "run-s create-config:dev build-vite",
     "preview": "vite preview",
-    "test": "tsc && ava",
+    "vite-start": "vite",
+    "build-vite": "tsc && vite build",
     "test:cypress": "cypress open",
     "lint": "run-s lint:css lint:ts",
     "lint:ts": "eslint --no-error-on-unmatched-pattern ./src/**/*.{ts,tsx}",
     "lint:ts:fix": "eslint --no-error-on-unmatched-pattern ./src/**/*.{ts,tsx} --fix",
     "lint:scss": "npx stylelint ./src/**/*.scss",
     "lint:css:fix": "npx stylelint ./src/**/*.{css,scss} --fix",
+    "create-config:local": "node local-config-builder local",
     "prepare": "husky install"
   },
   "dependencies": {
