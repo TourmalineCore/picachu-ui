@@ -8,7 +8,9 @@ import { AuthContext } from './authContext';
 export const withPrivateRoute = <Type extends Record<string, unknown>>(ComposedComponent: FunctionComponent<Type>) => {
   return function RequireAuthentication(props: Type) {
     const { isAuthenticated } = useContext(AuthContext);
+
     const navigation = useNavigate();
+
     const location = useLocation();
 
     useEffect(() => {

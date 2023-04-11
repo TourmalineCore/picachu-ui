@@ -12,7 +12,7 @@ import ProfileCircle from '../../assets/images/profile-bg.png';
 import { useOnClickOutside } from '../../common/hooks/useOnClickOutside';
 
 import { AuthContext } from '../../common/auth/authStateProvider/authContext';
-import { authService } from '../../common/auth/auth.helper';
+import { auth } from '../../common/auth/auth.helper';
 
 function Header() {
   const { setIsAuthenticated } = useContext(AuthContext);
@@ -82,7 +82,7 @@ function Header() {
   );
 
   function logout() {
-    authService.removeToken();
+    auth.removeToken();
     setIsAuthenticated(false);
   }
 }

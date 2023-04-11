@@ -4,7 +4,7 @@ import axios from 'axios';
 import MountainImage from '../../assets/images/Mountain.png';
 import LoginForm from './components/LoginForm/LoginForm';
 import { AuthContext } from '../../common/auth/authStateProvider/authContext';
-import { authService } from '../../common/auth/auth.helper';
+import { auth } from '../../common/auth/auth.helper';
 
 function LoginPage() {
   const { isAuthenticated, setIsAuthenticated } = useContext(AuthContext);
@@ -44,7 +44,7 @@ function LoginPage() {
         password,
       });
       if (response.data) {
-        authService.setToken(response.data.accessToken);
+        auth.setToken(response.data.accessToken);
         setIsAuthenticated(true);
       }
       return response.data;
