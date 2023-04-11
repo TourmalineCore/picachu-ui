@@ -14,6 +14,15 @@ describe(`GalleriesPage`, () => {
       .contains(`Create a gallery to get started`);
   });
 
+  it(`SHOULD render no galleries message WHEN there are no galleries`, () => {
+    cy.intercept(`GET`, `/api/galleries`, []).as(`call-1`);
+
+    mountComponent();
+
+    cy.getByData(`no-galleries`)
+      .contains(`Create a gallery to get started`);
+  });
+
   it(`SHOULD call backend to create WHEN click on create new gallery and not changing the name`, () => {
     cy.intercept(`GET`, `/api/galleries`, [{
       id: 1,
