@@ -4,11 +4,34 @@ on:
   push:
     branches: [ feature/* ]
 
+env:
+  UBUNTU_VERSION: ubuntu-22.04
+  NOVE_VERSION: 18.14.1
+
 jobs:
+  check-lint:
+    runs-on: ${{ env.UBUNTU_VERSION }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Set up Node.js ${{ matrix.node-version }}
+          uses: actions/setup-node@v2
+          with:
+            node-version: ${{ matrix.node-version }}
+
+      - name: Install dependencies
+            run: |
+              npm ci
+
+      - name: Check linting
+        run: npm run lint
+        continue-on-error: false
+
   install:
     runs-on: ubuntu-22.04
     container:
-      image: cypress/browsers:node-18.14.1-chrome-111.0.5563.146-1-ff-111.0.1-edge-111.0.1661.54-1
+      image: cypress/browsers:${{ matrix.node-version }}-chrome-111.0.5563.146-1-ff-111.0.1-edge-111.0.1661.54-1
     steps:
       - name: Checkout
         uses: actions/checkout@v3
@@ -28,7 +51,7 @@ jobs:
   
   components-test:
     runs-on: ubuntu-22.04
-    container: cypress/browsers:node-18.14.1-chrome-111.0.5563.146-1-ff-111.0.1-edge-111.0.1661.54-1
+    container: cypress/browsers:${{ matrix.node-version }}-chrome-111.0.5563.146-1-ff-111.0.1-edge-111.0.1661.54-1
     needs: install
     steps:
       - name: Checkout
