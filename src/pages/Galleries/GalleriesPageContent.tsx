@@ -15,9 +15,6 @@ import GalleriesPageStateContext from "./state/GalleriesPageStateContext";
 function GalleriesPageContent() {
   const galleriesPageState = useContext(GalleriesPageStateContext);
 
-
-
-  
   const {
     response: loadedGalleries,
   } = useGet<Gallery[]>({
