@@ -1,6 +1,6 @@
 import '../../../cypress/support/commands';
 import GalleriesPage from './GalleriesPage';
-const allure = Cypress.Allure.reporter.getInterface();
+import { Button } from '../../../cypress/e2e/page-factory/button';
 
 // Found bugs/nuances ;)
 // explains partially why we need this different aliases https://stackoverflow.com/questions/66765452/intercept-the-same-api-call-multiple-times-in-cypress
@@ -8,7 +8,7 @@ const allure = Cypress.Allure.reporter.getInterface();
 describe(`GalleriesPage`, () => {
   it(`SHOULD render no galleries message WHEN there are no galleries`, () => {
     cy.intercept(`GET`, `/api/galleries`, []).as(`call-1`);
-    
+
     mountComponent();
 
     cy.getByData(`no-galleries`)
@@ -16,6 +16,11 @@ describe(`GalleriesPage`, () => {
   });
 
   it(`SHOULD call backend to create WHEN click on create new gallery and not changing the name`, () => {
+    const addButton = new Button({
+      selector: `[data-cy=add-button]`,
+      name: `AddButton`,
+    });
+
     cy.intercept(`GET`, `/api/galleries`, [{
       id: 1,
       name: `First Gallery`,
@@ -35,8 +40,9 @@ describe(`GalleriesPage`, () => {
     });
 
     // ask to create a new gallery
-    cy.getByData(`add-button`)
-      .click();
+    addButton.click();
+    // cy.getByData(`add-button`)
+    // .click();
 
     const onRenameBackendCallSpy = cy.spy().as(`onRenameBackendCallSpy`);
 

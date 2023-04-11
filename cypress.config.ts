@@ -9,6 +9,8 @@ export default defineConfig({
     },
     viewportHeight: 600,
     viewportWidth:1000,
+    video: false,
+    screenshotOnRunFailure: false,
     setupNodeEvents(on, config) {
       allureWriter(on, config);
       return config;
