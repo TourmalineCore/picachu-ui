@@ -13,8 +13,9 @@ const queryClient = new QueryClient({
 
 // https://docs.cypress.io/guides/component-testing/react/examples
 // to wrap all components in router in case they use e.g. useLocation inside
-export default function mountWithRouter(component, options = {}) {
+export default function mountWithRouter(component:any, options = {}) {
   const {
+    // @ts-ignore
     routerProps = {
       initialEntries: [`/`],
     },

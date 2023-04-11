@@ -3,9 +3,9 @@ ENV PATH /node_modules/.bin:$PATH
 COPY package.json ./
 COPY package-lock.json ./
 # COPY .npmrc ./
-RUN npm ci --production
+RUN npm ci
 COPY . ./
-RUN npm run build
+RUN npm run build-vite
 
 
 FROM nginx:1.16.1-alpine

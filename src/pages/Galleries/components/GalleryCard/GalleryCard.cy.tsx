@@ -199,7 +199,6 @@ function mountComponent({
 
   cy.mount(
     <GalleryCard
-      id={id}
       photos={photos}
       photosCount={0}
       name={name}

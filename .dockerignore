@@ -18,7 +18,7 @@ node_modules
 **/values.dev.yaml
 cypress
 cypress.config.ts
-**/**.cy.*
+./src/**/*.cy.*
 .commitlintrc.json
 .husky
 **/tests

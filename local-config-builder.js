@@ -1,8 +1,7 @@
-// @ts-ignore
 /* eslint-disable @typescript-eslint/quotes */
-const env = process.argv[2];
+import fs from "fs";
 
-const fs = require("fs");
+const env = process.argv[2];
 
 const filepath = "./public/env-config.js";
 const data = fs.readFileSync(`./.config-${env}`);

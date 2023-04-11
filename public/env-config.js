@@ -1,0 +1,1 @@
+window.__ENV__ = { ENV_KEY: "dev",API_ROOT: "http://localhost:7501/api", }
