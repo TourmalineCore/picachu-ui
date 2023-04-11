@@ -10,7 +10,7 @@ env:
 
 jobs:
   check-lint:
-    runs-on: $env.UBUNTU_VERSION
+    runs-on: $UBUNTU_VERSION
     steps:
       - name: Checkout
         uses: actions/checkout@v3
@@ -29,7 +29,7 @@ jobs:
         continue-on-error: false
 
   install:
-    runs-on: $env.UBUNTU_VERSION
+    runs-on: $UBUNTU_VERSION
     needs: check-lint
     container:
       image: cypress/browsers:node-18.14.1-chrome-111.0.5563.146-1-ff-111.0.1-edge-111.0.1661.54-1
@@ -51,7 +51,7 @@ jobs:
           path: dist
   
   components-test:
-    runs-on: $env.UBUNTU_VERSION
+    runs-on: $UBUNTU_VERSION
     container: cypress/browsers:node-18.14.1-chrome-111.0.5563.146-1-ff-111.0.1-edge-111.0.1661.54-1
     needs: install
     steps:
