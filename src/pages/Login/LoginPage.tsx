@@ -39,18 +39,16 @@ function LoginPage() {
   async function onLogin({ login, password }: { login: string; password: string }) {
     setIsLoading(true);
     try {
-      const response = await axios.post(`${import.meta.env.VITE_SERVER_URL}auth/login`, {
+      const { data } = await axios.post(`${import.meta.env.VITE_SERVER_URL}auth/login`, {
         login,
         password,
       });
-      if (response.data) {
-        auth.setToken(response.data.accessToken);
-        setIsAuthenticated(true);
-      }
-      return response.data;
+
+      auth.setToken(data.accessToken);
+      setIsAuthenticated(true);
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (error: any) {
-      return setErrorMessage(error.response.data.msg);
+      setErrorMessage(error.response.data.msg);
     } finally {
       setIsLoading(false);
     }
