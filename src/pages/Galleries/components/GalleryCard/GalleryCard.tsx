@@ -2,10 +2,7 @@ import {
   KeyboardEvent, useEffect, useRef, useState,
 } from "react";
 import { ReactComponent as DeleteIcon } from "../../../../assets/icons/icon-delete.svg";
-
-type PreviewPhoto = {
-  photoPath: string;
-};
+import { PreviewPhoto } from "../GalleriesList/Gallery";
 
 function GalleryCard({
   name,
@@ -32,7 +29,8 @@ function GalleryCard({
     }
   }, [newlyCreated]);
 
-  const [newGalleryName, setNewGalleryName] = useState(name);
+  // '' is temporal here until backend error is fixed
+  const [newGalleryName, setNewGalleryName] = useState(name || ``);
 
   const tryToApplyEmptyName = !newGalleryName.trim().length;
 

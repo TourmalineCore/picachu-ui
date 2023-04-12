@@ -25,6 +25,7 @@ function GalleriesList({
           galleriesPageState.galleries.map(({
             id,
             name,
+            previewPhotos,
           }) => (
             <li
               className="galleries-list__item"
@@ -43,7 +44,7 @@ function GalleriesList({
                   onGalleryDelete(id);
                 }}
                 photosCount={0}
-                photos={[]}
+                previewPhotos={previewPhotos}
               />
             </li>
           ))

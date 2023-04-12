@@ -6,11 +6,12 @@ import { observer } from "mobx-react-lite";
 import AddButton from "../../components/AddButton/AddButton";
 import NoGalleries from "./components/NoGalleries/NoGalleries";
 import GalleriesList from "./components/GalleriesList/GalleriesList";
-import Gallery from "./components/GalleriesList/Gallery";
+import { Gallery } from "./components/GalleriesList/Gallery";
 import Breadcrumbs from "../../components/Breadcrumbs/Breadcrumbs";
 import { useGet } from "../../common/hooks/useGet";
 import GalleriesPageStateContext from "./state/GalleriesPageStateContext";
 import RestoreDeletedGallery from "./components/RestoreDeletedGallery/RestoreDeletedGallery";
+import { api } from "../../common/utils/HttpClient";
 
 function GalleriesPageContent() {
   const galleriesPageState = useContext(GalleriesPageStateContext);
@@ -64,7 +65,7 @@ function GalleriesPageContent() {
   async function onNewGalleryClick() {
     const {
       data: loadedNewlyCreatedGalleryId,
-    } = await axios.post(`/api/galleries`, {
+    } = await api.post(`/api/galleries`, {
       name: `new gallery`,
     });
 
@@ -92,18 +93,18 @@ function GalleriesPageContent() {
       return;
     }
 
-    await axios.put(`/api/galleries/${galleryId}/update-name`, {
+    await api.post(`/api/galleries/${galleryId}/rename`, {
       newName,
     });
   }
 
   async function onGalleryDelete(galleryId: number) {
     galleriesPageState.deleteGallery({ galleryId });
-    await axios.delete(`/api/galleries/${galleryId}`);
+    await api.delete(`/api/galleries/${galleryId}`);
   }
 
   async function onRestoreGallery() {
-    await axios.post(`/api/galleries/restore/${galleriesPageState.galleryToRestore!.id}`);
+    await api.post(`/api/galleries/restore/${galleriesPageState.galleryToRestore!.id}`);
     galleriesPageState.restoreGallery();
   }
 }

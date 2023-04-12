@@ -1,6 +1,11 @@
- type Gallery = {
-   id: number;
-   name: string;
- };
+type PreviewPhoto = {
+  photoPath: string;
+};
 
-export default Gallery;
+type Gallery = {
+  id: number;
+  name: string;
+  previewPhotos: PreviewPhoto[];
+};
+
+export type { Gallery, PreviewPhoto };
