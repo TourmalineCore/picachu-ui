@@ -26,5 +26,5 @@ docker build -t picachu-ui .
 
 ### Run
 ```bash
-docker run --detach --publish 7551:80 --rm --name react-template-admin --env ENV_KEY="'dev'" --env API_ROOT="'http://localhost:7501/api'" picachu-ui
+docker run --detach --publish 7551:80 --rm --name picachu-ui --env ENV_KEY="'dev'" --env API_ROOT="'http://localhost:7501/api'" picachu-ui
 ```
