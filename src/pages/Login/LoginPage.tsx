@@ -1,10 +1,10 @@
 import { useContext, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
 import MountainImage from '../../assets/images/Mountain.png';
 import LoginForm from './components/LoginForm/LoginForm';
 import { AuthContext } from '../../common/auth/authStateProvider/authContext';
 import { auth } from '../../common/auth/auth.helper';
+import { api } from '../../common/utils/HttpClient';
 
 function LoginPage() {
   const { isAuthenticated, setIsAuthenticated } = useContext(AuthContext);
@@ -39,7 +39,7 @@ function LoginPage() {
   async function onLogin({ login, password }: { login: string; password: string }) {
     setIsLoading(true);
     try {
-      const { data } = await axios.post(`${import.meta.env.VITE_SERVER_URL}auth/login`, {
+      const { data } = await api.post(`auth/login`, {
         login,
         password,
       });
