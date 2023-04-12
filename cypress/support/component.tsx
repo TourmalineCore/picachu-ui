@@ -1,4 +1,5 @@
 import "./commands";
+import "../../public/env-config";
 
 /// <reference types="cypress" />
 
