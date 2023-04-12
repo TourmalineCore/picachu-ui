@@ -20,7 +20,7 @@ function GalleriesPageContent() {
     response: loadedGalleries,
   } = useGet<Gallery[]>({
     queryKey: [`galleries`],
-    url: `/api/galleries`,
+    url: `/galleries`,
   });
 
   useEffect(() => {
@@ -65,7 +65,7 @@ function GalleriesPageContent() {
   async function onNewGalleryClick() {
     const {
       data: loadedNewlyCreatedGalleryId,
-    } = await api.post(`/api/galleries`, {
+    } = await api.post(`/galleries`, {
       name: `new gallery`,
     });
 
@@ -93,18 +93,18 @@ function GalleriesPageContent() {
       return;
     }
 
-    await api.post(`/api/galleries/${galleryId}/rename`, {
+    await api.post(`/galleries/${galleryId}/rename`, {
       newName,
     });
   }
 
   async function onGalleryDelete(galleryId: number) {
     galleriesPageState.deleteGallery({ galleryId });
-    await api.delete(`/api/galleries/${galleryId}`);
+    await api.delete(`/galleries/${galleryId}`);
   }
 
   async function onRestoreGallery() {
-    await api.post(`/api/galleries/restore/${galleriesPageState.galleryToRestore!.id}`);
+    await api.post(`/galleries/restore/${galleriesPageState.galleryToRestore!.id}`);
     galleriesPageState.restoreGallery();
   }
 }

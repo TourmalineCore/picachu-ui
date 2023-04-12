@@ -18,9 +18,14 @@
     outline: 1px solid $color-grey-light-200;
     padding: 16px 24px;
     width: 100%;
+    min-height: 48px;
     max-width: 288px;
     color: $color-dark-grey;
     transition: all $default-transition;
+
+    span {
+      line-height: 0;
+    }
 
     svg {
       @include icon(14px,14px,$color-dark-grey);
