@@ -17,8 +17,7 @@ describe(`GalleriesPage`, () => {
 
   it(`SHOULD call backend to create WHEN click on create new gallery and not changing the name`, () => {
     const addButton = new Button({
-      selector: `[data-cy=add-button]`,
-      name: `AddButton`,
+      selector: `add-button`,
     });
 
     cy.intercept(`GET`, `/api/galleries`, [{
@@ -41,6 +40,8 @@ describe(`GalleriesPage`, () => {
 
     // ask to create a new gallery
     addButton.click();
+    addButton.shouldHaveText(`dsds`);
+    addButton.shouldIlay();
     // cy.getByData(`add-button`)
     // .click();
 

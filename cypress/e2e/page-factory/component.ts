@@ -1,5 +1,4 @@
-import { ComponentProps, Selector } from "../types/page-factory/component";
-import { selectorTemplateFormat } from "../utils/page-factory";
+import { ComponentProps } from "../types/page-factory/component";
 
 export abstract class Component {
   selector: string;
@@ -11,11 +10,8 @@ export abstract class Component {
     this.name = name;
   }
 
-  getSelector(props: Selector = {}): Cypress.Chainable<JQuery<HTMLElement>> {
-    const { selector, ...context } = props;
-    const withTemplate = selectorTemplateFormat(selector || this.selector, context);
-
-    return cy.get(withTemplate);
+  getSelector(): Cypress.Chainable<JQuery<HTMLElement>> {
+    return cy.get(`[data-cy=${this.selector}]`);
   }
 
   get typeOf(): string {
@@ -26,11 +22,32 @@ export abstract class Component {
     return this.name;
   }
 
-  async click(selectorProp: Selector = {}): Promise<void> {
+  click(): Cypress.Chainable<JQuery<HTMLElement>> {
     cy.allure()
-      .startStep(`Clicking the ${this.typeOf} with name ${this.componentName}`);
+      .startStep(`Clicking the ${this.typeOf}`);
 
-    const selector = this.getSelector(selectorProp);
-    selector.click();
+    const selector = this.getSelector();
+
+    return selector.click();
+  }
+
+  shouldHaveText(text: string): Cypress.Chainable<JQuery<HTMLElement>> {
+    cy.allure()
+      .startStep(`The ${this.typeOf} should have text "${text}"`);
+
+    const selector = this.getSelector();
+
+    return selector.should(`have.text`, text);
+  }
+
+  shouldIlay(): Cypress.Chainable<JQuery<HTMLElement>> {
+    let option: Cypress.Chainer<any>;
+    console.log(`dfsfs`, option);
+    cy.allure()
+      .startStep(`The ${this.typeOf} should have text ""`);
+
+    const selector = this.getSelector();
+
+    return selector.should(``);
   }
 }
