@@ -44,23 +44,28 @@ function GalleryCard({
       <div className="gallery-card__image-container">
         {
           previewPhotos.length ? (
-            <div data-cy="gallery-photo-collage">
-              {previewPhotos.length < 4
-              && (
-                <img
-                  key={previewPhotos[0].photoPath}
-                  src={previewPhotos[0].photoPath}
-                  alt={`Preview for ${name} gallery`}
-                />
-              )}
-              {previewPhotos.length >= 4
-              && previewPhotos.map((previewPhoto, index) => (
-                <img
-                  key={previewPhoto.photoPath}
-                  src={previewPhoto.photoPath}
-                  alt={`Preview ${index + 1} for ${name} gallery`}
-                />
-              ))}
+            <div
+              className="gallery-card__collage"
+              data-cy="gallery-photo-collage"
+            >
+              {
+                previewPhotos.length < 4 && (
+                  <img
+                    key={previewPhotos[0].photoPath}
+                    src={previewPhotos[0].photoPath}
+                    alt={`Preview for ${name} gallery`}
+                  />
+                )
+              }
+              {previewPhotos.length >= 4 && previewPhotos
+                .splice(0, 4)
+                .map((previewPhoto, index) => (
+                  <img
+                    key={previewPhoto.photoPath}
+                    src={previewPhoto.photoPath}
+                    alt={`Preview ${index + 1} for ${name} gallery`}
+                  />
+                ))}
             </div>
           ) : (
             <img
