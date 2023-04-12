@@ -58,11 +58,11 @@
     "vite-start": "vite",
     "build-vite": "tsc && vite build",
     "test:cypress": "cypress open",
-    "lint": "run-s lint:css lint:ts",
+    "lint": "run-s lint:scss lint:ts",
     "lint:ts": "eslint --no-error-on-unmatched-pattern ./src/**/*.{ts,tsx}",
     "lint:ts:fix": "eslint --no-error-on-unmatched-pattern ./src/**/*.{ts,tsx} --fix",
     "lint:scss": "npx stylelint ./src/**/*.scss",
-    "lint:css:fix": "npx stylelint ./src/**/*.{css,scss} --fix",
+    "lint:scss:fix": "npx stylelint ./src/**/*.scss --fix",
     "create-config:dev": "node local-config-builder dev",
     "prepare": "husky install"
   },
