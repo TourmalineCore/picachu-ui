@@ -24,7 +24,7 @@ describe(`GalleriesPageState`, () => {
     ]);
   });
 
-  it(`SHOULD remove a gallery form the list of galleries WHEN delete was called for it`, () => {
+  it(`SHOULD remove a gallery from the list of galleries WHEN delete was called for it`, () => {
     const galleriesPageState = new GalleriesPageState();
 
     galleriesPageState.initialize({
@@ -83,17 +83,6 @@ describe(`GalleriesPageState`, () => {
     galleriesPageState.deleteGallery({
       galleryId: 2,
     });
-
-    expect(galleriesPageState.galleries).to.deep.equal([
-      {
-        id: 1,
-        name: `First`,
-      },
-      {
-        id: 3,
-        name: `Third`,
-      },
-    ]);
 
     galleriesPageState.restoreGallery();
 
