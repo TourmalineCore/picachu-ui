@@ -1,3 +1,4 @@
+/* eslint-disable import/extensions */
 import "./commands";
 import "../../public/env-config";
 
