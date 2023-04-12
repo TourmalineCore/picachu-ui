@@ -105,4 +105,4 @@ dist
 
 .eslintcache
 
-env-config.js
+**/*/env-config.js
