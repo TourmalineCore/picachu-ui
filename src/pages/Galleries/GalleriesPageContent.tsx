@@ -20,7 +20,7 @@ function GalleriesPageContent() {
     response: loadedGalleries,
   } = useGet<Gallery[]>({
     queryKey: [`galleries`],
-    url: `/api/galleries`,
+    url: `/galleries`,
   });
 
   useEffect(() => {

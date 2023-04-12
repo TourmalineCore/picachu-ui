@@ -1,4 +1,5 @@
 import '../../../cypress/support/commands';
+import { API_ROOT } from '../../common/config';
 import GalleriesPage from './GalleriesPage';
 
 // Found bugs/nuances ;)
@@ -6,7 +7,7 @@ import GalleriesPage from './GalleriesPage';
 
 describe(`GalleriesPage`, () => {
   it(`SHOULD render no galleries message WHEN there are no galleries`, () => {
-    cy.intercept(`GET`, `/api/galleries`, []).as(`call-1`);
+    cy.intercept(`GET`, `${API_ROOT}/galleries`, []).as(`call-1`);
 
     mountComponent();
 
@@ -15,7 +16,7 @@ describe(`GalleriesPage`, () => {
   });
 
   it(`SHOULD call backend to create WHEN click on create new gallery and not changing the name`, () => {
-    cy.intercept(`GET`, `/api/galleries`, [{
+    cy.intercept(`GET`, `${API_ROOT}//galleries`, [{
       id: 1,
       name: `First Gallery`,
     }]).as(`call-2`);
@@ -29,7 +30,7 @@ describe(`GalleriesPage`, () => {
 
     const newGalleryId = 2;
 
-    cy.intercept(`POST`, `/api/galleries`, {
+    cy.intercept(`POST`, `${API_ROOT}//galleries`, {
       body: newGalleryId,
     });
 
@@ -39,7 +40,7 @@ describe(`GalleriesPage`, () => {
 
     const onRenameBackendCallSpy = cy.spy().as(`onRenameBackendCallSpy`);
 
-    cy.intercept(`PUT`, `/api/galleries/${newGalleryId}/update-name`, onRenameBackendCallSpy);
+    cy.intercept(`PUT`, `${API_ROOT}//galleries/${newGalleryId}/update-name`, onRenameBackendCallSpy);
 
     // the gallery name has to be focused since we just created it
     // and if press enter, rename shouldn't be called since the name is the same

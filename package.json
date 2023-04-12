@@ -63,6 +63,7 @@
     "lint:scss": "npx stylelint ./src/**/*.scss",
     "lint:scss:fix": "npx stylelint ./src/**/*.scss --fix",
     "create-config:dev": "node local-config-builder dev",
+    "create-config:local": "node local-config-builder local",
     "prepare": "husky install"
   },
   "ava": {

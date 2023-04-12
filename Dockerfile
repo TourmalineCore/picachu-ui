@@ -5,7 +5,7 @@ COPY package-lock.json ./
 # COPY .npmrc ./
 RUN npm ci
 COPY . ./
-RUN npm run build-vite
+RUN npm run build
 
 
 FROM nginx:1.16.1-alpine
