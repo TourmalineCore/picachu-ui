@@ -53,10 +53,9 @@
   "scripts": {
     "start": "run-s create-config:local vite-start",
     "start:dev": "run-s create-config:dev vite-start",
-    "build": "run-s create-config:dev build-vite",
-    "preview": "vite preview",
+    "build": "tsc && vite build",
+    "preview": "vite preview --host",
     "vite-start": "vite",
-    "build-vite": "tsc && vite build",
     "test:cypress": "cypress open",
     "lint": "run-s lint:scss lint:ts",
     "lint:ts": "eslint --no-error-on-unmatched-pattern ./src/**/*.{ts,tsx}",
