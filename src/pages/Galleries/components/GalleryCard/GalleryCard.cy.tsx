@@ -172,6 +172,39 @@ function photoPreviewTests() {
       .get(`img`)
       .should(`have.length`, 1);
   });
+
+  it(`SHOULD show a collage of 4 photos on gallery card preview WHEN 4 images are added to the gallery`, () => {
+    mountComponent({
+      newlyCreated: false,
+      previewPhotos: [
+        { photoPath: `https://picsum.photos/200/300` },
+        { photoPath: `https://picsum.photos/400/300` },
+        { photoPath: `https://picsum.photos/400/400` },
+        { photoPath: `https://picsum.photos/300/200` },
+      ],
+    });
+
+    cy.getByData(`gallery-photo-collage`)
+      .get(`img`)
+      .should(`have.length`, 4);
+  });
+
+  it(`SHOULD show a collage of 4 photos on gallery card preview WHEN more than 4 images are added to the gallery`, () => {
+    mountComponent({
+      newlyCreated: false,
+      previewPhotos: [
+        { photoPath: `https://picsum.photos/200/300` },
+        { photoPath: `https://picsum.photos/400/300` },
+        { photoPath: `https://picsum.photos/400/400` },
+        { photoPath: `https://picsum.photos/300/200` },
+        { photoPath: `https://picsum.photos/500/200` },
+      ],
+    });
+
+    cy.getByData(`gallery-photo-collage`)
+      .get(`img`)
+      .should(`have.length`, 4);
+  });
 }
 
 function deleteGalleryTests() {
