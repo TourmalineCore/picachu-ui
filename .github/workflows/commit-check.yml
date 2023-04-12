@@ -72,6 +72,7 @@ jobs:
         uses: cypress-io/github-action@v5
         with:
           component: true
+          start: npm start
           browser: chrome
         env: 
           GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
