@@ -6,6 +6,7 @@
 
 // pages
 @import "../pages/Login/LoginPage.scss";
+@import "../pages/Galleries/components/RestoreDeletedGallery/RestoreDeletedGallery.scss";
 
 // components
 @import "../components/Error/Error.scss";
@@ -15,4 +16,4 @@
 @import "../pages/Galleries/components/NoGalleries/NoGalleries.scss";
 @import "../pages/Galleries/components/GalleryCard/GalleryCard.scss";
 @import "../pages/Galleries/components/GalleriesList/GalleriesList.scss";
-@import "../pages/Galleries/components/RestoreDeletedGallery/RestoreDeletedGallery.scss";
+@import "../components/Loader/Loader.scss";
