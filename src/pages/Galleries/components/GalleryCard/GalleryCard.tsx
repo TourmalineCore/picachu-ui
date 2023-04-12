@@ -45,7 +45,16 @@ function GalleryCard({
         {
           previewPhotos.length ? (
             <div data-cy="gallery-photo-collage">
-              {previewPhotos.map((previewPhoto, index) => (
+              {previewPhotos.length < 4
+              && (
+                <img
+                  key={previewPhotos[0].photoPath}
+                  src={previewPhotos[0].photoPath}
+                  alt={`Preview for ${name} gallery`}
+                />
+              )}
+              {previewPhotos.length >= 4
+              && previewPhotos.map((previewPhoto, index) => (
                 <img
                   key={previewPhoto.photoPath}
                   src={previewPhoto.photoPath}
