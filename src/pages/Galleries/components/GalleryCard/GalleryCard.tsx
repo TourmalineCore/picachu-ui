@@ -3,7 +3,9 @@ import {
 } from "react";
 import { ReactComponent as DeleteIcon } from "../../../../assets/icons/icon-delete.svg";
 
-type Photo = {};
+type PreviewPhoto = {
+  photoPath: string;
+};
 
 function GalleryCard({
   name,
@@ -11,14 +13,14 @@ function GalleryCard({
   onNameApply,
   onDelete,
   photosCount,
-  photos,
+  previewPhotos,
 }: {
   name: string;
   newlyCreated: boolean;
   onNameApply: (newName: string) => unknown;
   onDelete: () => unknown;
   photosCount: number;
-  photos: Photo[];
+  previewPhotos: PreviewPhoto[];
 }) {
   const nameRef = useRef<HTMLInputElement>(null);
 
@@ -40,18 +42,26 @@ function GalleryCard({
       data-cy="gallery-card"
     >
       <div className="gallery-card__image-container">
-        <a href="/">
-          {
-            !photos.length && (
-              <img
-                className="gallery-card__image"
-                src="src/assets/images/dummy-image.png"
-                alt={`No photos have been added to ${name} yet`}
-                data-cy="gallery-photo-preview"
-              />
-            )
-          }
-        </a>
+        {
+          previewPhotos.length ? (
+            <div data-cy="gallery-photo-collage">
+              {previewPhotos.map((previewPhoto, index) => (
+                <img
+                  key={previewPhoto.photoPath}
+                  src={previewPhoto.photoPath}
+                  alt={`Preview ${index + 1} for ${name} gallery`}
+                />
+              ))}
+            </div>
+          ) : (
+            <img
+              className="gallery-card__image"
+              src="src/assets/images/dummy-image.png"
+              alt={`No photos have been added to ${name} yet`}
+              data-cy="gallery-photo-preview"
+            />
+          )
+        }
       </div>
       <div className="gallery-card__inner">
         <div className="gallery-card__wrapper">

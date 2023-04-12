@@ -155,7 +155,7 @@ function photoPreviewTests() {
 
     cy.getByData(`gallery-photo-collage`)
       .get(`img`)
-      .should(`exist`);
+      .should(`have.length`, 1);
   });
 }
 
