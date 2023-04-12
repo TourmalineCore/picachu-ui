@@ -21,7 +21,8 @@
     "src/@types/global.d.ts",
     "vite.config.ts",
     "./.eslintrc.json",
-    "cypress",
+    "cypress", 
+    "local-config-builder.js"
   ],
   "references": [{ "path": "./tsconfig.node.json" }]
 }
