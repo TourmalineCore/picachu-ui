@@ -145,11 +145,26 @@ function photoPreviewTests() {
       .and(`equal`, `No photos have been added to new gallery yet`);
   });
 
-  it(`SHOULD show 1 photo on gallery card preview WHEN only one image is added to the gallery`, () => {
+  it(`SHOULD show a single photo on gallery card preview WHEN only one image is added to the gallery`, () => {
     mountComponent({
       newlyCreated: false,
       previewPhotos: [
         { photoPath: `https://picsum.photos/200/300` },
+      ],
+    });
+
+    cy.getByData(`gallery-photo-collage`)
+      .get(`img`)
+      .should(`have.length`, 1);
+  });
+
+  it(`SHOULD show a single photo on gallery card preview WHEN more than 1 and less than 4 images are added to the gallery`, () => {
+    mountComponent({
+      newlyCreated: false,
+      previewPhotos: [
+        { photoPath: `https://picsum.photos/200/300` },
+        { photoPath: `https://picsum.photos/400/300` },
+        { photoPath: `https://picsum.photos/400/400` },
       ],
     });
 
