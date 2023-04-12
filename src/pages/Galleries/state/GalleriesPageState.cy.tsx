@@ -23,4 +23,82 @@ describe(`GalleriesPageState`, () => {
       },
     ]);
   });
+
+  it(`SHOULD remove a gallery from the list of galleries WHEN delete was called for it`, () => {
+    const galleriesPageState = new GalleriesPageState();
+
+    galleriesPageState.initialize({
+      loadedGalleries: [
+        {
+          id: 1,
+          name: `First`,
+        },
+        {
+          id: 2,
+          name: `Second`,
+        },
+        {
+          id: 3,
+          name: `Third`,
+        },
+      ],
+    });
+
+    galleriesPageState.deleteGallery({
+      galleryId: 2,
+    });
+
+    expect(galleriesPageState.galleries).to.deep.equal([
+      {
+        id: 1,
+        name: `First`,
+      },
+      {
+        id: 3,
+        name: `Third`,
+      },
+    ]);
+  });
+
+  it(`SHOULD restore the deleted gallery and put it at the initial position in the list of galleries WHEN restore was called for this deleted gallery`, () => {
+    const galleriesPageState = new GalleriesPageState();
+
+    galleriesPageState.initialize({
+      loadedGalleries: [
+        {
+          id: 1,
+          name: `First`,
+        },
+        {
+          id: 2,
+          name: `Second`,
+        },
+        {
+          id: 3,
+          name: `Third`,
+        },
+      ],
+    });
+
+    galleriesPageState.deleteGallery({
+      galleryId: 2,
+    });
+
+    galleriesPageState.restoreGallery();
+
+    expect(galleriesPageState.galleries).to.deep.equal([
+      {
+        id: 1,
+        name: `First`,
+      },
+      {
+        id: 2,
+        name: `Second`,
+      },
+      {
+        id: 3,
+        name: `Third`,
+      },
+    ]);
+  });
 });

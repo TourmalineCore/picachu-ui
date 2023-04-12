@@ -11,7 +11,7 @@ import Breadcrumbs from "../../components/Breadcrumbs/Breadcrumbs";
 import { useGet } from "../../common/hooks/useGet";
 import GalleriesPageStateContext from "./state/GalleriesPageStateContext";
 import { api } from "../../common/utils/HttpClient";
-// import RestoreDeletedGallery from "./components/RestoreDeletedGallery/RestoreDeletedGallery";
+import RestoreDeletedGallery from "./components/RestoreDeletedGallery/RestoreDeletedGallery";
 
 function GalleriesPageContent() {
   const galleriesPageState = useContext(GalleriesPageStateContext);
@@ -47,16 +47,18 @@ function GalleriesPageContent() {
               </AddButton>
               <GalleriesList
                 onNameApply={onNameApply}
-                onGalleryDelete={(id: number) => {
-                }}
+                onGalleryDelete={onGalleryDelete}
               />
-              {/* <RestoreDeletedGallery
-                onRestoreGallery={onRestoreGallery}
-                galleryName="town"
-              /> */}
+
             </>
           )
       }
+      {galleriesPageState.galleryToRestore && (
+        <RestoreDeletedGallery
+          onRestoreGallery={onRestoreGallery}
+          galleryName={galleriesPageState.galleryToRestore!.name}
+        />
+      )}
     </div>
   );
 
@@ -96,8 +98,14 @@ function GalleriesPageContent() {
     });
   }
 
-  function onRestoreGallery() {
-    console.log(`onRestoreGallery`);
+  async function onGalleryDelete(galleryId: number) {
+    galleriesPageState.deleteGallery({ galleryId });
+    await api.delete(`/galleries/${galleryId}`);
+  }
+
+  async function onRestoreGallery() {
+    await api.post(`/galleries/restore/${galleriesPageState.galleryToRestore!.id}`);
+    galleriesPageState.restoreGallery();
   }
 }
 
