@@ -15,13 +15,13 @@
     "isolatedModules": true,
     "noEmit": true,
     "jsx": "react-jsx"
-  },
+  }, 
   "include": [
     "src",
     "src/@types/global.d.ts",
     "vite.config.ts",
     "./.eslintrc.json",
-    "cypress"
+    "cypress",
   ],
   "references": [{ "path": "./tsconfig.node.json" }]
 }

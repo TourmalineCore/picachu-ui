@@ -9,7 +9,7 @@
     "preview": "vite preview",
     "test": "tsc && ava",
     "test:cypress": "cypress open",
-    "lint": "run-s lint:css lint:ts",
+    "lint": "run-s lint:scss lint:ts",
     "lint:ts": "eslint --no-error-on-unmatched-pattern ./src/**/*.{ts,tsx}",
     "lint:ts:fix": "eslint --no-error-on-unmatched-pattern ./src/**/*.{ts,tsx} --fix",
     "lint:scss": "npx stylelint ./src/**/*.scss",
