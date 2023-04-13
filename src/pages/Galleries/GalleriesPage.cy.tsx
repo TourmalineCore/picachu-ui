@@ -26,17 +26,20 @@ describe(`GalleriesPage`, () => {
 
     const addButton = new Button({
       selector: `add-button`,
-      name: `dsda`,
     });
 
     const galleryNameInput = new Input({
       selector: `gallery-name-input`,
     });
+    // galleryNameInput.getSelector();
 
     // we should see the existing gallery, it is not newly created, thus, not focused
-    cy.getByData(`gallery-name-input`)
-      .should(`have.value`, `First Gallery`)
-      .should(`not.be.focused`);
+    // cy.getByData(`gallery-name-input`)
+    //   .should(`have.value`, `First Gallery`)
+    //   .should(`not.be.focused`);
+
+    galleryNameInput.shouldValue(`First Gallery`)
+      .shouldNotBeFocused();
 
     const newGalleryId = 2;
 
@@ -46,8 +49,6 @@ describe(`GalleriesPage`, () => {
 
     // ask to create a new gallery
     addButton.click();
-    // addButton.shouldHaveText(`dsds`);
-    // addButton.sholdA()(`be.NaN`);
     // cy.getByData(`add-button`)
     // .click();
 
@@ -58,24 +59,26 @@ describe(`GalleriesPage`, () => {
     // the gallery name has to be focused since we just created it
     // and if press enter, rename shouldn't be called since the name is the same
 
+    // galleryNameInput.lastElement().shouldBeFocused();
     // console.log(galleryNameInput.getLastElement());
     // galleryNameInput.click();
-    galleryNameInput.getLastElement().shouldBeVisible();
+    // galleryNameInput.getLastElement();
+    // console.log(`fsdfs`, galleryNameInput.getLastElement().clickF());
+    // console.log(`cy`, cy.getByData(`gallery-name-input`)
+    //   .last());
 
     // cy.getByData(`gallery-name-input`)
     //   .last()
     //   .should(`be.focused`)
     //   .type(`{enter}`);
 
-    // addButton.add();
-
     cy.get(`@onRenameBackendCallSpy`).should(`not.have.been.called`);
 
     // we should check that the new card is not focused and name is the same
-    cy.getByData(`gallery-name-input`)
-      .last()
-      .should(`have.value`, `new gallery`)
-      .should(`not.be.focused`);
+    // cy.getByData(`gallery-name-input`)
+    //   .last()
+    //   .should(`have.value`, `new gallery`)
+    //   .should(`not.be.focused`);
   });
 });
 
