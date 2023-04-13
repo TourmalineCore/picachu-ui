@@ -73,6 +73,7 @@ function GalleriesPageContent() {
       newlyCreatedGallery: {
         id: loadedNewlyCreatedGalleryId,
         name: `new gallery`,
+        previewPhotos: [],
       },
     });
   }

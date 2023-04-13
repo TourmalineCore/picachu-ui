@@ -10,6 +10,7 @@ describe(`GalleriesPageState`, () => {
         {
           id: 1,
           name: `First`,
+          previewPhotos: [],
         },
       ],
     });
@@ -20,6 +21,7 @@ describe(`GalleriesPageState`, () => {
       {
         id: 1,
         name: `First`,
+        previewPhotos: [],
       },
     ]);
   });
@@ -32,14 +34,17 @@ describe(`GalleriesPageState`, () => {
         {
           id: 1,
           name: `First`,
+          previewPhotos: [],
         },
         {
           id: 2,
           name: `Second`,
+          previewPhotos: [],
         },
         {
           id: 3,
           name: `Third`,
+          previewPhotos: [],
         },
       ],
     });
@@ -52,10 +57,12 @@ describe(`GalleriesPageState`, () => {
       {
         id: 1,
         name: `First`,
+        previewPhotos: [],
       },
       {
         id: 3,
         name: `Third`,
+        previewPhotos: [],
       },
     ]);
   });
@@ -68,14 +75,17 @@ describe(`GalleriesPageState`, () => {
         {
           id: 1,
           name: `First`,
+          previewPhotos: [],
         },
         {
           id: 2,
           name: `Second`,
+          previewPhotos: [],
         },
         {
           id: 3,
           name: `Third`,
+          previewPhotos: [],
         },
       ],
     });
@@ -90,14 +100,17 @@ describe(`GalleriesPageState`, () => {
       {
         id: 1,
         name: `First`,
+        previewPhotos: [],
       },
       {
         id: 2,
         name: `Second`,
+        previewPhotos: [],
       },
       {
         id: 3,
         name: `Third`,
+        previewPhotos: [],
       },
     ]);
   });
