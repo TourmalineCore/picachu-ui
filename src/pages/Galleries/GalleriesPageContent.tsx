@@ -93,7 +93,7 @@ function GalleriesPageContent() {
       return;
     }
 
-    await api.put(`/galleries/${galleryId}/update-name`, {
+    await api.post(`/galleries/${galleryId}/rename`, {
       newName,
     });
   }

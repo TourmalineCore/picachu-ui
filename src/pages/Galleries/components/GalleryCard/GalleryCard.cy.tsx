@@ -18,8 +18,7 @@ function defaultNameRenderingTests() {
       newlyCreated: true,
     });
 
-    cy
-      .getByData(`gallery-name-input`)
+    cy.getByData(`gallery-name-input`)
       .should(`have.value`, `new gallery`)
       .focused();
   });
@@ -31,9 +30,10 @@ function nameEditingTests() {
       newlyCreated: true,
     });
 
-    cy
-      .getByData(`gallery-name-input`)
-      .type(`123`)
+    cy.getByData(`gallery-name-input`)
+      .type(`123`);
+
+    cy.getByData(`gallery-name-input`)
       .should(`have.value`, `new gallery123`)
       .type(`{enter}`);
 
@@ -47,9 +47,10 @@ function nameEditingTests() {
       newlyCreated: true,
     });
 
-    cy
-      .getByData(`gallery-name-input`)
-      .type(`!!!`)
+    cy.getByData(`gallery-name-input`)
+      .type(`!!!`);
+
+    cy.getByData(`gallery-name-input`)
       .blur();
 
     checkOnApplyCalledOnce({
@@ -62,17 +63,14 @@ function nameEditingTests() {
       newlyCreated: true,
     });
 
-    cy
-      .getByData(`gallery-name-input`)
-      .type(`777`)
-      .type(`{esc}`);
+    cy.getByData(`gallery-name-input`)
+      .type(`777 {esc}`);
 
     checkOnApplyCalledOnce({
       expectedName: `new gallery`,
     });
 
-    cy
-      .getByData(`gallery-name-input`)
+    cy.getByData(`gallery-name-input`)
       .should(`have.value`, `new gallery`);
   });
 
@@ -81,17 +79,17 @@ function nameEditingTests() {
       newlyCreated: true,
     });
 
-    cy
-      .getByData(`gallery-name-input`)
-      .clear()
+    cy.getByData(`gallery-name-input`)
+      .clear();
+
+    cy.getByData(`gallery-name-input`)
       .type(`{enter}`);
 
     checkOnApplyCalledOnce({
       expectedName: `new gallery`,
     });
 
-    cy
-      .getByData(`gallery-name-input`)
+    cy.getByData(`gallery-name-input`)
       .should(`have.value`, `new gallery`);
   });
 
@@ -100,17 +98,17 @@ function nameEditingTests() {
       newlyCreated: true,
     });
 
-    cy
-      .getByData(`gallery-name-input`)
-      .clear()
+    cy.getByData(`gallery-name-input`)
+      .clear();
+
+    cy.getByData(`gallery-name-input`)
       .blur();
 
     checkOnApplyCalledOnce({
       expectedName: `new gallery`,
     });
 
-    cy
-      .getByData(`gallery-name-input`)
+    cy.getByData(`gallery-name-input`)
       .should(`have.value`, `new gallery`);
   });
 
@@ -120,10 +118,13 @@ function nameEditingTests() {
       newlyCreated: false,
     });
 
-    cy
-      .getByData(`gallery-name-input`)
-      .click()
-      .type(` duper`)
+    cy.getByData(`gallery-name-input`)
+      .click();
+
+    cy.getByData(`gallery-name-input`)
+      .type(` duper`);
+
+    cy.getByData(`gallery-name-input`)
       .blur();
 
     checkOnApplyCalledOnce({
@@ -139,8 +140,7 @@ function photoPreviewTests() {
       photos: [],
     });
 
-    cy
-      .getByData(`gallery-photo-preview`)
+    cy.getByData(`gallery-photo-preview`)
       .should(`have.attr`, `alt`)
       .and(`equal`, `No photos have been added to new gallery yet`);
   });
@@ -153,8 +153,7 @@ function deleteGalleryTests() {
       photos: [],
     });
 
-    cy
-      .getByData(`delete-gallery-button`).click();
+    cy.getByData(`delete-gallery-button`).click();
 
     cy.get(`@onDelete`)
       .should(`have.been.calledOnce`);

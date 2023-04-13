@@ -76,10 +76,12 @@ describe(`GalleriesList`, () => {
       onNameApply: onNameApplySpy,
     });
 
-    cy
-      .getByData(`gallery-name-input`)
+    cy.getByData(`gallery-name-input`)
       .last()
-      .type(` Ever`)
+      .type(` Ever`);
+
+    cy.getByData(`gallery-name-input`)
+      .last()
       .blur();
 
     cy.get(`@onNameApply`)
