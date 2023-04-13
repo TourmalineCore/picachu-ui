@@ -1,6 +1,15 @@
 import { ComponentProps } from "../types/page-factory/component";
 
-export abstract class Component {
+interface Chainable<Subject = any> {
+  shouldHaveText(text: string): Chainable<Subject>;
+  shouldBeVisible(): Chainable<Subject>;
+  getLastElement(): Chainable<Subject>;
+  shouldHaveValue(): Chainable<Subject>;
+  click(): Chainable<Subject>;
+  // type(value: string): Chainable<Subject>;
+  // shouldBeFocused(): Chainable<Subject>;
+}
+export abstract class Component implements Chainable<any> {
   selector: string;
 
   private name: string | undefined;
@@ -10,44 +19,49 @@ export abstract class Component {
     this.name = name;
   }
 
-  getSelector(): Cypress.Chainable<JQuery<HTMLElement>> {
-    return cy.get(`[data-cy=${this.selector}]`);
-  }
-
-  get typeOf(): string {
+  protected get typeOf(): string {
     return `component`;
   }
 
-  get componentName(): string {
+  protected get componentName(): string {
     return this.name;
   }
 
-  click(): Cypress.Chainable<JQuery<HTMLElement>> {
-    cy.allure()
-      .startStep(`Clicking the ${this.typeOf}`);
-
-    const selector = this.getSelector();
-
-    return selector.click();
+  protected createStep(stepName: string) {
+    return cy.allure().startStep(stepName).endStep();
   }
 
-  shouldHaveText(text: string): Cypress.Chainable<JQuery<HTMLElement>> {
-    cy.allure()
-      .startStep(`The ${this.typeOf} should have text "${text}"`);
-
-    const selector = this.getSelector();
-
-    return selector.should(`have.text`, text);
+  getSelector() {
+    return cy.get(`[data-cy=${this.selector}]`);
   }
 
-  shouldIlay(): Cypress.Chainable<JQuery<HTMLElement>> {
-    let option: Cypress.Chainer<any>;
-    console.log(`dfsfs`, option);
-    cy.allure()
-      .startStep(`The ${this.typeOf} should have text ""`);
+  public click() {
+    this.createStep(`Clicking the ${this.typeOf}`);
 
-    const selector = this.getSelector();
+    return this.getSelector().click();
+  }
 
-    return selector.should(``);
+  public shouldHaveText(text: string): Chainable<JQuery<HTMLElement>> {
+    this.createStep(`The ${this.typeOf} should have text "${text}"`);
+
+    return this.getSelector().should(`have.text`, text);
+  }
+
+  public shouldBeVisible(): Chainable<JQuery<HTMLElement>> {
+    this.createStep(`The ${this.typeOf} should be visiable on the page`);
+
+    return this.getSelector().should(`be.visible`);
+  }
+
+  public shouldHaveValue(value: string): Chainable<JQuery<HTMLElement>> {
+    this.createStep(`The ${this.typeOf} should be have value ${value}`);
+
+    return this.getSelector().should(`have.value`, value);
+  }
+
+  public getLastElement(): Chainable<JQuery<HTMLElement>> {
+    this.createStep(`Get last ${this.typeOf} in the list`);
+
+    return this.getSelector().last();
   }
 }
