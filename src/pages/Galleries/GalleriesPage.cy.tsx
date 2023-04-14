@@ -16,9 +16,13 @@ describe(`GalleriesPage`, () => {
   });
 
   it(`SHOULD call backend to create WHEN click on create new gallery and not changing the name`, () => {
-    cy.intercept(`GET`, `${API_ROOT}//galleries`, [{
+    // eslint-disable-next-line cypress/no-unnecessary-waiting
+    cy.wait(1000, { log: false });
+
+    cy.intercept(`GET`, `${API_ROOT}/galleries`, [{
       id: 1,
       name: `First Gallery`,
+      previewPhotos: [],
     }]).as(`call-2`);
 
     mountComponent();
@@ -30,7 +34,7 @@ describe(`GalleriesPage`, () => {
 
     const newGalleryId = 2;
 
-    cy.intercept(`POST`, `${API_ROOT}//galleries`, {
+    cy.intercept(`POST`, `${API_ROOT}/galleries`, {
       body: newGalleryId,
     });
 
@@ -40,7 +44,7 @@ describe(`GalleriesPage`, () => {
 
     const onRenameBackendCallSpy = cy.spy().as(`onRenameBackendCallSpy`);
 
-    cy.intercept(`PUT`, `${API_ROOT}//galleries/${newGalleryId}/update-name`, onRenameBackendCallSpy);
+    cy.intercept(`PUT`, `${API_ROOT}/galleries/${newGalleryId}/update-name`, onRenameBackendCallSpy);
 
     // the gallery name has to be focused since we just created it
     // and if press enter, rename shouldn't be called since the name is the same
