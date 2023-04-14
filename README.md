@@ -24,7 +24,7 @@ Open http://localhost:5501/ with local env variables.
 
 The page will automatically reload after any changes to the code.
 
-### `npm start:dev`
+### `npm run start:dev`
 
 Run the application in development mode.
 Open http://localhost:5501/ with dev env variables.
@@ -39,7 +39,7 @@ This command will find all the tests in the project, then it will run all the te
 ### `npm run cypress:component` 
 For it to work properly, you must first run the command `npm start`.
 
-This command will open the Cypress launchpad with component testing in to Chrome browser
+This command will open the Cypress launchpad with component testing in the Chrome browser.
 
 ### `npm run build`
 
@@ -52,7 +52,9 @@ Your app is ready to be deployed.
 
 ### `npm run preview`
 
-The command will boot up a local static web server that serves the files from dist at http://localhost:4173. It's an easy way to check if the production build looks OK in your local environment.
+The command will boot up a local static web server that serves the files from dist at http://localhost:4173. 
+
+It's an easy way to check if the production build looks OK in your local environment.
 
 ## husky with nvm
 
