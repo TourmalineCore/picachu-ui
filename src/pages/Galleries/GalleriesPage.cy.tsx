@@ -16,9 +16,6 @@ describe(`GalleriesPage`, () => {
   });
 
   it(`SHOULD call backend to create WHEN click on create new gallery and not changing the name`, () => {
-    // eslint-disable-next-line cypress/no-unnecessary-waiting
-    cy.wait(1000, { log: false });
-
     cy.intercept(`GET`, `${API_ROOT}/galleries`, [{
       id: 1,
       name: `First Gallery`,
