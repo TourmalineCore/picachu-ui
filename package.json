@@ -6,7 +6,7 @@
   "scripts": {
     "start": "run-s create-config:local vite-start",
     "start:dev": "run-s create-config:dev vite-start",
-    "vite-start": "vite",
+    "vite-start": "vite --port 5501",
     "build": "tsc && vite build",
     "preview": "vite preview --host",
     "cypress:run": "cypress run --component",
