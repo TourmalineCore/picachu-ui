@@ -1,0 +1,21 @@
+.circle-bar {
+  position: relative;
+  flex: none;
+
+  &__background {
+    fill: none;
+    stroke: $color-grey-light-300;
+  }
+
+  &__progress {
+    fill: none;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+
+  &__percentage-text {
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 1.4;
+  }
+}
