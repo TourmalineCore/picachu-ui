@@ -16,7 +16,7 @@ jobs:
         uses: actions/checkout@v1
       - name: Build and push image
         run: |
-          docker login ghcr.io -u ${{ secret.GH_REGISTRY_LOGIN }} -p ${{ secret.GH_REGISTRY_PASSWORD }}
+          docker login ghcr.io -u ${{ secrets.GH_REGISTRY_LOGIN }} -p ${{ secrets.GH_REGISTRY_PASSWORD }}
           docker build -t ghcr.io/tourmalinecore/picachu/ui:latest -t ghcr.io/tourmalinecore/picachu/ui:${{ github.sha }} -f ./Dockerfile .
           docker push ghcr.io/tourmalinecore/picachu/ui:latest
           docker push ghcr.io/tourmalinecore/picachu/ui:${{ github.sha }}
@@ -38,8 +38,8 @@ jobs:
             helm upgrade --install --namespace dev-picachu --create-namespace --values ./ci/values-custom.yaml \
             --set "image.pullSecrets={${RELEASE_NAME}-nginx-docker-secret}" \
             --set "ingress.hostname=picachu.dev.tourmalinecore.com" \
-            --set "image.pullCredentials.username=${{ secret.GH_REGISTRY_LOGIN }}" \
-            --set "image.pullCredentials.password=${{ secret.GH_REGISTRY_PASSWORD }}" \
+            --set "image.pullCredentials.username=${{ secrets.GH_REGISTRY_LOGIN }}" \
+            --set "image.pullCredentials.password=${{ secrets.GH_REGISTRY_PASSWORD }}" \
             --set "image.tag=${{ github.sha }}" \
             --set "extraConfigMapEnvVars.ENV_KEY=${{ DEV_ENV_KEY }}" \
             --set "extraConfigMapEnvVars.API_ROOT=${{ DEV_API_ROOT }}" \
