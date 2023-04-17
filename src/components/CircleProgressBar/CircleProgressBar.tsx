@@ -69,6 +69,7 @@ function CircleProgressBar(
           y="50%"
           dy="0.3em"
           textAnchor="middle"
+          data-cy="circle-percentage-text"
           className="circle-bar__percentage-text"
         >
           {percentage}

@@ -1,6 +1,6 @@
-type SimilarPhotoType = {
-  id: number;
-  image: string;
+export type SimilarPhotoType = {
+  photoId: number;
+  photoPath: string;
   relatedColors: {
     red: number;
     green: number;
@@ -10,7 +10,7 @@ type SimilarPhotoType = {
 };
 
 function MetricsSimilarCard({
-  id, image, relatedColors, relatedFeatures,
+  photoId, photoPath, relatedColors, relatedFeatures,
 }: SimilarPhotoType) {
   return (
     <li
@@ -18,7 +18,7 @@ function MetricsSimilarCard({
     >
       <div className="metric-similar-card__image-container">
         <img
-          src={image}
+          src={photoPath}
           className="metric-similar-card__image"
           alt="metric"
           draggable={false}
@@ -28,7 +28,7 @@ function MetricsSimilarCard({
             relatedColors.map((color) => (
               <span
                 className="metric-similar-card__color"
-                key={String(color.blue + color.red + color.green + id)}
+                key={String(color.blue + color.red + color.green + photoId)}
                 style={{
                   backgroundColor: `rgb(${color.red},${color.green},${color.blue})`,
                 }}
@@ -42,7 +42,7 @@ function MetricsSimilarCard({
         <div className="metric-similar-card__features-box-items">
           {relatedFeatures.map((feature) => (
             <span
-              key={feature + String(id)}
+              key={feature + String(photoId)}
               className="metric-similar-card__features-item"
             >
               {feature}

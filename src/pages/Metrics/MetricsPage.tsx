@@ -5,7 +5,7 @@ import Breadcrumbs from '../../components/Breadcrumbs/Breadcrumbs';
 import CircleProgressBar from '../../components/CircleProgressBar/CircleProgressBar';
 import MetricSimilarList from './components/MetricsSimilarList/MetricsSimilarList';
 import {
-  associationsArray, colorsArray, emotionsArray, objectsArray,
+  associationsArray, colorsArray, emotionsArray, objectsArray, similarPhotosArray,
 } from './MetricsTestValues.data';
 
 function MetricsPage() {
@@ -15,7 +15,7 @@ function MetricsPage() {
 
   const [isLoading, setIsLoading] = useState(true);
 
-  const delay = 20;
+  const delay = 1;
 
   useEffect(() => {
     const timer1 = setTimeout(() => setIsLoading(false), delay * 1000);
@@ -253,7 +253,10 @@ function MetricsPage() {
             </div>
 
           </div>
-          <MetricSimilarList isLoading={isLoading} />
+          <MetricSimilarList
+            isLoading={isLoading}
+            similarPhotosArray={similarPhotosArray}
+          />
         </div>
 
       </div>
