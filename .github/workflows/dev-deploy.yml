@@ -1,0 +1,48 @@
+name: deploy service to dev k8s
+
+on:
+  push:
+    branches:
+      - develop
+      - feature/ci-to-deploy
+  pull_request:
+
+jobs:
+  build-image:
+    name: Build and push service image  
+    runs-on: ubuntu-22.04
+    steps:
+      - name: checkout
+        uses: actions/checkout@v1
+      - name: Build and push image
+        run: |
+          docker login ghcr.io -u ${{ secret.GH_REGISTRY_LOGIN }} -p ${{ secret.GH_REGISTRY_PASSWORD }}
+          docker build -t ghcr.io/tourmalinecore/picachu/ui:latest -t ghcr.io/tourmalinecore/picachu/ui:${{ github.sha }} -f ./Dockerfile .
+          docker push ghcr.io/tourmalinecore/picachu/ui:latest
+          docker push ghcr.io/tourmalinecore/picachu/ui:${{ github.sha }}
+
+  deploy-to-dev-k8s:
+    needs: build-image
+    name: Deploy service to k8s for development environment  
+    if: github.event_name == 'push'
+    runs-on: ubuntu-22.04
+    steps:
+      - name: checkout
+        uses: actions/checkout@v1
+      - name: Deploy
+        uses: WyriHaximus/github-action-helm3@v3
+        with:
+          exec: |
+            RELEASE_NAME=ui
+            helm repo add bitnami https://charts.bitnami.com/bitnami
+            helm upgrade --install --namespace dev-picachu --create-namespace --values ./ci/values-custom.yaml \
+            --set "image.pullSecrets={${RELEASE_NAME}-nginx-docker-secret}" \
+            --set "ingress.hostname=picachu.dev.tourmalinecore.com" \
+            --set "image.pullCredentials.username=${{ secret.GH_REGISTRY_LOGIN }}" \
+            --set "image.pullCredentials.password=${{ secret.GH_REGISTRY_PASSWORD }}" \
+            --set "image.tag=${{ github.sha }}" \
+            --set "extraConfigMapEnvVars.ENV_KEY=${{ DEV_ENV_KEY }}" \
+            --set "extraConfigMapEnvVars.API_ROOT=${{ DEV_API_ROOT }}" \
+            "${RELEASE_NAME}" \
+            bitnami/nginx
+          kubeconfig: "${{ secrets.DEV_KUBECONFIG }}"
