@@ -3,12 +3,10 @@ import { useEffect, useState } from 'react';
 import metricImage from '../../assets/images/metric-image.png';
 import Breadcrumbs from '../../components/Breadcrumbs/Breadcrumbs';
 import CircleProgressBar from '../../components/CircleProgressBar/CircleProgressBar';
+import MetricSimilarList from './components/MetricsSimilarList/MetricsSimilarList';
 import {
-  similarPhotosArray,
   associationsArray, colorsArray, emotionsArray, objectsArray,
 } from './MetricsTestValues.data';
-import MetricsSimilarCard from './components/MetricsSimilarCard/MetricsSimilarCard';
-import MetricSimilarLoader from '../../assets/images/similar-loader-image.svg';
 
 function MetricsPage() {
   const TotalUniqueness = 52;
@@ -62,7 +60,7 @@ function MetricsPage() {
 
                 <div className="metrics-page__stroke-bars">
                   <div className="metrics-page__box">
-                    <p className="metrics-page__subtitle">Colors</p>
+                    <h3 className="metrics-page__subtitle">Colors</h3>
 
                     {isLoading ? (
                       <div
@@ -95,11 +93,11 @@ function MetricsPage() {
 
                   </div>
                   <div className="metrics-page__box">
-                    <p className="metrics-page__subtitle">
+                    <h3 className="metrics-page__subtitle">
                       Objects,
                       emotions,
                       associations
-                    </p>
+                    </h3>
 
                     {
                       isLoading ? (
@@ -139,7 +137,7 @@ function MetricsPage() {
             <div className="metrics-page__features">
               <h2 className="metrics-page__title">Features</h2>
               <div className="metrics-page__features-box">
-                <p className="metrics-page__subtitle">Main colors</p>
+                <h3 className="metrics-page__subtitle">Main colors</h3>
                 {isLoading ? (
                   <div style={{
                     textAlign: `left`,
@@ -168,7 +166,7 @@ function MetricsPage() {
 
               </div>
               <div className="metrics-page__features-box">
-                <p className="metrics-page__subtitle">Emotions</p>
+                <h3 className="metrics-page__subtitle">Emotions</h3>
                 {isLoading ? (
                   <div style={{
                     textAlign: `left`,
@@ -196,7 +194,7 @@ function MetricsPage() {
 
               </div>
               <div className="metrics-page__features-box">
-                <p className="metrics-page__subtitle">Objects</p>
+                <h3 className="metrics-page__subtitle">Objects</h3>
                 {isLoading ? (
                   <div style={{
                     textAlign: `left`,
@@ -224,7 +222,7 @@ function MetricsPage() {
 
               </div>
               <div className="metrics-page__features-box">
-                <p className="metrics-page__subtitle">Associations</p>
+                <h3 className="metrics-page__subtitle">Associations</h3>
                 {isLoading ? (
                   <div style={{
                     textAlign: `left`,
@@ -251,48 +249,13 @@ function MetricsPage() {
                 )}
 
               </div>
+
             </div>
+
           </div>
+          <MetricSimilarList isLoading={isLoading} />
         </div>
 
-        <div className="metrics-page__similar-photos">
-          <h2 className="metrics-page__title">Similar photos</h2>
-          {isLoading ? (
-            <div className="metrics-page__similar-photos-empty-container">
-              <img
-                src={MetricSimilarLoader}
-                alt="loader similar images"
-                draggable={false}
-                style={{
-                  marginBottom: `24px`,
-                }}
-              />
-              <p className="metrics-page__similar-photos-empty">
-                We&apos;ll start searching for photos once we&apos;ve highlighted
-                all the tags
-              </p>
-            </div>
-          ) : similarPhotosArray.length === 0 ? (
-            <div className="metrics-page__similar-photos-empty-container">
-              <p className="metrics-page__similar-photos-empty">
-                The photo is unique so it has
-                no similar photos
-              </p>
-            </div>
-          ) : (
-            <div className="metrics-page__similar-photos-full-container">
-              {similarPhotosArray.map((photo) => (
-                <MetricsSimilarCard
-                  id={photo.photoId}
-                  key={photo.photoId}
-                  image={photo.photoPath}
-                  relatedColors={photo.relatedColors}
-                  relatedFeatures={photo.relatedFeatures}
-                />
-              ))}
-            </div>
-          )}
-        </div>
       </div>
     </div>
   );

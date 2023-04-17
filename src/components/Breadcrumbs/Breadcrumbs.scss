@@ -32,7 +32,7 @@
   }
 
   &__icon {
-    @include icon(12px,7px,$color-dark-grey);
+    @include icon(12px,7px,$color-medium-grey);
 
     flex: none;
   }

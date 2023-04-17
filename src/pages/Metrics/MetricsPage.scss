@@ -160,48 +160,6 @@
     background: $color-grey-light-300;
   }
 
-  &__similar-photos {
-    position: relative;
-
-    @include desktop {
-      margin-left: 48px;
-      border-left: 2px solid $color-grey-light-100;
-      padding-left: 32px;
-    }
-  }
-
-  &__similar-photos-empty {
-    font-weight: 500;
-    font-size: 14px;
-    line-height: 1.4;
-    text-align: center;
-    color: #7f7d85;
-  }
-
-  &__similar-photos-empty-container {
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-    justify-content: center;
-    width: 100%;
-    height: 100%;
-    min-width: 224px;
-  }
-
-  &__similar-photos-full-container {
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-    overflow-y: scroll;
-    width: 100%;
-    height: calc(100vh - 224px);
-    min-width: 224px;
-
-    &::-webkit-scrollbar {
-      display: none;
-    }
-  }
-
   &__bar-progress {
     border-radius: 6px;
     height: 8px;
