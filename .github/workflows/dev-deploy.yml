@@ -41,8 +41,8 @@ jobs:
             --set "image.pullCredentials.username=${{ secrets.GH_REGISTRY_LOGIN }}" \
             --set "image.pullCredentials.password=${{ secrets.GH_REGISTRY_PASSWORD }}" \
             --set "image.tag=${{ github.sha }}" \
-            --set "extraConfigMapEnvVars.ENV_KEY=${{ DEV_ENV_KEY }}" \
-            --set "extraConfigMapEnvVars.API_ROOT=${{ DEV_API_ROOT }}" \
+            --set "extraConfigMapEnvVars.ENV_KEY=${{ github.DEV_ENV_KEY }}" \
+            --set "extraConfigMapEnvVars.API_ROOT=${{ github.DEV_API_ROOT }}" \
             "${RELEASE_NAME}" \
             bitnami/nginx
           kubeconfig: "${{ secrets.DEV_KUBECONFIG }}"
