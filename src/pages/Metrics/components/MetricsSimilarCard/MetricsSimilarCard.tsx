@@ -13,7 +13,7 @@ function MetricsSimilarCard({
   id, image, relatedColors, relatedFeatures,
 }: SimilarPhotoType) {
   return (
-    <div
+    <li
       className="metric-similar-card"
     >
       <div className="metric-similar-card__image-container">
@@ -52,7 +52,7 @@ function MetricsSimilarCard({
 
       </div>
 
-    </div>
+    </li>
   );
 }
 

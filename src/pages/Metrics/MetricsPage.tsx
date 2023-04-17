@@ -15,7 +15,7 @@ function MetricsPage() {
 
   const [isLoading, setIsLoading] = useState(true);
 
-  const delay = 1;
+  const delay = 20;
 
   useEffect(() => {
     const timer1 = setTimeout(() => setIsLoading(false), delay * 1000);
