@@ -15,7 +15,6 @@ function MetricsSimilarCard({
   return (
     <div
       className="metric-similar-card"
-      key={id}
     >
       <div className="metric-similar-card__image-container">
         <img
@@ -29,6 +28,7 @@ function MetricsSimilarCard({
             relatedColors.map((color) => (
               <span
                 className="metric-similar-card__color"
+                key={String(color.blue + color.red + color.green + id)}
                 style={{
                   backgroundColor: `rgb(${color.red},${color.green},${color.blue})`,
                 }}
@@ -42,7 +42,7 @@ function MetricsSimilarCard({
         <div className="metric-similar-card__features-box-items">
           {relatedFeatures.map((feature) => (
             <span
-              key={feature}
+              key={feature + String(id)}
               className="metric-similar-card__features-item"
             >
               {feature}

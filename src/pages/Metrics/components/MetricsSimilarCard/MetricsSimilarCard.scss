@@ -1,6 +1,5 @@
 .metric-similar-card {
   position: relative;
-  flex: none;
   margin-bottom: 24px;
   width: 100%;
 
@@ -65,5 +64,10 @@
     &:last-child {
       margin-right: 0;
     }
+  }
+
+  @include desktop {
+    flex: none;
+    min-width: 224px;
   }
 }

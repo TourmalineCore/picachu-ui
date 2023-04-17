@@ -29,7 +29,7 @@ export const similarPhotosArray = [{
   photoId: 24,
   photoPath: similarPhoto1,
   relatedColors: [{
-    red: 56,
+    red: 57,
     green: 56,
     blue: 56,
   },
@@ -58,6 +58,38 @@ export const similarPhotosArray = [{
   relatedFeatures: [`calm`, `mountain`, `tree`, `lake`, `snow`],
 },
 {
+  photoId: 100,
+  photoPath: similarPhoto2,
+  relatedColors: [{
+    red: 100,
+    green: 56,
+    blue: 4,
+  },
+  {
+    red: 100,
+    green: 53,
+    blue: 124,
+  },
+  ],
+  relatedFeatures: [`calm`, `mountain`, `tree`, `lake`, `snow`],
+},
+{
+  photoId: 101,
+  photoPath: similarPhoto2,
+  relatedColors: [{
+    red: 100,
+    green: 56,
+    blue: 4,
+  },
+  {
+    red: 100,
+    green: 53,
+    blue: 124,
+  },
+  ],
+  relatedFeatures: [`calm`, `mountain`, `tree`, `lake`, `snow`],
+},
+{
   photoId: 22,
   photoPath: similarPhoto3,
   relatedColors: [{
@@ -66,9 +98,9 @@ export const similarPhotosArray = [{
     blue: 56,
   },
   {
-    red: 56,
-    green: 56,
-    blue: 56,
+    red: 54,
+    green: 124,
+    blue: 5,
   },
   ],
   relatedFeatures: [`calm`, `mountain`, `tree`, `lake`, `snow`],
