@@ -137,12 +137,73 @@ function photoPreviewTests() {
   it(`SHOULD show dummy picture WHEN no image is available`, () => {
     mountComponent({
       newlyCreated: true,
-      photos: [],
+      previewPhotos: [],
     });
 
     cy.getByData(`gallery-photo-preview`)
       .should(`have.attr`, `alt`)
       .and(`equal`, `No photos have been added to new gallery yet`);
+  });
+
+  it(`SHOULD show a single photo on gallery card preview WHEN only one image is added to the gallery`, () => {
+    mountComponent({
+      newlyCreated: false,
+      previewPhotos: [
+        { photoPath: `https://picsum.photos/200/300` },
+      ],
+    });
+
+    cy.getByData(`gallery-photo-collage`)
+      .get(`img`)
+      .should(`have.length`, 1);
+  });
+
+  it(`SHOULD show a single photo on gallery card preview WHEN more than 1 and less than 4 images are added to the gallery`, () => {
+    mountComponent({
+      newlyCreated: false,
+      previewPhotos: [
+        { photoPath: `https://picsum.photos/200/300` },
+        { photoPath: `https://picsum.photos/400/300` },
+        { photoPath: `https://picsum.photos/400/400` },
+      ],
+    });
+
+    cy.getByData(`gallery-photo-collage`)
+      .get(`img`)
+      .should(`have.length`, 1);
+  });
+
+  it(`SHOULD show a collage of 4 photos on gallery card preview WHEN 4 images are added to the gallery`, () => {
+    mountComponent({
+      newlyCreated: false,
+      previewPhotos: [
+        { photoPath: `https://picsum.photos/200/300` },
+        { photoPath: `https://picsum.photos/400/300` },
+        { photoPath: `https://picsum.photos/400/400` },
+        { photoPath: `https://picsum.photos/300/200` },
+      ],
+    });
+
+    cy.getByData(`gallery-photo-collage`)
+      .get(`img`)
+      .should(`have.length`, 4);
+  });
+
+  it(`SHOULD show a collage of 4 photos on gallery card preview WHEN more than 4 images are added to the gallery`, () => {
+    mountComponent({
+      newlyCreated: false,
+      previewPhotos: [
+        { photoPath: `https://picsum.photos/200/300` },
+        { photoPath: `https://picsum.photos/400/300` },
+        { photoPath: `https://picsum.photos/400/400` },
+        { photoPath: `https://picsum.photos/300/200` },
+        { photoPath: `https://picsum.photos/500/200` },
+      ],
+    });
+
+    cy.getByData(`gallery-photo-collage`)
+      .get(`img`)
+      .should(`have.length`, 4);
   });
 }
 
@@ -150,7 +211,7 @@ function deleteGalleryTests() {
   it(`SHOULD delete a gallery WHEN this gallery's Delete button is clicked`, () => {
     mountComponent({
       newlyCreated: false,
-      photos: [],
+      previewPhotos: [],
     });
 
     cy.getByData(`delete-gallery-button`).click();
@@ -174,20 +235,21 @@ function checkOnApplyCalledOnce(
 function mountComponent({
   name = `new gallery`,
   newlyCreated,
-  photos = [],
+  previewPhotos = [],
 }: {
   name?: string;
   newlyCreated: boolean;
   onNameApply?: (newName: string) => unknown;
   onDelete?: () => unknown;
   photos?: [];
+  previewPhotos?: { photoPath: string }[];
 }) {
   const onNameApplySpy = cy.spy().as(`onNameApply`);
   const onDeleteSpy = cy.spy().as(`onDelete`);
 
   cy.mount(
     <GalleryCard
-      photos={photos}
+      previewPhotos={previewPhotos}
       photosCount={0}
       name={name}
       newlyCreated={newlyCreated}

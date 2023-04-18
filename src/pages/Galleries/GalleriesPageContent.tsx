@@ -6,12 +6,12 @@ import { observer } from "mobx-react-lite";
 import AddButton from "../../components/AddButton/AddButton";
 import NoGalleries from "./components/NoGalleries/NoGalleries";
 import GalleriesList from "./components/GalleriesList/GalleriesList";
-import Gallery from "./components/GalleriesList/Gallery";
+import { Gallery } from "./components/GalleriesList/Gallery";
 import Breadcrumbs from "../../components/Breadcrumbs/Breadcrumbs";
 import { useGet } from "../../common/hooks/useGet";
 import GalleriesPageStateContext from "./state/GalleriesPageStateContext";
-import { api } from "../../common/utils/HttpClient";
 import RestoreDeletedGallery from "./components/RestoreDeletedGallery/RestoreDeletedGallery";
+import { api } from "../../common/utils/HttpClient";
 
 function GalleriesPageContent() {
   const galleriesPageState = useContext(GalleriesPageStateContext);
@@ -73,6 +73,7 @@ function GalleriesPageContent() {
       newlyCreatedGallery: {
         id: loadedNewlyCreatedGalleryId,
         name: `new gallery`,
+        previewPhotos: [],
       },
     });
   }
