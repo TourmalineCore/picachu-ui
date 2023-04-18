@@ -23,7 +23,7 @@ function MetricsSimilarCard({
           alt="metric"
           draggable={false}
         />
-        <div className="metric-similar-card__box-colors">
+        <div className="metric-similar-card__colors">
           {
             relatedColors.map((color) => (
               <span

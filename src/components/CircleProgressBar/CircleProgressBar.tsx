@@ -22,7 +22,7 @@ function CircleProgressBar(
       width={circleWidth}
       height={circleWidth}
       viewBox={`0 0 ${circleWidth} ${circleWidth}`}
-      className="circle-bar"
+      className="circle-progress-bar"
     >
 
       <defs>
@@ -46,7 +46,7 @@ function CircleProgressBar(
         cy={circleWidth / 2}
         strokeWidth={`${strokeWidth}px`}
         r={radius}
-        className="circle-bar__background"
+        className="circle-progress-bar__background"
       />
 
       <circle
@@ -54,7 +54,7 @@ function CircleProgressBar(
         cy={circleWidth / 2}
         strokeWidth={`${strokeWidth}px`}
         r={radius}
-        className="circle-bar__progress"
+        className="circle-progress-bar__progress"
         style={{
           strokeDasharray: dashArray,
           strokeDashoffset: dashOffset,
@@ -70,7 +70,7 @@ function CircleProgressBar(
           dy="0.3em"
           textAnchor="middle"
           data-cy="circle-percentage-text"
-          className="circle-bar__percentage-text"
+          className="circle-progress-bar__percentage-text"
         >
           {percentage}
           %
