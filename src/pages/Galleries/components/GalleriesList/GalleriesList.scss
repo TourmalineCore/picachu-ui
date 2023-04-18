@@ -1,29 +1,29 @@
 .galleries-list {
-  padding-top: $top-menu-height;
-  min-height: 100vh;
+  $this: &;
 
-  &__list {
-    @include reset-list;
+  @include reset-list;
 
-    display: grid;
-    margin-top: 20px;
-    gap: 16px;
-    grid-template-columns: repeat(auto-fit, minmax(156px, 1fr));
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: 8px;
+  margin-right: -8px;
+  margin-left: -8px;
+
+  &__item {
+    flex-grow: 1;
+    padding: 8px;
+    width: 50%;
+    max-width: 50%;
 
     @include desktop {
-      gap: 35px;
-      grid-template-columns: repeat(auto-fit, minmax(192px, 1fr));
+      padding: 16px;
+      width: 16.66%;
+      max-width: 16.66%;
     }
   }
 
-  &__item {
-    width: 156px;
-    height: 164px;
-    background-color: $color-grey-light-200;
-
-    @include desktop {
-      width: 192px;
-      height: 192px;
-    }
+  @include desktop {
+    margin-right: -16px;
+    margin-left: -16px;
   }
 }

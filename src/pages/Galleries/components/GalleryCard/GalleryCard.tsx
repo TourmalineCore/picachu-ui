@@ -1,6 +1,7 @@
 import {
   KeyboardEvent, useEffect, useRef, useState,
 } from "react";
+import clsx from 'clsx';
 import { ReactComponent as DeleteIcon } from "../../../../assets/icons/icon-delete.svg";
 import { PreviewPhoto } from "../GalleriesList/Gallery";
 
@@ -36,7 +37,9 @@ function GalleryCard({
 
   return (
     <div
-      className="gallery-card"
+      className={clsx(`gallery-card`, {
+        'gallery-card--single-photo-preview': previewPhotos.length < 4,
+      })}
       data-cy="gallery-card"
     >
       <div className="gallery-card__image-container">
@@ -49,6 +52,7 @@ function GalleryCard({
               {
                 previewPhotos.length < 4 && (
                   <img
+                    className="gallery-card__image"
                     key={previewPhotos[0].photoPath}
                     src={previewPhotos[0].photoPath}
                     alt={`Preview for ${name} gallery`}
@@ -56,9 +60,10 @@ function GalleryCard({
                 )
               }
               {previewPhotos.length >= 4 && previewPhotos
-                .splice(0, 4)
+                .slice(0, 4)
                 .map((previewPhoto, index) => (
                   <img
+                    className="gallery-card__image"
                     key={previewPhoto.photoPath}
                     src={previewPhoto.photoPath}
                     alt={`Preview ${index + 1} for ${name} gallery`}
@@ -82,6 +87,7 @@ function GalleryCard({
           >
             <input
               ref={nameRef}
+              className="gallery-card__input"
               data-cy="gallery-name-input"
               type="text"
               value={newGalleryName}
@@ -96,14 +102,16 @@ function GalleryCard({
             photos
           </span>
         </div>
-        <button
-          data-cy="delete-gallery-button"
-          type="button"
-          className="button gallery-card__delete-btn"
-          onClick={onDelete}
-        >
-          <DeleteIcon />
-        </button>
+        <div>
+          <button
+            data-cy="delete-gallery-button"
+            type="button"
+            className="button gallery-card__delete-btn"
+            onClick={onDelete}
+          >
+            <DeleteIcon />
+          </button>
+        </div>
       </div>
     </div>
   );
