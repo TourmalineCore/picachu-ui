@@ -39,11 +39,11 @@ function MetricsSimilarCard({
       </div>
       <div className="metric-similar-card__features-box">
         <p className="metric-similar-card__subtitle">Related features</p>
-        <div className="metric-similar-card__features-box-items">
+        <div className="metric-similar-card__tags">
           {relatedFeatures.map((feature) => (
             <span
               key={feature + String(photoId)}
-              className="metric-similar-card__features-item"
+              className="metric-similar-card__tag"
             >
               {feature}
             </span>

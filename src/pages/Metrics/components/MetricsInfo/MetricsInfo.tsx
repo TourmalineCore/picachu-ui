@@ -8,9 +8,6 @@ function MetricsInfo({
 }: {
   isLoading: boolean;
 }) {
-  const UNIQ = 52;
-  const Colors = 20;
-  const Other = 15;
   return (
     <div className="metrics-info">
       <div className="metrics-info__uniqueness">
@@ -24,7 +21,7 @@ function MetricsInfo({
               </div>
             ) : (
               <CircleProgressBar
-                percentage={UNIQ}
+                percentage={52}
                 circleWidth={72}
                 strokeWidth={7}
                 radius={32}
@@ -45,7 +42,7 @@ function MetricsInfo({
                   <span
                     className="metrics-info__image-loader-text"
                   >
-                    {Colors}
+                    {20}
                     % completed
                   </span>
                 </div>
@@ -55,12 +52,12 @@ function MetricsInfo({
                     <div
                       className="metrics-info__bar-progress"
                       style={{
-                        width: `${Colors}%`,
+                        width: `${20}%`,
                       }}
                     />
                   </div>
                   <h2 className="metrics-info__bar-percentage-text">
-                    {Colors}
+                    {20}
                     <span>%</span>
                   </h2>
                 </div>
@@ -83,7 +80,7 @@ function MetricsInfo({
                     <span
                       className="metrics-info__image-loader-text"
                     >
-                      {Other}
+                      {15}
                       % completed
                     </span>
                   </div>
@@ -93,12 +90,12 @@ function MetricsInfo({
                       <div
                         className="metrics-info__bar-progress"
                         style={{
-                          width: `${Other}%`,
+                          width: `${15}%`,
                         }}
                       />
                     </div>
                     <h2 className="metrics-info__bar-percentage-text">
-                      {Other}
+                      {15}
                       <span>%</span>
                     </h2>
                   </div>
@@ -127,7 +124,7 @@ function MetricsInfo({
             <div className="metrics-info__colors">
               {colorsArray.map((color) => (
                 <span
-                  key={color.blue + color.red + color.green + Colors}
+                  key={color.blue + color.red + color.green}
                   className="metrics-info__color"
                   style={{
                     backgroundColor: `rgb(${color.red},${color.green},${color.blue})`,

@@ -11,21 +11,21 @@ function MetricsSimilarList({
 }) {
   return (
     <div
-      className="metrics-similar-photos"
+      className="metrics-similar-list"
 
     >
-      <h2 className="metrics-similar-photos__title">Similar photos</h2>
+      <h2 className="metrics-similar-list__title">Similar photos</h2>
       {isLoading ? (
-        <div className="metrics-similar-photos__empty-container">
+        <div className="metrics-similar-list__empty-container">
           <img
             src={MetricSimilarLoader}
-            className="metrics-similar-photos__empty-loader-svg"
+            className="metrics-similar-list__empty-loader-svg"
             data-cy="empty-loader-svg"
             alt="loader similar images"
             draggable={false}
           />
           <span
-            className="metrics-similar-photos__empty"
+            className="metrics-similar-list__empty"
             data-cy="empty-loader-text"
           >
             We&apos;ll start searching for photos once we&apos;ve highlighted
@@ -34,17 +34,17 @@ function MetricsSimilarList({
         </div>
       ) : similarPhotosArray.length === 0 ? (
         <div
-          className="metrics-similar-photos__empty-container"
+          className="metrics-similar-list__empty-container"
           data-cy="empty-container"
         >
-          <span className="metrics-similar-photos__empty">
+          <span className="metrics-similar-list__empty">
             The photo is unique so it has
             no similar photos
           </span>
         </div>
       ) : (
         <ul
-          className="metrics-similar-photos__full-container"
+          className="metrics-similar-list__full-container"
           data-cy="full-container"
         >
           {similarPhotosArray.map((photo) => (

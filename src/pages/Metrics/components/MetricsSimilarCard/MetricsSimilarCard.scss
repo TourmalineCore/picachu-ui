@@ -17,7 +17,7 @@
     color: $color-dark-grey;
   }
 
-  &__features-item {
+  &__tag {
     margin-right: 8px;
     margin-bottom: 8px;
     border-radius: 8px;
@@ -26,7 +26,7 @@
     background-color: $color-grey-light-100;
   }
 
-  &__features-box-items {
+  &__tags {
     display: flex;
     align-items: flex-start;
     flex-wrap: wrap;
