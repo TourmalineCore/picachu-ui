@@ -32,6 +32,7 @@ function MetricsSimilarCard({
               <span
                 className="metric-similar-card__color"
                 key={String(color.blue + color.red + color.green + photoId)}
+                data-cy="color"
                 style={{
                   backgroundColor: `rgb(${color.red},${color.green},${color.blue})`,
                 }}
@@ -46,6 +47,7 @@ function MetricsSimilarCard({
           {relatedFeatures.map((feature) => (
             <span
               key={feature + String(photoId)}
+              data-cy="tag"
               className="metric-similar-card__tag"
             >
               {feature}

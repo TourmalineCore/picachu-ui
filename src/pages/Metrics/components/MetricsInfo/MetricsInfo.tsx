@@ -126,6 +126,7 @@ function MetricsInfo({
                 <span
                   key={color.blue + color.red + color.green}
                   className="metrics-info__color"
+                  data-cy="color"
                   style={{
                     backgroundColor: `rgb(${color.red},${color.green},${color.blue})`,
                   }}
@@ -151,6 +152,7 @@ function MetricsInfo({
               {emotionsArray.map((emotion) => (
                 <span
                   key={emotion}
+                  data-cy="emotion"
                   className="metrics-info__tag"
                 >
                   {emotion}
@@ -176,6 +178,7 @@ function MetricsInfo({
               {objectsArray.map((object) => (
                 <span
                   key={object}
+                  data-cy="object"
                   className="metrics-info__tag"
                 >
                   {object}
@@ -201,6 +204,7 @@ function MetricsInfo({
               {associationsArray.map((association) => (
                 <span
                   key={association}
+                  data-cy="association"
                   className="metrics-info__tag"
                 >
                   {association}
