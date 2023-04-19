@@ -1,4 +1,6 @@
 .metrics-similar-list {
+  position: relative;
+
   &__title {
     margin-bottom: 16px;
     font-size: 18px;
@@ -44,8 +46,9 @@
     }
 
     @include desktop {
+      position: absolute;
       overflow-y: scroll;
-      height: calc(100vh - 224px);
+      height: 100vh;
 
       &::-webkit-scrollbar {
         display: none;
@@ -54,8 +57,10 @@
   }
 
   @include desktop {
+    overflow: hidden;
     margin-left: 48px;
     border-left: 2px solid $color-grey-light-100;
     padding-left: 32px;
+    min-width: 259px;
   }
 }

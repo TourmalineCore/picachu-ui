@@ -64,5 +64,9 @@
   @include desktop {
     flex: none;
     min-width: 224px;
+
+    &:last-child {
+      margin-bottom: 224px;
+    }
   }
 }
