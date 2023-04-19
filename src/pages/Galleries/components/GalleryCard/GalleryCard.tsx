@@ -56,6 +56,7 @@ function GalleryCard({
                     key={previewPhotos[0].photoPath}
                     src={previewPhotos[0].photoPath}
                     alt={`Preview for ${name} gallery`}
+                    data-cy="gallery-card-preview-image"
                   />
                 )
               }
@@ -67,6 +68,7 @@ function GalleryCard({
                     key={previewPhoto.photoPath}
                     src={previewPhoto.photoPath}
                     alt={`Preview ${index + 1} for ${name} gallery`}
+                    data-cy="gallery-card-preview-image"
                   />
                 ))}
             </div>

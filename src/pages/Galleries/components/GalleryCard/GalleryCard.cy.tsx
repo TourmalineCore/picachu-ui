@@ -168,8 +168,7 @@ function photoPreviewTests() {
       ],
     });
 
-    cy.getByData(`gallery-photo-collage`)
-      .get(`img`)
+    cy.getByData(`gallery-card-preview-image`)
       .should(`have.length`, 1);
   });
 
@@ -184,8 +183,7 @@ function photoPreviewTests() {
       ],
     });
 
-    cy.getByData(`gallery-photo-collage`)
-      .get(`img`)
+    cy.getByData(`gallery-card-preview-image`)
       .should(`have.length`, 4);
   });
 
@@ -201,8 +199,7 @@ function photoPreviewTests() {
       ],
     });
 
-    cy.getByData(`gallery-photo-collage`)
-      .get(`img`)
+    cy.getByData(`gallery-card-preview-image`)
       .should(`have.length`, 4);
   });
 }
