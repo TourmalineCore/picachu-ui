@@ -10,7 +10,10 @@ export type SimilarPhotoType = {
 };
 
 function MetricsSimilarCard({
-  photoId, photoPath, relatedColors, relatedFeatures,
+  photoId,
+  photoPath,
+  relatedColors,
+  relatedFeatures,
 }: SimilarPhotoType) {
   return (
     <li
