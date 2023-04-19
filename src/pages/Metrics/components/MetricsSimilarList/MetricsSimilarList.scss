@@ -33,6 +33,8 @@
   }
 
   &__full-container {
+    @include reset-list;
+
     display: flex;
     align-items: center;
     flex-direction: column;
