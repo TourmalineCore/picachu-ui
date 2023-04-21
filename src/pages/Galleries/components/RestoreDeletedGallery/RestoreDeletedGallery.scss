@@ -1,10 +1,13 @@
 .restore-deleted-gallery {
+  $this: &;
+
   position: fixed;
   left: 50%;
   bottom: 20px;
   border-radius: 6px;
   padding: 16px 24px;
   box-shadow: 1px 4px 16px rgb(180 173 189 / 15%);
+  background-color: $color-white;
   transform: translateX(-50%);
 
   &__button {

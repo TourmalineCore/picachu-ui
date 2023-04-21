@@ -30,7 +30,7 @@ function GalleriesPageContent() {
   }, [loadedGalleries]);
 
   return (
-    <div>
+    <div className="galleries-page">
       {
         galleriesPageState.galleries.length === 0
           ? (
@@ -42,6 +42,7 @@ function GalleriesPageContent() {
               <AddButton
                 type="button"
                 onClick={onNewGalleryClick}
+                className="galleries-page__add-btn"
               >
                 Create new
               </AddButton>
