@@ -1,5 +1,5 @@
 import { makeAutoObservable } from "mobx";
-import Gallery from "../components/GalleriesList/Gallery";
+import { Gallery } from "../components/GalleriesList/Gallery";
 
 class GalleriesPageState {
   _galleries: Gallery[] = [];

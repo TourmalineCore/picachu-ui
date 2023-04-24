@@ -7,6 +7,7 @@
 // pages
 @import "../pages/Login/LoginPage.scss";
 @import "../pages/Galleries/components/RestoreDeletedGallery/RestoreDeletedGallery.scss";
+@import "../pages/Metrics/MetricsPage.scss";
 
 // components
 @import "../components/Error/Error.scss";
@@ -17,4 +18,9 @@
 @import "../pages/Galleries/components/GalleryCard/GalleryCard.scss";
 @import "../pages/Galleries/components/GalleriesList/GalleriesList.scss";
 @import "../pages/Images/components/NoImages/NoImages.scss";
+@import "../components/CircleProgressBar/CircleProgressBar.scss";
+@import "../pages/Metrics/components/MetricsSimilarCard/MetricsSimilarCard.scss";
+@import "../pages/Metrics/components/MetricsSimilarList/MetricsSimilarList.scss";
+@import "../pages/Metrics/components/MetricsInfo/MetricsInfo.scss";
+@import "../pages/Galleries/GalleriesPage.scss";
 @import "../components/Loader/Loader.scss";

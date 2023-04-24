@@ -1,0 +1,13 @@
+.galleries-page {
+  $this: &;
+
+  margin-top: 64px;
+
+  &__add-btn {
+    margin-top: 16px;
+
+    @include desktop {
+      margin-top: 28px;
+    }
+  }
+}

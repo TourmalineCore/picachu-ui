@@ -2,7 +2,7 @@ import '../../../../../cypress/support/commands';
 import GalleriesPageState from '../../state/GalleriesPageState';
 import GalleriesPageStateContext from '../../state/GalleriesPageStateContext';
 import GalleriesList from './GalleriesList';
-import Gallery from './Gallery';
+import { Gallery } from './Gallery';
 
 describe(`GalleriesList`, () => {
   it(`SHOULD NOT render call to action message WHEN there are galleries`, () => {
@@ -10,6 +10,7 @@ describe(`GalleriesList`, () => {
       galleries: [{
         id: 1,
         name: `Am`,
+        previewPhotos: [],
       }],
     });
 
@@ -22,6 +23,7 @@ describe(`GalleriesList`, () => {
       galleries: [{
         id: 1,
         name: `My Gallery is Awesome`,
+        previewPhotos: [],
       }],
     });
 
@@ -34,10 +36,12 @@ describe(`GalleriesList`, () => {
       galleries: [{
         id: 1,
         name: `My Gallery is Awesome`,
+        previewPhotos: [],
       },
       {
         id: 2,
         name: `My Awful Gallery`,
+        previewPhotos: [],
       }],
     });
 
@@ -51,6 +55,7 @@ describe(`GalleriesList`, () => {
       newlyCreatedGallery: {
         id: 1,
         name: `My Gallery is Awesome`,
+        previewPhotos: [],
       },
     });
 
@@ -67,11 +72,13 @@ describe(`GalleriesList`, () => {
         {
           id: 1,
           name: `First Gallery`,
+          previewPhotos: [],
         },
       ],
       newlyCreatedGallery: {
         id: 2,
         name: `Second Gallery`,
+        previewPhotos: [],
       },
       onNameApply: onNameApplySpy,
     });
@@ -101,10 +108,12 @@ describe(`GalleriesList`, () => {
           {
             id: 3,
             name: `Third Gallery`,
+            previewPhotos: [],
           },
           {
             id: 1,
             name: `First Gallery`,
+            previewPhotos: [],
           },
         ],
       });
