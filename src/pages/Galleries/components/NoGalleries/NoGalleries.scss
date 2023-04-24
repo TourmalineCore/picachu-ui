@@ -1,4 +1,6 @@
 .no-galleries {
+  $this: &;
+
   position: relative;
   display: flex;
   flex-direction: column;
