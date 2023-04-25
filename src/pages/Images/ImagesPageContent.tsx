@@ -1,10 +1,10 @@
-import { useContext, useEffect } from "react";
+/* eslint-disable react/jsx-no-bind */
+import { ChangeEvent, useContext, useEffect } from "react";
 import NoImages from "./components/NoImages/NoImages";
-import Breadcrumbs from "../../components/Breadcrumbs/Breadcrumbs";
 import ImagesPageStateContext from "./state/ImagesPageStateContext";
 import { useGet } from "../../common/hooks/useGet";
 import Image from "./components/ImagesList/Image";
-import FileUploader from "../../components/FileUploader/FileUploader";
+import { api } from "../../common/utils/HttpClient";
 
 function ImagesPageContent() {
   const imagesPageState = useContext(ImagesPageStateContext);
@@ -29,23 +29,23 @@ function ImagesPageContent() {
     <div>
       {
         imagesPageState._images.length === 0 ? (
-          <NoImages />
+          <NoImages onUploadNewImage={onUploadNewImage} />
         ) : (
           <>
-            <Breadcrumbs />
-            <div style={{
-              display: `flex`,
-              justifyContent: `space-between`,
-              alignItems: `center`,
-            }}
-            >
-              <FileUploader isAddButton />
-            </div>
+            next feat
           </>
         )
       }
     </div>
   );
+
+  async function onUploadNewImage(event: ChangeEvent<HTMLInputElement>) {
+    if (!event.target.files) return;
+    const fileUploaded = event.target.files[0];
+    await api.post(`/photos/${galleryId}/upload-photo`, {
+      fileUploaded,
+    });
+  }
 }
 
 export default ImagesPageContent;

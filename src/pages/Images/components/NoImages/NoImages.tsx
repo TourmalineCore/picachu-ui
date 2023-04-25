@@ -1,8 +1,13 @@
+import { ChangeEvent } from 'react';
 import uploadImage from '../../../../assets/images/upload-image.png';
 import Breadcrumbs from '../../../../components/Breadcrumbs/Breadcrumbs';
 import FileUploader from '../../../../components/FileUploader/FileUploader';
 
-function NoImages() {
+function NoImages({
+  onUploadNewImage,
+}: {
+  onUploadNewImage: (event: ChangeEvent<HTMLInputElement>) => Promise<unknown>;
+}) {
   return (
     <div
       data-cy="no-images"
@@ -24,7 +29,10 @@ function NoImages() {
         </p>
       </div>
 
-      <FileUploader isAddButton={false} />
+      <FileUploader
+        isAddButton={false}
+        onUploadNewImage={onUploadNewImage}
+      />
     </div>
   );
 }

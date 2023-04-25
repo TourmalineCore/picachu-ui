@@ -1,7 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable no-unused-vars */
-import { useContext, useEffect, useState } from "react";
-import axios from "axios";
+import { useContext, useEffect } from "react";
 import { observer } from "mobx-react-lite";
 import AddButton from "../../components/AddButton/AddButton";
 import NoGalleries from "./components/NoGalleries/NoGalleries";

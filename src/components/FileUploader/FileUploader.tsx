@@ -1,19 +1,19 @@
 import { ChangeEvent, useRef } from "react";
 import AddButton from "../AddButton/AddButton";
 
-function FileUploader({ isAddButton }: { isAddButton: boolean }) {
+function FileUploader({
+  isAddButton,
+  onUploadNewImage,
+}: {
+  isAddButton: boolean;
+  onUploadNewImage: (event: ChangeEvent<HTMLInputElement>) => Promise<unknown>;
+}) {
   const hiddenFileInput = useRef<HTMLInputElement>(null);
 
   const handleClick = () => {
     if (hiddenFileInput && hiddenFileInput.current) {
       hiddenFileInput.current.click();
     }
-  };
-
-  const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
-    if (!event.target.files) return;
-    const fileUploaded = event.target.files[0];
-    console.log(fileUploaded);
   };
 
   return (
@@ -40,7 +40,7 @@ function FileUploader({ isAddButton }: { isAddButton: boolean }) {
         type="file"
         accept=".png,.jpeg"
         ref={hiddenFileInput}
-        onChange={handleChange}
+        onChange={onUploadNewImage}
         style={{ display: `none` }}
       />
     </>
