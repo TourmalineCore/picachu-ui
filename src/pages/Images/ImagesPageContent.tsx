@@ -1,25 +1,20 @@
 /* eslint-disable react/jsx-no-bind */
-import { ChangeEvent, useContext, useEffect } from "react";
+import {
+  ChangeEvent, useContext, useEffect, useState,
+} from "react";
 import NoImages from "./components/NoImages/NoImages";
 import ImagesPageStateContext from "./state/ImagesPageStateContext";
-import { useGet } from "../../common/hooks/useGet";
 import Image from "./components/ImagesList/Image";
 import { api } from "../../common/utils/HttpClient";
 
 function ImagesPageContent() {
   const imagesPageState = useContext(ImagesPageStateContext);
-
+  const [loadedImages, setLoadedImages] = useState<Image[]>([]);
   // test const
   const galleryId = `nature`;
 
-  const {
-    response: loadedImages,
-  } = useGet<Image[]>({
-    queryKey: [`images`],
-    url: `/galleries/${galleryId}/photos`,
-  });
-
   useEffect(() => {
+    onGetImages();
     if (loadedImages) {
       imagesPageState.initialize({ loadedImages });
     }
@@ -38,6 +33,11 @@ function ImagesPageContent() {
       }
     </div>
   );
+
+  async function onGetImages() {
+    const { data } = await api.get(`/galleries/${galleryId}/photos`);
+    setLoadedImages(data);
+  }
 
   async function onUploadNewImage(event: ChangeEvent<HTMLInputElement>) {
     if (!event.target.files) return;
