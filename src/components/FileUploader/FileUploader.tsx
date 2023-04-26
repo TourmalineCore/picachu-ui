@@ -6,7 +6,7 @@ function FileUploader({
   onUploadNewImage,
 }: {
   isAddButton: boolean;
-  onUploadNewImage: (event: ChangeEvent<HTMLInputElement>) => Promise<unknown>;
+  onUploadNewImage?: (event: ChangeEvent<HTMLInputElement>) => Promise<unknown>;
 }) {
   const hiddenFileInput = useRef<HTMLInputElement>(null);
 
