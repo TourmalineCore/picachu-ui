@@ -22,15 +22,15 @@ function FileUploader({
         <AddButton
           type="button"
           onClick={handleClick}
-          data-cy="no-images-outline-upload-image-button"
+          data-cy="no-photos-outline-upload-image-button"
         >
           Upload a photo
         </AddButton>
       ) : (
         <button
           type="button"
-          className="button button--bright no-images__position-btn"
-          data-cy="no-images-default-upload-image-button"
+          className="button button--bright no-photos__position-btn"
+          data-cy="no-photos-default-upload-image-button"
           onClick={handleClick}
         >
           Upload a photo

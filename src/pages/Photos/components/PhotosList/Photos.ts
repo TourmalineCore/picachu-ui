@@ -1,6 +1,6 @@
-type Image = {
+type Photo = {
   id: number;
   uniqueness: number;
 };
 
-export default Image;
+export default Photo;
