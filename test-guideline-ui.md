@@ -1,10 +1,23 @@
-# Rules and Patterns of the UI testing
+# ***Rules and Patterns of the UI testing***
+# Contents:
+- [Main rules](#Main_rules)
+- [Page Object and Page Factory](#page_factory)
+- [Cypress Chain Method](#chain)
+- [Component Testing Strategy](#component_strategy)
+- [Typical Cypress Test for a Component](#example_component)
+- [Network Calls and UI Rendering](#calls)
+- [Mocking](#mocking)
+- [Async Commands and the Cypress Command Queue](#queue)
+- [Mixing Asynchronous and Synchronous Code](#async)
+- [Executing Tests](#execute)
+
+### Main rules <a name="Main_rules"></a> 
 Testing frameworks must be configured - Cypress for Unit, Component, and E2E Testing. 
 
 The Cypress framework is used for component and user-flow (E2E) testing. Tests will be written only by ***TDD*** methodology.
 
 Component unit tests must be stored in the same folder as the component being tested and have the .cy extension in the name. For example, the test for component LoginForm.tsx will be named LoginForm.cy.tsx in the appropriate folder LoginForm. 
-
+### Page Object and Page Factory <a name="page_factory"></a> 
 Follow Page Object and Page Factory patterns of the testing. As a developer, you should use these patterns for several reasons: 
   - **Code reusability**: The Page Object and Page Factory patterns allow you to write code that can be reused across different tests. Instead of writing the same code over and over again, you can create reusable Page Objects and use them in multiple tests, making your tests more maintainable and easier to read.
   - **Separation of concerns**: The Page Object and Page Factory patterns separate the code that interacts with the UI from the test logic. This separation of concerns makes your tests easier to read and maintain, as it allows you to focus on the test logic without worrying about the details of how the UI is implemented.
@@ -66,7 +79,7 @@ describe('Login', () => {
 ```
 In the `beforeEach` method, we use the `LoginPage` object to visit the login page before each test. In the tests themselves, we use the `LoginPage` object to interact with the UI, using the `login` method to enter the username and password, and clicking the login button. We can then add our assertions to check that the login succeeded or failed as expected.
 
-
+### Cypress Chain Method <a name="chain"></a> 
 Cypress methods must be used in the structure called `chain-method` to more understandable and easy-to-read code: \
 Example: 
 ```
@@ -77,6 +90,7 @@ cy.getByData(`gallery-name-input`)
   .type(`{enter}`);
 ```
 
+### Component Testing Strategy <a name="component_strategy"></a> 
 The following will describe strategies for testing components in different cases:
 Test inner component of page (unit component test):
 - Component mounting successfully
@@ -85,7 +99,7 @@ Test inner component of page (unit component test):
 Test page (integration component test):
 - Verify that all axios requests are correctly parsed and successfully mount components as we need. Use mock backend for testing it
 
-### Typical Cypress Test for a Component
+### Typical Cypress Test for a Component <a name="example_component"></a> 
 
 A typical Cypress test for a component usually implements one of the following patterns:
 
@@ -96,16 +110,16 @@ A typical Cypress test for a component usually implements one of the following p
 
 We strive for a modular approach, employing separation of concerns, and try to split code into smaller (single) units (functions) that are tested separately. 
 
-### Network Calls and UI Rendering
+### Network Calls and UI Rendering <a name="calls"></a> 
 
 When testing using Cypress, we only sparingly mock/intercept network calls or other interaction with the 'outside world' (except when we want to explicitly test this). We isolate UI rendering.
 
-### Mocking
+### Mocking <a name="mocking"></a> 
   - If we're mocking API calls, we can use `cy.intercept`. We will update this document as we gain more experience to determine best practices.
   -  Using Stub Functions\
   When a component takes a callback function as a parameter, we use `cy.stub`. Instead of each test creating a new stub, consider creating the stub inside the `mountComponent` function. Because a stubbed function has an alias, the calling test can refer to the stub by its alias.
 
-### Async Commands and the Cypress Command Queue
+### Async Commands and the Cypress Command Queue <a name="queue"></a> 
 
 It is important to note that the Cypress Command queue is asynchronous. Commands execute immediately when they are enqueued, but their callbacks don't execute until all previously enqueued commands have completed. 
 
@@ -131,7 +145,7 @@ it('hides the thing when it is clicked', () => {
 ```
 Cypress does not begin browser automation until the test function has completed.
 
-### Mixing Asynchronous and Synchronous Code
+### Mixing Asynchronous and Synchronous Code <a name="async"></a> 
 It is important to remember that Cypress commands run asynchronously when attempting to combine them with synchronous code. Synchronous code executes immediately, without waiting for the Cypress commands to complete above it.
 
 ### Incorrect Usage
@@ -252,7 +266,7 @@ it('test', () => {
 // We've queued all of these commands and now
 // Cypress will begin running them in order!
 ```
-## Executing Tests
+## Executing Tests <a name="execute"></a> 
 To execute Cypress component test, run this command in the terminal:
 ```
 npm run test --component
