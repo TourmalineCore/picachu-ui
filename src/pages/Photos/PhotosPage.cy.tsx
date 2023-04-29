@@ -4,7 +4,7 @@ import PhotosPage from './PhotosPage';
 
 describe(`PhotosPage`, () => {
   it(`SHOULD render no photos message WHEN there are no photos`, () => {
-    cy.intercept(`GET`, `${API_ROOT}/galleries/nature/photos`, []).as(`call-1`);
+    cy.intercept(`GET`, `${API_ROOT}/galleries/**/photos`, []);
 
     mountComponent();
 
