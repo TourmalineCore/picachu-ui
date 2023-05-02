@@ -1,0 +1,42 @@
+.no-photos {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  padding-top: $top-menu-height;
+  min-height: 100vh;
+
+  &__text {
+    position: relative;
+    display: inline-block;
+    margin-top: 40px;
+    margin-bottom: 32px;
+  }
+
+  &__image {
+    @include noselect;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    margin: 0 calc($side-paddings-mobile * -1);
+    margin-top: 48px;
+  }
+
+  &__position-btn {
+    margin: 0 auto;
+    width: 186px;
+  }
+
+  &__title {
+    margin-bottom: 16px;
+    min-width: 100%;
+    font-size: 22px;
+    line-height: 1.5;
+    color: $color-black;
+  }
+
+  &__description {
+    color: $color-dark-grey;
+  }
+}

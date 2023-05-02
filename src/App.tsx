@@ -6,6 +6,7 @@ import LoginPage from './pages/Login/LoginPage';
 import GalleriesPage from './pages/Galleries/GalleriesPage';
 import { withPrivateRoute } from './common/auth/authStateProvider/withPrivateRoute';
 import MetricsPage from './pages/Metrics/MetricsPage';
+import PhotosPage from './pages/Photos/PhotosPage';
 
 const WithPrivateRoute = withPrivateRoute(Layout);
 
@@ -24,6 +25,10 @@ export function App() {
           <Route
             path="galleries"
             element={<GalleriesPage />}
+          />
+          <Route
+            path="galleries/:galleryId"
+            element={<PhotosPage />}
           />
           <Route
             path="galleries/nature/metric"
