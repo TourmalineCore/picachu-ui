@@ -4,8 +4,6 @@ import Photo from "../components/PhotosList/Photos";
 class PhotosPageState {
   _photos: Photo[] = [];
 
-  _sort: string = `uniqueness`;
-
   constructor() {
     makeAutoObservable(this);
   }

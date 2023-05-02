@@ -2,6 +2,7 @@
 import {
   ChangeEvent, useContext, useEffect,
 } from "react";
+import { useParams } from "react-router-dom";
 import NoPhotos from "./components/NoPhotos/NoPhotos";
 import PhotosPageStateContext from "./state/PhotosPageStateContext";
 import { api } from "../../common/utils/HttpClient";
@@ -9,8 +10,8 @@ import Photo from "./components/PhotosList/Photos";
 
 function PhotosPageContent() {
   const photosPageState = useContext(PhotosPageStateContext);
-  // test const
-  const galleryId = `nature`;
+
+  const { galleryId } = useParams();
 
   useEffect(() => {
     onGetPhotos();
@@ -31,7 +32,7 @@ function PhotosPageContent() {
   );
 
   async function onGetPhotos() {
-    const { data }: { data: Photo[] } = await api.get(`/galleries/${galleryId}/photos`);
+    const { data } = await api.get<Photo[]>(`/galleries/${galleryId}/photos`);
     photosPageState.initialize({ loadedPhotos: data });
   }
 

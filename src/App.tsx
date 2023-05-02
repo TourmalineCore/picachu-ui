@@ -27,7 +27,7 @@ export function App() {
             element={<GalleriesPage />}
           />
           <Route
-            path="galleries/nature"
+            path="galleries/:galleryId"
             element={<PhotosPage />}
           />
           <Route
