@@ -25,9 +25,8 @@ function PhotoCard({
           draggable={false}
         />
       </div>
-      <p
+      <h3
         className="photo-card__title"
-
       >
         Uniqueness
         {` `}
@@ -35,7 +34,7 @@ function PhotoCard({
           {uniqueness}
           %
         </span>
-      </p>
+      </h3>
     </Link>
   );
 }

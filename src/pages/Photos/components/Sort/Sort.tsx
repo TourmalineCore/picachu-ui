@@ -36,7 +36,7 @@ export const Sort: FC = memo(() => {
         className="sort__label"
         data-cy="sort-label"
       >
-        <p className="sort__title">Sort by</p>
+        <span className="sort__title">Sort by</span>
         <button
           type="button"
           onClick={() => setIsVisiblePopup(!isVisiblePopup)}
@@ -73,7 +73,7 @@ export const Sort: FC = memo(() => {
                     key={sort}
                     data-cy="sort-popup-item"
                     className={clsx(`sort__popup-item`, {
-                      'sort__popup-item sort__popup-item--active': photosPageState._sort === sort,
+                      'sort__popup-item--active': photosPageState._sort === sort,
                     })}
                   >
                     <button

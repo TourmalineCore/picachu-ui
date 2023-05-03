@@ -3,6 +3,7 @@
   $this: &;
 
   position: relative;
+  margin-left: 8px;
 
   &__label {
     display: none;
@@ -28,7 +29,6 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-left: 8px;
     outline: 1px solid $color-grey-light-200;
     border-radius: 6px;
     padding: 16px;
@@ -116,6 +116,10 @@
       svg {
         opacity: 1 !important;
       }
+    }
+
+    @include tablet {
+      padding: 8px 10px;
     }
   }
 }

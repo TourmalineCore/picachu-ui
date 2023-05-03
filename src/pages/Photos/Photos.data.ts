@@ -15,4 +15,19 @@ export const photosArray = [{
   photoPath: testImage,
   uniqueness: 70,
 },
+{
+  id: 4,
+  photoPath: testImage,
+  uniqueness: 70,
+},
+{
+  id: 5,
+  photoPath: testImage,
+  uniqueness: 70,
+},
+{
+  id: 6,
+  photoPath: testImage,
+  uniqueness: 70,
+},
 ];

@@ -20,16 +20,12 @@ function PhotosPageContent() {
   }, []);
 
   return (
-    <div>
-      {
-        // change zero to one to check PhotoListPage
-        photosPageState._photos.length === 0 ? (
-          <NoPhotos onUploadNewPhoto={onUploadNewPhoto} />
-        ) : (
-          <PhotoList photosArray={photosArray} />
-        )
-      }
-    </div>
+  // change zero to one to check PhotoListPage
+    photosPageState._photos.length === 1 ? (
+      <NoPhotos onUploadNewPhoto={onUploadNewPhoto} />
+    ) : (
+      <PhotoList photosArray={photosArray} />
+    )
   );
 
   async function onGetPhotos() {
