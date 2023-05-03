@@ -4,7 +4,6 @@
 
   @include reset-button;
 
-  border-radius: 8px;
   font-family: inherit;
   font-weight: inherit;
   color: inherit;
@@ -16,11 +15,12 @@
     align-items: center;
     justify-content: space-between;
     outline: 1px solid $color-grey-light-200;
+    border-radius: 6px;
     padding: 16px 24px;
     width: 100%;
     min-height: 48px;
     max-width: 288px;
-    color: $color-dark-grey;
+    color: $color-black;
     transition: all $default-transition;
 
     span {
@@ -28,20 +28,31 @@
     }
 
     svg {
-      @include icon(14px,14px,$color-dark-grey);
+      @include icon(14px,14px,$color-black);
 
       flex: none;
+
+      @include desktop {
+        @include icon(14px,14px,$color-dark-grey);
+      }
     }
 
     &:hover {
       background-color: $color-grey-light-100;
 
       svg {
-        color: $color-black;
         transform: rotate(180deg);
         transition: color $default-transition;
         transition: transform 0.5s ease-in-out;
+
+        @include desktop {
+          color: $color-black;
+        }
       }
+    }
+
+    @include desktop {
+      color: $color-dark-grey;
     }
   }
 
@@ -75,6 +86,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    border-radius: 8px;
     padding: 16px;
     color: $color-white;
     background-color: $primary-color-default;

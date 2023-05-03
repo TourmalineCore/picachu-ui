@@ -1,0 +1,44 @@
+.photo-list {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  padding-top: $top-menu-height;
+  min-height: 100vh;
+
+  &__card {
+    margin-bottom: 16px;
+    width: 100%;
+
+    @include tablet {
+      margin-right: 32px;
+      margin-bottom: 24px;
+      width: 300px;
+      height: 249px;
+    }
+  }
+
+  &__button-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 16px;
+
+    @include desktop {
+      margin-top: 0;
+    }
+  }
+
+  &__container {
+    $this: &;
+
+    @include reset-list;
+
+    margin-top: 16px;
+
+    @include tablet {
+      display: flex;
+      flex-wrap: wrap;
+      margin-top: 24px;
+    }
+  }
+}
