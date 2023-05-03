@@ -41,7 +41,6 @@ describe(`Sort`, () => {
 
     cy.getByData(`sort-popup-item`)
       .contains(`uniqueness metric`)
-      .click({ force: true })
       .should(`be.disabled`);
   });
 
@@ -77,10 +76,7 @@ describe(`Sort`, () => {
     cy.getByData(`sort-variable`)
       .click();
 
-    cy.getByData(`sort-popup-item`)
-      .contains(`date of upload`)
-      .click({ force: true })
-      .should(`be.disabled`);
+    cy.getByData(`sort-popup-item`).contains(`date of upload`).should(`be.disabled`);
   });
 });
 
