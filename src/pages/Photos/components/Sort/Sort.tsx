@@ -1,5 +1,4 @@
 import {
-  FC,
   memo,
   useContext, useRef, useState,
 } from "react";
@@ -12,7 +11,7 @@ import PhotosPageStateContext from "../../state/PhotosPageStateContext";
 
 const sortList: string[] = [`uniqueness metric`, `date of upload`];
 
-export const Sort: FC = memo(() => {
+function Sort() {
   const [isVisiblePopup, setIsVisiblePopup] = useState(false);
 
   const photosPageState = useContext(PhotosPageStateContext);
@@ -20,11 +19,6 @@ export const Sort: FC = memo(() => {
   const sortRef = useRef<HTMLDivElement>(null);
 
   useOnClickOutside(sortRef, () => setIsVisiblePopup(false));
-
-  function changeSort(name: string) {
-    photosPageState.changeSortProperty(name);
-    setIsVisiblePopup(false);
-  }
 
   return (
     <div
@@ -100,4 +94,11 @@ export const Sort: FC = memo(() => {
       }
     </div>
   );
-});
+
+  function changeSort(name: string) {
+    photosPageState.changeSortProperty(name);
+    setIsVisiblePopup(false);
+  }
+}
+
+export default memo(Sort);

@@ -1,7 +1,7 @@
 import Breadcrumbs from '../../../../components/Breadcrumbs/Breadcrumbs';
 import FileUploader from '../../../../components/FileUploader/FileUploader';
 import PhotoCard, { PhotoType } from '../PhotoCard/PhotoCard';
-import { Sort } from '../Sort/Sort';
+import Sort from '../Sort/Sort';
 
 function PhotoList({
   photosArray,

@@ -1,6 +1,6 @@
 import PhotosPageState from "../../state/PhotosPageState";
 import PhotosPageStateContext from "../../state/PhotosPageStateContext";
-import { Sort } from "./Sort";
+import Sort from "./Sort";
 
 describe(`Sort`, () => {
   beforeEach(() => {
