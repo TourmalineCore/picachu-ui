@@ -35,7 +35,7 @@ export abstract class Component {
   }
 
   click() {
-    this.createStep(`Clicking the ${this.typeOf} with ${this.name}`);
+    this.createStep(`Clicking the ${this.typeOf} ${this.name}`);
 
     this.element = this.element.click();
 
@@ -43,13 +43,13 @@ export abstract class Component {
   }
 
   lastElement() {
-    this.createStep(`Get last ${this.typeOf} with ${this.name} in the list`);
+    this.createStep(`Get last ${this.typeOf} ${this.name} in the list`);
     this.element = this.element.last();
 
     return this;
   }
 
-  shouldValue(text: string) {
+  shouldHaveValue(text: string) {
     this.createStep(`The ${this.typeOf} with ${this.name} should have value "text"`);
     this.element = this.element.should(`have.value`, text);
 

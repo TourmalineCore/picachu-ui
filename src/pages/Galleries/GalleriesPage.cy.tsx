@@ -38,7 +38,7 @@ describe(`GalleriesPage`, () => {
     //   .should(`have.value`, `First Gallery`)
     //   .should(`not.be.focused`);
 
-    galleryNameInput.shouldValue(`First Gallery`)
+    galleryNameInput.shouldHaveValue(`First Gallery`)
       .shouldNotBeFocused();
 
     const newGalleryId = 2;
