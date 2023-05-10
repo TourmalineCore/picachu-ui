@@ -16,7 +16,7 @@ Testing frameworks must be configured - Cypress for Unit, Component, and E2E Tes
 
 The Cypress framework is used for component and user-flow (E2E) testing. Tests will be written only by ***TDD*** methodology.
 
-Component unit tests must be stored in the same folder as the component being tested and have the .cy extension in the name. For example, the test for component LoginForm.tsx will be named LoginForm.cy.tsx in the appropriate folder LoginForm. 
+Component unit tests must be stored in the same folder as the component being tested and have the .cy extension in the name. For example, the test for component LoginForm.tsx will be named LoginForm.cy.tsx and stored in the appropriate folder LoginForm. 
 ### Page Object and Page Factory <a name="page_factory"></a> 
 Follow Page Object and Page Factory patterns of the testing. As a developer, you should use these patterns for several reasons: 
   - **Code reusability**: The Page Object and Page Factory patterns allow you to write code that can be reused across different tests. Instead of writing the same code over and over again, you can create reusable Page Objects and use them in multiple tests, making your tests more maintainable and easier to read.
@@ -29,13 +29,13 @@ In `login_page.ts`, we define the `LoginPage` object using the `Page Object` pat
 ```
 class LoginPage {
   // Define the elements of the login page
-  get username() {
+  username() {
     return cy.get('#username');
   }
-  get password() {
+  password() {
     return cy.get('#password');
   }
-  get loginButton() {
+  loginButton() {
     return cy.get('#login-button');
   }
 
@@ -119,14 +119,14 @@ When testing using Cypress, we only sparingly mock/intercept network calls or ot
   -  Using Stub Functions\
   When a component takes a callback function as a parameter, we use `cy.stub`. Instead of each test creating a new stub, consider creating the stub inside the `mountComponent` function. Because a stubbed function has an alias, the calling test can refer to the stub by its alias.
 
-### Async Commands and the Cypress Command Queue <a name="queue"></a> 
+## Async Commands and the Cypress Command Queue <a name="queue"></a> 
 
 It is important to note that the Cypress Command queue is asynchronous. Commands execute immediately when they are enqueued, but their callbacks don't execute until all previously enqueued commands have completed. 
 
-Asynchronous Execution of Cypress Commands
+- **Asynchronous Execution of Cypress Commands** \
 It is crucial to understand that Cypress commands do not perform any action immediately upon being invoked, but rather schedule themselves for later execution. This is what is meant by the term "asynchronous" when referring to Cypress commands.
 
-### Mixing Asynchronous and Synchronous Code <a name="async"></a> 
+- **Mixing Asynchronous and Synchronous Code** \
 It is important to remember that Cypress commands run asynchronously when attempting to combine them with synchronous code. Synchronous code executes immediately, without waiting for the Cypress commands to complete above it.
 
 [***Go here for the details and examples. It is an official Cypress documentation.***](https://docs.cypress.io/guides/core-concepts/introduction-to-cypress#Commands-Are-Asynchronous) 
