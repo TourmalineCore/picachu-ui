@@ -1,4 +1,5 @@
 import '../../../cypress/support/commands';
+import { API_ROOT } from '../../common/config';
 import GalleriesPage from './GalleriesPage';
 import { Button } from '../../../cypress/e2e/page-factory/button';
 import { Input } from '../../../cypress/e2e/page-factory/input';
@@ -8,7 +9,7 @@ import { Input } from '../../../cypress/e2e/page-factory/input';
 
 describe(`GalleriesPage`, () => {
   it(`SHOULD render no galleries message WHEN there are no galleries`, () => {
-    cy.intercept(`GET`, `/api/galleries`, []).as(`call-1`);
+    cy.intercept(`GET`, `${API_ROOT}/galleries`, []).as(`call-1`);
 
     mountComponent();
 
@@ -17,9 +18,10 @@ describe(`GalleriesPage`, () => {
   });
 
   it(`SHOULD call backend to create WHEN click on create new gallery and not changing the name`, () => {
-    cy.intercept(`GET`, `/api/galleries`, [{
+    cy.intercept(`GET`, `${API_ROOT}/galleries`, [{
       id: 1,
       name: `First Gallery`,
+      previewPhotos: [],
     }]).as(`call-2`);
 
     mountComponent();
@@ -43,7 +45,7 @@ describe(`GalleriesPage`, () => {
 
     const newGalleryId = 2;
 
-    cy.intercept(`POST`, `/api/galleries`, {
+    cy.intercept(`POST`, `${API_ROOT}/galleries`, {
       body: newGalleryId,
     });
 
@@ -54,7 +56,7 @@ describe(`GalleriesPage`, () => {
 
     const onRenameBackendCallSpy = cy.spy().as(`onRenameBackendCallSpy`);
 
-    cy.intercept(`PUT`, `/api/galleries/${newGalleryId}/update-name`, onRenameBackendCallSpy);
+    cy.intercept(`PUT`, `${API_ROOT}/galleries/${newGalleryId}/update-name`, onRenameBackendCallSpy);
 
     // the gallery name has to be focused since we just created it
     // and if press enter, rename shouldn't be called since the name is the same
@@ -79,6 +81,51 @@ describe(`GalleriesPage`, () => {
     //   .last()
     //   .should(`have.value`, `new gallery`)
     //   .should(`not.be.focused`);
+  });
+
+  it.skip(`SHOULD call backend with DELETE method to delete a gallery WHEN delete button is clicked`, () => {
+    cy.intercept(`GET`, `/api/galleries`, [{
+      id: 1,
+      name: `First Gallery`,
+    },
+    ]).as(`call-3`);
+
+    cy.intercept(`DELETE`, `/api/galleries/1`).as(`call-3-1`);
+
+    mountComponent();
+
+    cy.getByData(`delete-gallery-button`)
+      .click();
+
+    cy.getByData(`gallery-card`)
+      .should(`not.exist`);
+  });
+
+  it.skip(`SHOULD call backend with POST method to restore a gallery WHEN restore button is clicked`, () => {
+    cy.intercept(`GET`, `/api/galleries`, [{
+      id: 1,
+      name: `First Gallery`,
+    },
+    ]).as(`call-4`);
+
+    mountComponent();
+
+    cy.intercept(`DELETE`, `/api/galleries/1`, {
+      body: {
+        id: 1,
+      },
+    }).as(`call-5`);
+
+    cy.getByData(`delete-gallery-button`)
+      .click();
+
+    cy.intercept(`POST`, `/api/galleries/restore/1`).as(`call-6`);
+
+    cy.getByData(`restore-gallery-button`)
+      .click();
+
+    cy.contains(`First Gallery`)
+      .should(`exist`);
   });
 });
 

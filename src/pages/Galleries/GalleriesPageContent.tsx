@@ -1,16 +1,16 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable no-unused-vars */
-import { useContext, useEffect, useState } from "react";
-import axios from "axios";
+import { useContext, useEffect } from "react";
 import { observer } from "mobx-react-lite";
 import AddButton from "../../components/AddButton/AddButton";
 import NoGalleries from "./components/NoGalleries/NoGalleries";
 import GalleriesList from "./components/GalleriesList/GalleriesList";
-import Gallery from "./components/GalleriesList/Gallery";
+import { Gallery } from "./components/GalleriesList/Gallery";
 import Breadcrumbs from "../../components/Breadcrumbs/Breadcrumbs";
 import { useGet } from "../../common/hooks/useGet";
 import GalleriesPageStateContext from "./state/GalleriesPageStateContext";
-// import RestoreDeletedGallery from "./components/RestoreDeletedGallery/RestoreDeletedGallery";
+import RestoreDeletedGallery from "./components/RestoreDeletedGallery/RestoreDeletedGallery";
+import { api } from "../../common/utils/HttpClient";
 
 function GalleriesPageContent() {
   const galleriesPageState = useContext(GalleriesPageStateContext);
@@ -19,7 +19,7 @@ function GalleriesPageContent() {
     response: loadedGalleries,
   } = useGet<Gallery[]>({
     queryKey: [`galleries`],
-    url: `/api/galleries`,
+    url: `/galleries`,
   });
 
   useEffect(() => {
@@ -29,7 +29,7 @@ function GalleriesPageContent() {
   }, [loadedGalleries]);
 
   return (
-    <div>
+    <div className="galleries-page">
       {
         galleriesPageState.galleries.length === 0
           ? (
@@ -41,28 +41,31 @@ function GalleriesPageContent() {
               <AddButton
                 type="button"
                 onClick={onNewGalleryClick}
+                className="galleries-page__add-btn"
               >
                 Create new
               </AddButton>
               <GalleriesList
                 onNameApply={onNameApply}
-                onGalleryDelete={(id: number) => {
-                }}
+                onGalleryDelete={onGalleryDelete}
               />
-              {/* <RestoreDeletedGallery
-                onRestoreGallery={onRestoreGallery}
-                galleryName="town"
-              /> */}
+
             </>
           )
       }
+      {galleriesPageState.galleryToRestore && (
+        <RestoreDeletedGallery
+          onRestoreGallery={onRestoreGallery}
+          galleryName={galleriesPageState.galleryToRestore!.name}
+        />
+      )}
     </div>
   );
 
   async function onNewGalleryClick() {
     const {
       data: loadedNewlyCreatedGalleryId,
-    } = await axios.post(`/api/galleries`, {
+    } = await api.post(`/galleries`, {
       name: `new gallery`,
     });
 
@@ -70,6 +73,7 @@ function GalleriesPageContent() {
       newlyCreatedGallery: {
         id: loadedNewlyCreatedGalleryId,
         name: `new gallery`,
+        previewPhotos: [],
       },
     });
   }
@@ -90,13 +94,19 @@ function GalleriesPageContent() {
       return;
     }
 
-    await axios.put(`/api/galleries/${galleryId}/update-name`, {
+    await api.post(`/galleries/${galleryId}/rename`, {
       newName,
     });
   }
 
-  function onRestoreGallery() {
-    console.log(`onRestoreGallery`);
+  async function onGalleryDelete(galleryId: number) {
+    galleriesPageState.deleteGallery({ galleryId });
+    await api.delete(`/galleries/${galleryId}`);
+  }
+
+  async function onRestoreGallery() {
+    await api.post(`/galleries/restore/${galleriesPageState.galleryToRestore!.id}`);
+    galleriesPageState.restoreGallery();
   }
 }
 

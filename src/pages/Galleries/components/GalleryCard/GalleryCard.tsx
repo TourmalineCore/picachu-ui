@@ -1,9 +1,9 @@
 import {
   KeyboardEvent, useEffect, useRef, useState,
 } from "react";
+import clsx from 'clsx';
 import { ReactComponent as DeleteIcon } from "../../../../assets/icons/icon-delete.svg";
-
-type Photo = {};
+import { PreviewPhoto } from "../GalleriesList/Gallery";
 
 function GalleryCard({
   name,
@@ -11,14 +11,14 @@ function GalleryCard({
   onNameApply,
   onDelete,
   photosCount,
-  photos,
+  previewPhotos,
 }: {
   name: string;
   newlyCreated: boolean;
   onNameApply: (newName: string) => unknown;
   onDelete: () => unknown;
   photosCount: number;
-  photos: Photo[];
+  previewPhotos: PreviewPhoto[];
 }) {
   const nameRef = useRef<HTMLInputElement>(null);
 
@@ -30,28 +30,57 @@ function GalleryCard({
     }
   }, [newlyCreated]);
 
-  const [newGalleryName, setNewGalleryName] = useState(name);
+  // '' is temporal here until backend error is fixed
+  const [newGalleryName, setNewGalleryName] = useState(name || ``);
 
   const tryToApplyEmptyName = !newGalleryName.trim().length;
 
   return (
     <div
-      className="gallery-card"
+      className={clsx(`gallery-card`, {
+        'gallery-card--single-photo-preview': previewPhotos.length < 4,
+      })}
       data-cy="gallery-card"
     >
       <div className="gallery-card__image-container">
-        <a href="/">
-          {
-            !photos.length && (
-              <img
-                className="gallery-card__image"
-                src="src/assets/images/dummy-image.png"
-                alt={`No photos have been added to ${name} yet`}
-                data-cy="gallery-photo-preview"
-              />
-            )
-          }
-        </a>
+        {
+          previewPhotos.length ? (
+            <div
+              className="gallery-card__collage"
+              data-cy="gallery-photo-collage"
+            >
+              {
+                previewPhotos.length < 4 && (
+                  <img
+                    className="gallery-card__image"
+                    key={previewPhotos[0].photoPath}
+                    src={previewPhotos[0].photoPath}
+                    alt={`Preview for ${name} gallery`}
+                    data-cy="gallery-card-preview-image"
+                  />
+                )
+              }
+              {previewPhotos.length >= 4 && previewPhotos
+                .slice(0, 4)
+                .map((previewPhoto, index) => (
+                  <img
+                    className="gallery-card__image"
+                    key={previewPhoto.photoPath}
+                    src={previewPhoto.photoPath}
+                    alt={`Preview ${index + 1} for ${name} gallery`}
+                    data-cy="gallery-card-preview-image"
+                  />
+                ))}
+            </div>
+          ) : (
+            <img
+              className="gallery-card__image"
+              src="src/assets/images/dummy-image.png"
+              alt={`No photos have been added to ${name} yet`}
+              data-cy="gallery-photo-preview"
+            />
+          )
+        }
       </div>
       <div className="gallery-card__inner">
         <div className="gallery-card__wrapper">
@@ -60,6 +89,7 @@ function GalleryCard({
           >
             <input
               ref={nameRef}
+              className="gallery-card__input"
               data-cy="gallery-name-input"
               type="text"
               value={newGalleryName}
@@ -74,14 +104,16 @@ function GalleryCard({
             photos
           </span>
         </div>
-        <button
-          data-cy="delete-gallery-button"
-          type="button"
-          className="button gallery-card__delete-btn"
-          onClick={onDelete}
-        >
-          <DeleteIcon />
-        </button>
+        <div>
+          <button
+            data-cy="delete-gallery-button"
+            type="button"
+            className="button gallery-card__delete-btn"
+            onClick={onDelete}
+          >
+            <DeleteIcon />
+          </button>
+        </div>
       </div>
     </div>
   );

@@ -1,10 +1,14 @@
 import { makeAutoObservable } from "mobx";
-import Gallery from "../components/GalleriesList/Gallery";
+import { Gallery } from "../components/GalleriesList/Gallery";
 
 class GalleriesPageState {
   _galleries: Gallery[] = [];
 
   _newlyCreatedGalleryId: number | null = null;
+
+  _lastDeletedGallery: Gallery | null = null;
+
+  _lastDeletedGalleryIndex: number | null = null;
 
   constructor() {
     makeAutoObservable(this);
@@ -26,6 +30,10 @@ class GalleriesPageState {
     return this._newlyCreatedGalleryId;
   }
 
+  get galleryToRestore() {
+    return this._lastDeletedGallery;
+  }
+
   addNewlyCreatedGallery({
     newlyCreatedGallery,
   }: {
@@ -37,6 +45,23 @@ class GalleriesPageState {
 
   stopTrackingNewlyCreatedGallery() {
     this._newlyCreatedGalleryId = null;
+  }
+
+  deleteGallery({
+    galleryId,
+  }: {
+    galleryId: number;
+  }) {
+    this._lastDeletedGalleryIndex = this._galleries.findIndex((gallery) => gallery.id === galleryId);
+
+    const [deletedGallery] = this._galleries.splice(this._lastDeletedGalleryIndex, 1);
+
+    this._lastDeletedGallery = deletedGallery;
+  }
+
+  restoreGallery() {
+    this._galleries.splice(this._lastDeletedGalleryIndex!, 0, this._lastDeletedGallery!);
+    this._lastDeletedGallery = null;
   }
 }
 
