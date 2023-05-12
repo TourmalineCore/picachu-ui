@@ -41,7 +41,7 @@ function Sort() {
             className="sort__variable"
             data-cy="sort-variable"
           >
-            {photosPageState._sort}
+            {photosPageState.sort}
           </span>
           <DropArrow className="sort__arrow-icon" />
         </button>
@@ -67,7 +67,7 @@ function Sort() {
                     key={sort}
                     data-cy="sort-popup-item"
                     className={clsx(`sort__popup-item`, {
-                      'sort__popup-item--active': photosPageState._sort === sort,
+                      'sort__popup-item--active': photosPageState.sort === sort,
                     })}
                   >
                     <button
@@ -75,7 +75,7 @@ function Sort() {
                       className="button"
                       onClick={() => changeSort(sort)}
                       data-cy="sort-popup-item-button"
-                      disabled={photosPageState._sort === sort}
+                      disabled={photosPageState.sort === sort}
                     >
                       <DoneIcon />
                       <span
@@ -96,7 +96,7 @@ function Sort() {
   );
 
   function changeSort(name: string) {
-    photosPageState.changeSortProperty(name);
+    photosPageState.sort = name;
     setIsVisiblePopup(false);
   }
 }

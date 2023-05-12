@@ -14,9 +14,9 @@ describe(`PhotosPageState`, () => {
       ],
     });
 
-    expect(photosPageState._photos).to.has.lengthOf(1);
+    expect(photosPageState.photos).to.has.lengthOf(1);
 
-    expect(photosPageState._photos).to.deep.equal([
+    expect(photosPageState.photos).to.deep.equal([
       {
         id: 1,
         photoPath: `https://stickerbase.ru/wp-content/uploads/2021/07/61607.png`,
@@ -28,8 +28,8 @@ describe(`PhotosPageState`, () => {
   it(`SHOULD change sort value WHEN function was called`, () => {
     const photosPageState = new PhotosPageState();
 
-    photosPageState.changeSortProperty(`date of upload`);
+    photosPageState.sort = `date of upload`;
 
-    expect(photosPageState._sort).equal(`date of upload`);
+    expect(photosPageState.sort).equal(`date of upload`);
   });
 });

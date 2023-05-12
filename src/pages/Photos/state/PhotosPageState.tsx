@@ -2,9 +2,9 @@ import { makeAutoObservable } from "mobx";
 import { PhotoType } from "../components/PhotoCard/PhotoCard";
 
 class PhotosPageState {
-  _photos: PhotoType[] = [];
+  private _photos: PhotoType[] = [];
 
-  _sort: string = `uniqueness metric`;
+  private _sort: string = `uniqueness metric`;
 
   constructor() {
     makeAutoObservable(this);
@@ -26,7 +26,7 @@ class PhotosPageState {
     return this._sort;
   }
 
-  changeSortProperty(name: string) {
+  set sort(name: string) {
     this._sort = name;
   }
 }
