@@ -21,7 +21,7 @@ function PhotosPageContent() {
 
   return (
   // change zero to one to check PhotoListPage
-    photosPageState._photos.length === 0 ? (
+    photosPageState.photos.length === 0 ? (
       <NoPhotos onUploadNewPhoto={onUploadNewPhoto} />
     ) : (
       <PhotoList photosArray={photosArray} />
