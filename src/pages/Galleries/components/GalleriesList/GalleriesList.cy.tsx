@@ -12,6 +12,7 @@ describe(`GalleriesList`, () => {
         name: `Am`,
         previewPhotos: [],
       }],
+      isLoading: false,
     });
 
     cy.contains(`Create a gallery to get started`)
@@ -25,6 +26,7 @@ describe(`GalleriesList`, () => {
         name: `My Gallery is Awesome`,
         previewPhotos: [],
       }],
+      isLoading: false,
     });
 
     cy.getByData(`gallery-name-input`)
@@ -43,6 +45,7 @@ describe(`GalleriesList`, () => {
         name: `My Awful Gallery`,
         previewPhotos: [],
       }],
+      isLoading: false,
     });
 
     cy.getByData(`gallery-name-input`)
@@ -52,6 +55,7 @@ describe(`GalleriesList`, () => {
   it(`SHOULD focus name of the gallery WHEN we just created a new first one`, () => {
     mountComponentAndReturnState({
       galleries: [],
+      isLoading: false,
       newlyCreatedGallery: {
         id: 1,
         name: `My Gallery is Awesome`,
@@ -62,6 +66,19 @@ describe(`GalleriesList`, () => {
     cy
       .getByData(`gallery-name-input`)
       .should(`be.focused`);
+  });
+  it(`SHOULD render 6 skeleton cards IF isLoading state true`, () => {
+    mountComponentAndReturnState({
+      galleries: [],
+      isLoading: true,
+      newlyCreatedGallery: {
+        id: 1,
+        name: `My Gallery is Awesome`,
+        previewPhotos: [],
+      },
+    });
+    cy.getByData(`gallery-card`).should(`not.exist`);
+    cy.getByData(`galleries-list-skeleton`).its(`length`).should(`equal`, 6);
   });
 
   it(`SHOULD call on name apply WHEN we focus out from newly created gallery changed name`, () => {
@@ -80,6 +97,7 @@ describe(`GalleriesList`, () => {
         name: `Second Gallery`,
         previewPhotos: [],
       },
+      isLoading: false,
       onNameApply: onNameApplySpy,
     });
 
@@ -104,6 +122,7 @@ describe(`GalleriesList`, () => {
 
       mountComponentAndReturnState({
         onGalleryDelete: onDeleteSpy,
+        isLoading: false,
         galleries: [
           {
             id: 3,
@@ -134,9 +153,11 @@ function mountComponentAndReturnState({
   galleries,
   onNameApply = () => {},
   onGalleryDelete = () => {},
+  isLoading,
 }: {
   newlyCreatedGallery?: Gallery;
   galleries: Gallery[];
+  isLoading: boolean;
   onNameApply?: ({ galleryId, newName }: { galleryId: number; newName: string }) => unknown;
   onDelete?: ({ galleryId }: { galleryId: number }) => unknown;
   onGalleryDelete?: (id: number) => unknown;
@@ -158,6 +179,7 @@ function mountComponentAndReturnState({
       <GalleriesList
         onNameApply={onNameApply}
         onGalleryDelete={onGalleryDelete}
+        isLoading={isLoading}
       />
     </GalleriesPageStateContext.Provider>,
   );

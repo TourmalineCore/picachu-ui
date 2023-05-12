@@ -1,4 +1,4 @@
-import testImage from '../../assets/images/similar-test-image-3.png';
+import testImage from '../../assets/images/create-gallery-4-image.png';
 
 export const photosArray = [{
   id: 1,

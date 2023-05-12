@@ -1,6 +1,6 @@
 /* eslint-disable react/jsx-no-bind */
 import {
-  ChangeEvent, useContext, useEffect,
+  ChangeEvent, useContext, useEffect, useState,
 } from "react";
 import { useParams } from "react-router-dom";
 import NoPhotos from "./components/NoPhotos/NoPhotos";
@@ -12,7 +12,7 @@ import { photosArray } from "./Photos.data";
 
 function PhotosPageContent() {
   const photosPageState = useContext(PhotosPageStateContext);
-
+  const [isLoading, setIsLoading] = useState(false);
   const { galleryId } = useParams();
 
   useEffect(() => {
@@ -20,26 +20,47 @@ function PhotosPageContent() {
   }, []);
 
   return (
-  // change zero to one to check PhotoListPage
-    photosPageState.photos.length === 0 ? (
+    // eslint-disable-next-line no-nested-ternary
+    isLoading ? (
+      <PhotoList
+        photosArray={photosArray}
+        isLoading={isLoading}
+      />
+    ) : photosPageState.photos.length === 1 ? (
       <NoPhotos onUploadNewPhoto={onUploadNewPhoto} />
     ) : (
-      <PhotoList photosArray={photosArray} />
+      <PhotoList
+        photosArray={photosArray}
+        isLoading={isLoading}
+      />
     )
   );
 
   async function onGetPhotos() {
-    const { data } = await api.get<PhotoType[]>(`/galleries/${galleryId}/photos`);
-    photosPageState.initialize({ loadedPhotos: data });
+    setIsLoading(true);
+    try {
+      const { data } = await api.get<PhotoType[]>(`/galleries/${galleryId}/photos`);
+      photosPageState.initialize({ loadedPhotos: data });
+    } catch (error: any) {
+      console.log(error.response.data.msg);
+    } finally {
+      setTimeout(() => {
+        setIsLoading(false);
+      }, 5000);
+    }
   }
 
   async function onUploadNewPhoto(event: ChangeEvent<HTMLInputElement>) {
     if (!event.target.files) return;
     const fileUploaded = event.target.files[0];
-    await api.post(`/photos/${galleryId}/upload-photo`, {
-      fileUploaded,
-    });
-    onGetPhotos();
+    try {
+      await api.post(`/photos/${galleryId}/upload-photo`, {
+        fileUploaded,
+      });
+      onGetPhotos();
+    } catch (error: any) {
+      console.log(error.response.data.msg);
+    }
   }
 }
 
