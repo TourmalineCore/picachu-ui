@@ -6,7 +6,9 @@ import { useParams } from "react-router-dom";
 import NoPhotos from "./components/NoPhotos/NoPhotos";
 import PhotosPageStateContext from "./state/PhotosPageStateContext";
 import { api } from "../../common/utils/HttpClient";
-import Photo from "./components/PhotosList/Photos";
+import PhotoList from "./components/PhotosList/PhotoList";
+import { PhotoType } from "./components/PhotoCard/PhotoCard";
+import { photosArray } from "./Photos.data";
 
 function PhotosPageContent() {
   const photosPageState = useContext(PhotosPageStateContext);
@@ -18,21 +20,16 @@ function PhotosPageContent() {
   }, []);
 
   return (
-    <div>
-      {
-        photosPageState._photos.length === 0 ? (
-          <NoPhotos onUploadNewPhoto={onUploadNewPhoto} />
-        ) : (
-          <>
-            next feat
-          </>
-        )
-      }
-    </div>
+  // change zero to one to check PhotoListPage
+    photosPageState.photos.length === 0 ? (
+      <NoPhotos onUploadNewPhoto={onUploadNewPhoto} />
+    ) : (
+      <PhotoList photosArray={photosArray} />
+    )
   );
 
   async function onGetPhotos() {
-    const { data } = await api.get<Photo[]>(`/galleries/${galleryId}/photos`);
+    const { data } = await api.get<PhotoType[]>(`/galleries/${galleryId}/photos`);
     photosPageState.initialize({ loadedPhotos: data });
   }
 

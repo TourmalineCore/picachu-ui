@@ -1,0 +1,125 @@
+/* stylelint-disable no-descending-specificity */
+.sort {
+  $this: &;
+
+  position: relative;
+  margin-left: 8px;
+
+  &__label {
+    display: none;
+
+    @include tablet {
+      display: flex;
+      align-items: center;
+    }
+  }
+
+  &__title {
+    margin-right: 12px;
+    color: $color-medium-grey;
+  }
+
+  &__variable {
+    margin-right: 8px;
+    font-size: 14px;
+    color: $color-dark-grey;
+  }
+
+  &__select-popup-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    outline: 1px solid $color-grey-light-200;
+    border-radius: 6px;
+    padding: 16px;
+
+    svg {
+      @include icon(16px,21px,$color-black);
+    }
+
+    &:hover {
+      background-color: $color-grey-light-100;
+
+      svg {
+        transform: rotate(180deg);
+      }
+    }
+
+    @include tablet {
+      display: none;
+    }
+  }
+
+  &__btn-action {
+    &:hover {
+      #{$this}__arrow-icon {
+        @include icon(8px,12px,$color-dark-grey);
+      }
+    }
+
+    &:active {
+      #{$this}__arrow-icon {
+        transform: translateY(3px);
+      }
+    }
+  }
+
+  &__arrow-icon {
+    @include icon(8px,12px,$color-medium-grey);
+  }
+
+  &__popup {
+    position: absolute;
+    right: 0;
+    top: 64px;
+    z-index: $layer-popup;
+    margin: 0;
+    border-radius: 6px;
+    padding: 8px;
+    width: 224px;
+    box-shadow: 1px 4px 16px rgb(180 173 189 / 15%);
+    background-color: $color-white;
+
+    @include tablet {
+      right: 0;
+      top: 32px;
+    }
+  }
+
+  &__popup-list {
+    @include reset-list;
+
+    width: 100%;
+  }
+
+  &__popup-item {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 12px 10px;
+    cursor: pointer;
+
+    svg {
+      @include icon(9px,12px,$color-dark-grey);
+
+      margin-right: 15px;
+      opacity: 0;
+    }
+
+    &:hover {
+      svg {
+        opacity: 0.3;
+      }
+    }
+
+    &--active {
+      svg {
+        opacity: 1 !important;
+      }
+    }
+
+    @include tablet {
+      padding: 8px 10px;
+    }
+  }
+}

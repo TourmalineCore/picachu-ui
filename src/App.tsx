@@ -31,7 +31,7 @@ export function App() {
             element={<PhotosPage />}
           />
           <Route
-            path="galleries/nature/metric"
+            path="galleries/:galleryId/:id"
             element={<MetricsPage />}
           />
         </Route>

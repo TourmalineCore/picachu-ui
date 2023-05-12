@@ -1,0 +1,50 @@
+.photo-list {
+  display: flex;
+  flex-direction: column;
+  padding-top: $top-menu-height;
+  min-height: 100vh;
+
+  &__button-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 16px;
+
+    @include desktop {
+      margin-top: 0;
+    }
+  }
+
+  &__container {
+    @include reset-list;
+
+    margin-top: 16px;
+
+    @include tablet {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      margin-top: 24px;
+      margin-right: -16px;
+      margin-left: -16px;
+    }
+  }
+
+  &__card {
+    margin-bottom: 16px;
+    width: 100%;
+
+    @include tablet {
+      flex-grow: 1;
+      margin-bottom: 0;
+      padding: 16px;
+      width: 50%;
+      max-width: 50%;
+    }
+
+    @include desktop {
+      width: 25%;
+      max-width: 25%;
+    }
+  }
+}
