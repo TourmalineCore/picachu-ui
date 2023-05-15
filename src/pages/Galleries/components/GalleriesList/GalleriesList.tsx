@@ -1,11 +1,13 @@
 import { useContext } from "react";
 import { observer } from "mobx-react-lite";
+import Skeleton from 'react-loading-skeleton';
 import GalleriesPageStateContext from "../../state/GalleriesPageStateContext";
 import GalleryCard from "../GalleryCard/GalleryCard";
 
 function GalleriesList({
   onNameApply,
   onGalleryDelete,
+  isLoading,
 }: {
   onNameApply: ({
     galleryId,
@@ -15,13 +17,28 @@ function GalleriesList({
     newName: string;
   }) => unknown;
   onGalleryDelete: (id: number) => unknown;
+  isLoading: boolean;
 }) {
   const galleriesPageState = useContext(GalleriesPageStateContext);
+
+  const skeletons = [...new Array(6)].map((_, index) => (
+    <li
+      // eslint-disable-next-line react/no-array-index-key
+      key={index}
+      className="galleries-list__item"
+      data-cy="galleries-list-skeleton"
+    >
+      <Skeleton
+        height={200}
+        borderRadius={12}
+      />
+    </li>
+  ));
 
   return (
     <ul className="galleries-list">
       {
-        galleriesPageState.galleries.map(({
+        isLoading ? (skeletons) : galleriesPageState.galleries.map(({
           id,
           name,
           previewPhotos,

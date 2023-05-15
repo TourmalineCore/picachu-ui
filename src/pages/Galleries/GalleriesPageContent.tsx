@@ -1,3 +1,4 @@
+/* eslint-disable no-nested-ternary */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable no-unused-vars */
 import { useContext, useEffect } from "react";
@@ -17,6 +18,7 @@ function GalleriesPageContent() {
 
   const {
     response: loadedGalleries,
+    isLoading,
   } = useGet<Gallery[]>({
     queryKey: [`galleries`],
     url: `/galleries`,
@@ -30,8 +32,25 @@ function GalleriesPageContent() {
 
   return (
     <div className="galleries-page">
-      {
-        galleriesPageState.galleries.length === 0
+      {isLoading ? (
+        <>
+          <Breadcrumbs />
+          <AddButton
+            type="button"
+            onClick={onNewGalleryClick}
+            className="galleries-page__add-btn"
+          >
+            Create new
+          </AddButton>
+          <GalleriesList
+            onNameApply={onNameApply}
+            onGalleryDelete={onGalleryDelete}
+            isLoading={isLoading}
+          />
+
+        </>
+      )
+        : galleriesPageState.galleries.length === 0
           ? (
             <NoGalleries onNewGalleryClick={onNewGalleryClick} />
           )
@@ -48,11 +67,11 @@ function GalleriesPageContent() {
               <GalleriesList
                 onNameApply={onNameApply}
                 onGalleryDelete={onGalleryDelete}
+                isLoading={isLoading}
               />
 
             </>
-          )
-      }
+          )}
       {galleriesPageState.galleryToRestore && (
         <RestoreDeletedGallery
           onRestoreGallery={onRestoreGallery}

@@ -7,6 +7,7 @@ import GalleriesPage from './pages/Galleries/GalleriesPage';
 import { withPrivateRoute } from './common/auth/authStateProvider/withPrivateRoute';
 import MetricsPage from './pages/Metrics/MetricsPage';
 import PhotosPage from './pages/Photos/PhotosPage';
+import 'react-loading-skeleton/dist/skeleton.css';
 
 const WithPrivateRoute = withPrivateRoute(Layout);
 

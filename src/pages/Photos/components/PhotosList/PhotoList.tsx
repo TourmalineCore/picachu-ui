@@ -1,3 +1,4 @@
+import Skeleton from 'react-loading-skeleton';
 import Breadcrumbs from '../../../../components/Breadcrumbs/Breadcrumbs';
 import FileUploader from '../../../../components/FileUploader/FileUploader';
 import PhotoCard, { PhotoType } from '../PhotoCard/PhotoCard';
@@ -5,9 +6,25 @@ import Sort from '../Sort/Sort';
 
 function PhotoList({
   photosArray,
+  isLoading,
 }: {
   photosArray: PhotoType[];
+  isLoading: boolean;
 }) {
+  const skeletons = [...new Array(6)].map((_, index) => (
+    <li
+      // eslint-disable-next-line react/no-array-index-key
+      key={index}
+      className="photo-list__card"
+      data-cy="photo-card-skeleton"
+    >
+      <Skeleton
+        height={200}
+        borderRadius={12}
+      />
+    </li>
+  ));
+
   return (
     <div className="photo-list">
       <Breadcrumbs />
@@ -17,7 +34,7 @@ function PhotoList({
       </div>
 
       <ul className="photo-list__container">
-        {photosArray.map((photo) => (
+        {isLoading ? (skeletons) : photosArray.map((photo) => (
           <li
             className="photo-list__card"
             key={photo.id + photo.uniqueness}
