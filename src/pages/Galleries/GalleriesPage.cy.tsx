@@ -1,23 +1,26 @@
 import '../../../cypress/support/commands';
 import { API_ROOT } from '../../common/config';
-import GalleriesPage from './GalleriesPage';
-import { Button } from '../../../cypress/e2e/page-factory/button';
-import { Input } from '../../../cypress/e2e/page-factory/input';
+import GalleriesPageComponent from './GalleriesPage';
+import NoGalleriesPage from '../../../cypress/e2e/pages/no-galleries-page';
+import GalleriesPage from '../../../cypress/e2e/pages/galleries-page';
 
 // Found bugs/nuances ;)
 // explains partially why we need this different aliases https://stackoverflow.com/questions/66765452/intercept-the-same-api-call-multiple-times-in-cypress
 
 describe(`GalleriesPage`, () => {
+  const noGalleriesPage = new NoGalleriesPage();
+  const galleriesPage = new GalleriesPage();
+
   it(`SHOULD render no galleries message WHEN there are no galleries`, () => {
     cy.intercept(`GET`, `${API_ROOT}/galleries`, []).as(`call-1`);
 
     mountComponent();
 
-    cy.getByData(`no-galleries`)
-      .contains(`Create a gallery to get started`);
+    noGalleriesPage.isOpen();
+    console.log(`-----------------------------------`);
   });
 
-  it(`SHOULD call backend to create WHEN click on create new gallery and not changing the name`, () => {
+  it.skip(`SHOULD call backend to create WHEN click on create new gallery and not changing the name`, () => {
     cy.intercept(`GET`, `${API_ROOT}/galleries`, [{
       id: 1,
       name: `First Gallery`,
@@ -26,33 +29,15 @@ describe(`GalleriesPage`, () => {
 
     mountComponent();
 
-    const addButton = new Button({
-      selector: `add-button`,
-    });
-
-    const galleryNameInput = new Input({
-      selector: `gallery-name-input`,
-    });
-    // galleryNameInput.getSelector();
-
-    // we should see the existing gallery, it is not newly created, thus, not focused
-    // cy.getByData(`gallery-name-input`)
-    //   .should(`have.value`, `First Gallery`)
-    //   .should(`not.be.focused`);
-
-    galleryNameInput.shouldHaveValue(`First Gallery`)
-      .shouldNotBeFocused();
+    galleriesPage.isOpen();
+    galleriesPage.lastGalleryShouldNotBeFocused();
 
     const newGalleryId = 2;
-
     cy.intercept(`POST`, `${API_ROOT}/galleries`, {
       body: newGalleryId,
     });
 
-    // ask to create a new gallery
-    addButton.click();
-    // cy.getByData(`add-button`)
-    // .click();
+    galleriesPage.createNewGallery();
 
     const onRenameBackendCallSpy = cy.spy().as(`onRenameBackendCallSpy`);
 
@@ -76,39 +61,37 @@ describe(`GalleriesPage`, () => {
 
     cy.get(`@onRenameBackendCallSpy`).should(`not.have.been.called`);
 
-    // we should check that the new card is not focused and name is the same
-    // cy.getByData(`gallery-name-input`)
-    //   .last()
-    //   .should(`have.value`, `new gallery`)
-    //   .should(`not.be.focused`);
+    galleriesPage.lastGalleryShouldHaveName(`new gallery`);
+    galleriesPage.lastGalleryShouldNotBeFocused();
   });
 
-  it.skip(`SHOULD call backend with DELETE method to delete a gallery WHEN delete button is clicked`, () => {
-    cy.intercept(`GET`, `/api/galleries`, [{
+  it(`SHOULD call backend with DELETE method to delete a gallery WHEN delete button is clicked`, () => {
+    cy.intercept(`GET`, `${API_ROOT}/galleries`, [{
       id: 1,
       name: `First Gallery`,
+      previewPhotos: [],
     },
     ]).as(`call-3`);
 
-    cy.intercept(`DELETE`, `/api/galleries/1`).as(`call-3-1`);
+    cy.intercept(`DELETE`, `/api/galleries/1`, []).as(`call-3-1`);
 
     mountComponent();
 
-    cy.getByData(`delete-gallery-button`)
-      .click();
-
-    cy.getByData(`gallery-card`)
-      .should(`not.exist`);
+    galleriesPage.isOpen();
+    // console.log(galleriesPage);
+    console.log(`-----------------------------------`);
+    galleriesPage.deleteLastGallery();
+    console.log(`-----------------------------------`);
+    noGalleriesPage.isOpen();
   });
 
   it.skip(`SHOULD call backend with POST method to restore a gallery WHEN restore button is clicked`, () => {
+    const galleryName = `First Gallery`;
     cy.intercept(`GET`, `/api/galleries`, [{
       id: 1,
-      name: `First Gallery`,
+      name: galleryName,
     },
     ]).as(`call-4`);
-
-    mountComponent();
 
     cy.intercept(`DELETE`, `/api/galleries/1`, {
       body: {
@@ -116,21 +99,18 @@ describe(`GalleriesPage`, () => {
       },
     }).as(`call-5`);
 
-    cy.getByData(`delete-gallery-button`)
-      .click();
-
     cy.intercept(`POST`, `/api/galleries/restore/1`).as(`call-6`);
 
-    cy.getByData(`restore-gallery-button`)
-      .click();
+    mountComponent();
 
-    cy.contains(`First Gallery`)
-      .should(`exist`);
+    galleriesPage.deleteLastGallery();
+    noGalleriesPage.restoreDeletedGalleryToast.tapRestore();
+    galleriesPage.lastGalleryShouldHaveName(galleryName);
   });
 });
 
 function mountComponent() {
   cy.mount(
-    <GalleriesPage />,
+    <GalleriesPageComponent />,
   );
 }

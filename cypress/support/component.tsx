@@ -12,6 +12,7 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
 import { MountReturn, mount } from "cypress/react18";
 import { MountOptions } from 'cypress/react';
+import '@shelex/cypress-allure-plugin';
 
 const queryClient = new QueryClient({
   defaultOptions: {

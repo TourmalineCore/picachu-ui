@@ -2,7 +2,7 @@ import { makeAutoObservable } from "mobx";
 import Photo from "../components/PhotosList/Photos";
 
 class PhotosPageState {
-  _photos: Photo[] = [];
+  private _photos: Photo[] = [];
 
   constructor() {
     makeAutoObservable(this);

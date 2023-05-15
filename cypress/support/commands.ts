@@ -23,18 +23,4 @@ Cypress.Commands.add(`createStep`, (stepName) => cy.allure().startStep(stepName)
 
 //   const a = Cypress.Commands.add(`as`, () => {});
 // });
-
-Cypress.Commands.add(`getComponents`, (select, name) => {
-  const locatar = cy.getByData(select);
-
-  const checkTest = (test) => {
-    cy.createStep(`Andrey test`);
-
-    locatar.should(`have.text`, test);
-  };
-
-  return {
-    checkTest,
-  };
-});
 export {};

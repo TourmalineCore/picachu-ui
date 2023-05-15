@@ -55,7 +55,13 @@ function NoGalleries({
         }
       </div>
       <div className="no-galleries__text">
-        <h1 className="no-galleries__title">Create a gallery to get started</h1>
+        <h1
+          data-cy="no-galleries-title"
+          className="no-galleries__title"
+        >
+          Create a gallery to get started
+
+        </h1>
         <p className="no-galleries__description">
           With galleries you can group photos by category or event
         </p>
