@@ -102,13 +102,41 @@ cy.getByData(`gallery-name-input`)
 ```
 
 ## Component Testing Strategy <a name="component_strategy"></a> 
-The following will describe strategies for testing components in different cases:
-Test inner component of page (unit component test):
-- Component mounting successfully
-- Verify that all functions are called on certain cases that you expect. Use spies for testing it. Do not mock the backend.
-- Verify all behaviors that are described in requirements
-Test page (integration component test):
-- Verify that all axios requests are correctly parsed and successfully mount components as we need. Use mock backend for testing it
+The following will describe strategies for testing components in different cases.
+
+Typical tests for component:
+
+- Inner component of the page
+  - Component mounting successfully
+  - Verify all behaviors that are described in requirements
+  - Verify that all functions are called on certain cases that you expect. 
+  Use spies for testing it:
+  ```JavaScript
+  it('SHOULD call onLogin function once AFTER type creds and click Log In')
+    //using spy on your func
+    const onLogin = cy.spy().as(`onLogin`);
+    
+    cy.getByData(`login-input`)
+      .type(`admin`);
+
+    cy.getByData(`password-input`)
+      .type(`123`);
+
+    cy.getByData(`login-button`)
+      .click();
+
+    // validate that your func is called once with right parameters
+    cy.get(`@onLogin`)
+      .should(`have.been.calledOnceWith`, {
+        login: `admin`,
+        password: `123`,
+      });
+  ```
+  - Verify all behaviors that are described in requirements
+- Test page (integration component test):
+  - Verify that all axios requests are correctly parsed and successfully mount components as we need. Use mock backend for testing it
+
+Do not forget that all this is described through the **TDD** approach and it's just advices what and how you test it.
 
 ### Typical Cypress Test for a Component <a name="example_component"></a> 
 
