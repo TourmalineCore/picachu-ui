@@ -1,96 +1,107 @@
-# ***Rules and Patterns of the UI testing***
-# Contents:
+# Rules and Patterns of the UI testing
 - [Main rules](#Main_rules)
-- [Page Object and Page Factory](#page_factory)
-- [Cypress Chain Method](#chain)
+  - [Page Object and Page Factory](#page-object-and-factory)
+    - [Page Object](#page-object)
+    - [Page Factory](#page-factory)
+  - [Cypress Chain Method](#chain)
+  - [Async Commands and the Cypress Command Queue](#queue)
+    - [Asynchronous Execution of Cypress Commands](#async-exec-cypress)
+    - [Mixing Asynchronous and Synchronous Code](#async-and-sync)
 - [Component Testing Strategy](#component_strategy)
-- [Typical Cypress Test for a Component](#example_component)
-- [Network Calls and UI Rendering](#calls)
-- [Mocking](#mocking)
-- [Async Commands and the Cypress Command Queue](#queue)
-- [Mixing Asynchronous and Synchronous Code](#async)
+  - [Typical Cypress Test for a Component](#example_component)
+  - [Network Calls and UI Rendering](#calls)
+  - [Mocking](#mocking)
+- [E2E Testing Strategy](#e2e_strategy)
 - [Executing Tests](#execute)
 
-### Main rules <a name="Main_rules"></a> 
+## Main rules <a name="Main_rules"></a> 
 Testing frameworks must be configured - Cypress for Unit, Component, and E2E Testing. 
 
 The Cypress framework is used for component and user-flow (E2E) testing. Tests will be written only by ***TDD*** methodology.
 
 Component unit tests must be stored in the same folder as the component being tested and have the .cy extension in the name. For example, the test for component LoginForm.tsx will be named LoginForm.cy.tsx and stored in the appropriate folder LoginForm. 
-### Page Object and Page Factory <a name="page_factory"></a> 
-Follow Page Object and Page Factory patterns of the testing. As a developer, you should use these patterns for several reasons: 
+## Page Object and Page Factory <a name="page_factory"></a> 
+Follow Page Object and Page Factory design patterns for writing tests. This patterns involves describing all pages through classes that describe all possible actions in methods. In the same way actions with page elements are described.
+
+This is the best practice when designing automated UI tests. There is some reasons why we use patterns: 
   - **Code reusability**: The Page Object and Page Factory patterns allow you to write code that can be reused across different tests. Instead of writing the same code over and over again, you can create reusable Page Objects and use them in multiple tests, making your tests more maintainable and easier to read.
   - **Separation of concerns**: The Page Object and Page Factory patterns separate the code that interacts with the UI from the test logic. This separation of concerns makes your tests easier to read and maintain, as it allows you to focus on the test logic without worrying about the details of how the UI is implemented.
   - **Improved test stability**: The Page Object and Page Factory patterns provide a more stable and reliable way of interacting with the UI. By encapsulating the UI logic within the Page Object, you can make sure that your tests always interact with the UI in the same way, reducing the likelihood of flaky tests.
-  - **Scalability**: As your frontend application grows in complexity, the Page Object and Page Factory patterns make it easier to manage your tests. By breaking down your UI into smaller Page Objects, you can keep your code organized and more maintainable, even as your application grows.\
-  \
-Here's an example of using Page Object and Page Factory patterns:\
-In `login_page.ts`, we define the `LoginPage` object using the `Page Object` pattern:
-```
-class LoginPage {
-  // Define the elements of the login page
-  username() {
-    return cy.get('#username');
-  }
-  password() {
-    return cy.get('#password');
-  }
-  loginButton() {
-    return cy.get('#login-button');
-  }
+  - **Scalability**: As your frontend application grows in complexity, the Page Object and Page Factory patterns make it easier to manage your tests. By breaking down your UI into smaller Page Objects, you can keep your code organized and more maintainable, even as your application grows.
 
-  // Define methods to interact with the UI
-  visit() {
-    cy.visit('/login');
+Here we have a `BasePage` abstract class with common actions on every page, like visit, reload or header menu.
+So, then create Page Object class and extend this `BasePage` class. 
+
+Here's an example of defining Page Object class `LoginPage` with interactions on it:
+
+```JavaScript
+//login-page.ts
+import BasePage from "./BasePage"
+
+export default class LoginPage extends BasePage {
+  // Define methods to interact with the UI on the login page
+
+  static typeLogin(login: string) {
+    cy.getByData('usernameInput')
+      .type(login);
   }
-  login(username, password) {
-    this.username.type(username);
-    this.password.type(password);
-    this.loginButton.click();
+  static typePassword(password: string) {
+    cy.getByData('password-input')
+      .type(password);
+  }
+  static tapSignIn() {
+    cy.getByData('login-button')
+      .click();
+  }
+  static errorBoxIsShown() {
+    cy.getByData('error-box').should('exist');
   }
 }
+```
 
+Then use it on your tests like this:
+
+```JavaScript
 // Export the LoginPage object
-export default new LoginPage();
-```
-In `login.cy.ts`, we use the `Page Factory` pattern to obtain an instance of the `LoginPage` object:
-```
 import LoginPage from '../pages/login_page';
 
 describe('Login', () => {
   beforeEach(() => {
-    LoginPage.visit();
+    LoginPage.visit('/auth');
   });
 
   it('should log in with valid credentials', () => {
-    LoginPage.login('john.doe', 'password');
-    
-    // Add test assertions here
+    LoginPage.typeLogin('Elijah');
+    LoginPage.typePassword('Sapronov');
+    LoginPage.tapSignIn();
+    PersonalAccountPage.isOpen();
   });
 
-  it('should display an error message with invalid credentials', () => {
-    LoginPage.login('invalid', 'password');
-    cy.contains('Your username is invalid!');
-
-    LoginPage.login('john.doe', 'invalid');
-    cy.contains('Your password is invalid!');
+  it('should display an error message with invalid login', () => {
+    LoginPage.typeLogin('Elijah123');
+    LoginPage.typePassword('Sapronov');
+    LoginPage.errorBoxIsShown();
+  });
+  it('should display an error message with invalid password', () => {
+    LoginPage.typeLogin('Elijah');
+    LoginPage.typePassword('Sapronov123');
+    LoginPage.errorBoxIsShown();
   });
 });
 ```
-In the `beforeEach` method, we use the `LoginPage` object to visit the login page before each test. In the tests themselves, we use the `LoginPage` object to interact with the UI, using the `login` method to enter the username and password, and clicking the login button. We can then add our assertions to check that the login succeeded or failed as expected.
 
-### Cypress Chain Method <a name="chain"></a> 
-Cypress methods must be used in the structure called `chain-method` to more understandable and easy-to-read code: \
+## Cypress Chain Method writing convention <a name="chain"></a> 
+Cypress chain methods convention define how should be written on each line by the method (except for first line) to more understandable and easy-to-read code:
+
 Example: 
-```
+
+```JavaScript
 cy.getByData(`gallery-name-input`)
-  .focused()
   .last()
   .should(`be.focused`)
-  .type(`{enter}`);
 ```
 
-### Component Testing Strategy <a name="component_strategy"></a> 
+## Component Testing Strategy <a name="component_strategy"></a> 
 The following will describe strategies for testing components in different cases:
 Test inner component of page (unit component test):
 - Component mounting successfully
@@ -123,10 +134,10 @@ When testing using Cypress, we only sparingly mock/intercept network calls or ot
 
 It is important to note that the Cypress Command queue is asynchronous. Commands execute immediately when they are enqueued, but their callbacks don't execute until all previously enqueued commands have completed. 
 
-- **Asynchronous Execution of Cypress Commands** \
+- **Asynchronous Execution of Cypress Commands** <a name="async-exec-cypress"></a> \
 It is crucial to understand that Cypress commands do not perform any action immediately upon being invoked, but rather schedule themselves for later execution. This is what is meant by the term "asynchronous" when referring to Cypress commands.
 
-- **Mixing Asynchronous and Synchronous Code** \
+- **Mixing Asynchronous and Synchronous Code** <a name="async-and-sync"></a> \
 It is important to remember that Cypress commands run asynchronously when attempting to combine them with synchronous code. Synchronous code executes immediately, without waiting for the Cypress commands to complete above it.
 
 [***Go here for the details and examples. It is an official Cypress documentation.***](https://docs.cypress.io/guides/core-concepts/introduction-to-cypress#Commands-Are-Asynchronous) 
