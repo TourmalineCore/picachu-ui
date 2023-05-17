@@ -12,11 +12,14 @@
 
   &__button {
     margin-left: 10px;
+    border-radius: 4px;
+    padding: 8px 12px;
     color: $primary-color-default;
 
     &:hover {
       color: $primary-color-hover;
-      transition: color $default-transition;
+      background-color: $color-grey-light-100;
+      transition: all $default-transition;
     }
   }
 
