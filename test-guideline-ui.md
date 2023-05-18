@@ -133,8 +133,21 @@ Typical tests for component:
       });
   ```
   - Verify all behaviors that are described in requirements
-- Test page (integration component test):
-  - Verify that all axios requests are correctly parsed and successfully mount components as we need. Use mock backend for testing it
+- Page component (integration component test):
+  - Verify that all axios requests are correctly parsed and successfully. 
+  So, mock all backend requests for testing it
+  ```JavaScript
+  it('SHOULD call get galleries request and mount 1 gallerie WHEN mount component and correctly parsed it', () => {
+    // using intercept for mock it STATUS or RESPONSE on request with it url
+    // use it BEFORE request is called (before component is mounting)
+    cy.intercept(`GET`, `/api/galleries`, [{
+      id: 1,
+      name: `First Gallery`,
+    }])
+    cy.mount(<GalleriesPage />)
+    cy.getByData('gallery-card')
+      .should('have.length', 1)
+  ```
 
 Do not forget that all this is described through the **TDD** approach and it's just advices what and how you test it.
 
