@@ -58,7 +58,7 @@ jobs:
   
   components-test:
     runs-on: ubuntu-22.04 
-    container: cypress/browsers:node18.12.0-chrome103-ff107
+    container: cypress/browsers:node-18.14.1-chrome-111.0.5563.146-1-ff-111.0.1-edge-111.0.1661.54-1
     # needs: install
     steps:
       - name: Checkout
@@ -70,7 +70,7 @@ jobs:
       #     name: build
       #     path: build
 
-      - name: 'Components test'
+      - name: Components test
         uses: cypress-io/github-action@v5
         with:
           component: true
