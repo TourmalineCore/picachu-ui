@@ -1,26 +1,57 @@
 # Rules and Patterns of the UI testing
-- [Main rules](#Main_rules)
-  - [Page Object and Page Factory](#page-object-and-factory)
-    - [Page Object](#page-object)
-    - [Page Factory](#page-factory)
-  - [Cypress Chain Method](#chain)
-  - [Async Commands and the Cypress Command Queue](#queue)
-    - [Asynchronous Execution of Cypress Commands](#async-exec-cypress)
-    - [Mixing Asynchronous and Synchronous Code](#async-and-sync)
-- [Component Testing Strategy](#component_strategy)
-  - [Typical Cypress Test for a Component](#example_component)
-  - [Network Calls and UI Rendering](#calls)
-  - [Mocking](#mocking)
+- [Main rules](#main-rules)
+  - [Cypress Chain Method writing convention](#cypress-chain-method-writing-convention)
+  - [Async Commands and the Cypress Command Queue](#async-commands-and-the-cypress-command-queue)
+    - [Asynchronous Execution of Cypress Commands](#asynchronous-execution-of-cypress-commands)
+    - [Mixing Asynchronous and Synchronous Code](#mixing-asynchronous-and-synchronous-code)
+- [Page Object and Page Factory](#page-object-and-page-factory)
+  - [Storage folder for page object classes](#storage-folder-for-page-object-classes)
+- [Component Testing Strategy](#component-testing-strategy)
+  - [What do we test in the component test](#what-do-we-test-in-the-component-test)
+  - [Names of component tests](#names-of-component-tests)
 - [E2E Testing Strategy](#e2e_strategy)
-- [Executing Tests](#execute)
+  - [What do we test in the E2E test](#what-do-we-test-in-the-e2e-test)
+- [Executing Tests](#executing-tests)
 
-## Main rules <a name="Main_rules"></a> 
-Testing frameworks must be configured - Cypress for Unit, Component, and E2E Testing. 
+## Main rules <a name="main-rules"></a> 
 
 The Cypress framework is used for component and user-flow (E2E) testing. Tests will be written only by ***TDD*** methodology.
 
-Component unit tests must be stored in the same folder as the component being tested and have the .cy extension in the name. For example, the test for component LoginForm.tsx will be named LoginForm.cy.tsx and stored in the appropriate folder LoginForm. 
-## Page Object and Page Factory <a name="page_factory"></a> 
+But first, remember the rules you must follow when writing your tests
+
+- Atomicity. One test per functionality
+- Independence. Tests can be run in any order and it must pass 
+
+Ok! We are ready! Let's dive in!
+
+### Cypress Chain Method writing convention <a name="cypress-chain-method-writing-convention"></a> 
+Cypress chain methods convention define how should be written on each line by the method (except for first line) to more understandable and easy-to-read code
+
+Example: 
+
+```JavaScript
+cy.getByData(`gallery-name-input`)
+  .last()
+  .should(`be.focused`)
+```
+
+### Async Commands and the Cypress Command Queue <a name="#async-commands-and-the-cypress-command-queue"></a> 
+
+It is important to note that the Cypress Command queue is asynchronous. Commands execute immediately when they are enqueued, but their callbacks don't execute until all previously enqueued commands have completed. 
+
+#### *Asynchronous Execution of Cypress Commands* <a name="asynchronous-execution-of-cypress-commands"></a>
+
+  It is crucial to understand that Cypress commands do not perform any action immediately upon being invoked, but rather schedule themselves for later execution. This is what is meant by the term "asynchronous" when referring to Cypress commands.
+
+#### *Mixing Asynchronous and Synchronous Code* <a name="mixing-asynchronous-and-synchronous-code"></a>
+
+  It is important to remember that Cypress commands run asynchronously when attempting to combine them with synchronous code. Synchronous code executes immediately, without waiting for the Cypress commands to complete above it.
+
+[***Go here for the details and examples. It is an official Cypress documentation.***](https://docs.cypress.io/guides/core-concepts/introduction-to-cypress#Commands-Are-Asynchronous) 
+
+---
+
+## Page Object and Page Factory <a name="page-object-and-page-factory"></a> 
 Follow Page Object and Page Factory design patterns for writing tests. This patterns involves describing all pages through classes that describe all possible actions in methods. In the same way actions with page elements are described.
 
 This is the best practice when designing automated UI tests. There is some reasons why we use patterns: 
@@ -59,7 +90,7 @@ export default class LoginPage extends BasePage {
 }
 ```
 
-Then use it on your tests like this:
+Then use it on your component **and** E2E tests like this:
 
 ```JavaScript
 // Export the LoginPage object
@@ -90,27 +121,26 @@ describe('Login', () => {
 });
 ```
 
-## Cypress Chain Method writing convention <a name="chain"></a> 
-Cypress chain methods convention define how should be written on each line by the method (except for first line) to more understandable and easy-to-read code:
+### *Storage folder for page object classes* <a name="storage-folder-for-page-object-classes"></a>
 
-Example: 
+All page classes storage in **./cypress/pages** folder
 
-```JavaScript
-cy.getByData(`gallery-name-input`)
-  .last()
-  .should(`be.focused`)
-```
+Here, you can create files for every page like **base-page.ts**
 
-## Component Testing Strategy <a name="component_strategy"></a> 
-The following will describe strategies for testing components in different cases.
+---
 
-Typical tests for component:
+## Component Testing Strategy <a name="component-testing-strategy"></a> 
+
+The following will describe strategies for testing components.
+
+### *What do we test in the component test* <a name="what-do-we-test-in-the-component-test"></a>
 
 - Inner component of the page
   - Component mounting successfully
-  - Verify all behaviors that are described in requirements
-  - Verify that all functions are called on certain cases that you expect. 
-  Use spies for testing it:
+  - All behaviors that are described in requirements
+  - All functions are called on certain cases that you expect
+  
+    When a component takes a callback function as a parameter, we use `cy.spy()` for testing it:
   ```JavaScript
   it('SHOULD call onLogin function once AFTER type creds and click Log In')
     //using spy on your func
@@ -132,13 +162,14 @@ Typical tests for component:
         password: `123`,
       });
   ```
-  - Verify all behaviors that are described in requirements
+
 - Page component (integration component test):
-  - Verify that all axios requests are correctly parsed and successfully. 
-  So, mock all backend requests for testing it
+  - All axios requests are correctly parsed
+
+    When testing using Cypress, we only sparingly mock/intercept network calls or other interaction with the 'outside world'. We isolate UI rendering. If we're mocking API calls, we can use `cy.intercept()`
   ```JavaScript
-  it('SHOULD call get galleries request and mount 1 gallerie WHEN mount component and correctly parsed it', () => {
-    // using intercept for mock it STATUS or RESPONSE on request with it url
+  it('SHOULD call get galleries request and show 1 gallery WHEN mount component', () => {
+    // using intercept for mock it's STATUS or RESPONSE on request with it url
     // use it BEFORE request is called (before component is mounting)
     cy.intercept(`GET`, `/api/galleries`, [{
       id: 1,
@@ -147,43 +178,53 @@ Typical tests for component:
     cy.mount(<GalleriesPage />)
     cy.getByData('gallery-card')
       .should('have.length', 1)
+  })
   ```
 
-Do not forget that all this is described through the **TDD** approach and it's just advices what and how you test it.
+- Any other components (State classes / react hooks)
+  - All methods are worked as you expect
 
-### Typical Cypress Test for a Component <a name="example_component"></a> 
+Don't forget that all of this must be described through the **TDD** approach!
 
-A typical Cypress test for a component usually implements one of the following patterns:
+### *Names of component tests* <a name="names-of-component-tests"></a>
 
-1. The component is mounted; we test if this succeeds and might run additional checks on the component. No interaction takes place.
-2. The component is mounted, and we manipulate its state (via a MobX class); we test if the component properly reflects changes made to its state.
-3. The component is mounted, and we manipulate the UI; we test if the related state (a MobX class) is properly updated.
-4. We test a React hook.
+Component tests must contain the name of the component they are testing. You should also add .cy at the end of the file name so that Cypress can correctly recognize the test
 
-We strive for a modular approach, employing separation of concerns, and try to split code into smaller (single) units (functions) that are tested separately. 
+Example:
 
-### Network Calls and UI Rendering <a name="calls"></a> 
+Component `LoginForm.tsx`
 
-When testing using Cypress, we only sparingly mock/intercept network calls or other interaction with the 'outside world' (except when we want to explicitly test this). We isolate UI rendering.
+Test `LoginForm.cy.tsx`
 
-### Mocking <a name="mocking"></a> 
-  - If we're mocking API calls, we can use `cy.intercept`. We will update this document as we gain more experience to determine best practices.
-  -  Using Stub Functions\
-  When a component takes a callback function as a parameter, we use `cy.stub`. Instead of each test creating a new stub, consider creating the stub inside the `mountComponent` function. Because a stubbed function has an alias, the calling test can refer to the stub by its alias.
+### *Storage for component tests*
 
-## Async Commands and the Cypress Command Queue <a name="queue"></a> 
+Component tests must be stored in the same folder as the component being tested
 
-It is important to note that the Cypress Command queue is asynchronous. Commands execute immediately when they are enqueued, but their callbacks don't execute until all previously enqueued commands have completed. 
+Example:
 
-- **Asynchronous Execution of Cypress Commands** <a name="async-exec-cypress"></a> \
-It is crucial to understand that Cypress commands do not perform any action immediately upon being invoked, but rather schedule themselves for later execution. This is what is meant by the term "asynchronous" when referring to Cypress commands.
+Component `Galleries/GalleriesPage.tsx`
 
-- **Mixing Asynchronous and Synchronous Code** <a name="async-and-sync"></a> \
-It is important to remember that Cypress commands run asynchronously when attempting to combine them with synchronous code. Synchronous code executes immediately, without waiting for the Cypress commands to complete above it.
+Test `Galleries/GalleriesPage.cy.tsx`
 
-[***Go here for the details and examples. It is an official Cypress documentation.***](https://docs.cypress.io/guides/core-concepts/introduction-to-cypress#Commands-Are-Asynchronous) 
+---
 
-## Executing Tests <a name="execute"></a> 
+## E2E Testing Strategy
+
+
+
+### *What do we test in the E2E test* <a name="what-do-we-test-in-the-e2e-test"></a>
+
+Each E2E test - **use case** of our application
+
+It's a scenario in which the end user performs a chain of actions in a product or follows a specific path to a specific end goal. These scenarios must be positive (happy-path)
+
+We want to cover the whole scenario, considering 2 dimensions:
+
+- Horizontal - we are trying to fully embrace the flow, path, or user scenario that we know about, can imagine, wish to see, or expect from end-user behavior
+
+- Vertical - includes all technical layers: backend, frontend, service layer, data storage and management layer
+
+## Executing Tests <a name="executing-tests"></a> 
 To execute Cypress component test, run this command in the terminal:
 ```
 npm run test --component
