@@ -55,8 +55,13 @@ jobs:
           path: dist
   
   components-test:
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-22.04 
     container: cypress/browsers:node-18.14.1-chrome-111.0.5563.146-1-ff-111.0.1-edge-111.0.1661.54-1
+    strategy:
+      fail-fast: false
+      matrix:
+        # run 3 copies of the current job in parallel
+        containers: [1, 2, 3]
     needs: install
     steps:
       - name: Checkout
@@ -68,13 +73,16 @@ jobs:
           name: build
           path: build
 
-      - name: 'Components test'
+      - name: Components test
         uses: cypress-io/github-action@v5
         with:
           component: true
           start: npm start
           browser: chrome
+          record: true
+          parallel: true
+          group: "Chrome component"
         env: 
           GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
-          COMMIT_INFO_MESSAGE: ${{github.event.pull_request.title}}
-          COMMIT_INFO_SHA: ${{github.event.pull_request.head.sha}}
+          CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
+          CYPRESS_PROJECT_ID: ${{ secrets.CYPRESS_PROJECT_ID }}
