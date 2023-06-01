@@ -48,6 +48,7 @@ function GalleriesList({
             key={`${id}-${name}`}
           >
             <GalleryCard
+              id={id}
               name={name}
               newlyCreated={galleriesPageState.newlyCreatedGalleryId === id}
               onNameApply={(newName) => {

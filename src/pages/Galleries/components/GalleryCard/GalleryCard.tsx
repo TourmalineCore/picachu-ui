@@ -2,10 +2,12 @@ import {
   KeyboardEvent, useEffect, useRef, useState,
 } from "react";
 import clsx from 'clsx';
+import { Link } from "react-router-dom";
 import { ReactComponent as DeleteIcon } from "../../../../assets/icons/icon-delete.svg";
 import { PreviewPhoto } from "../GalleriesList/Gallery";
 
 function GalleryCard({
+  id,
   name,
   newlyCreated,
   onNameApply,
@@ -13,6 +15,7 @@ function GalleryCard({
   photosCount,
   previewPhotos,
 }: {
+  id: number;
   name: string;
   newlyCreated: boolean;
   onNameApply: (newName: string) => unknown;
@@ -42,46 +45,51 @@ function GalleryCard({
       })}
       data-cy="gallery-card"
     >
-      <div className="gallery-card__image-container">
-        {
-          previewPhotos.length ? (
-            <div
-              className="gallery-card__collage"
-              data-cy="gallery-photo-collage"
-            >
-              {
-                previewPhotos.length < 4 && (
-                  <img
-                    className="gallery-card__image"
-                    key={previewPhotos[0].photoPath}
-                    src={previewPhotos[0].photoPath}
-                    alt={`Preview for ${name} gallery`}
-                    data-cy="gallery-card-preview-image"
-                  />
-                )
-              }
-              {previewPhotos.length >= 4 && previewPhotos
-                .slice(0, 4)
-                .map((previewPhoto, index) => (
-                  <img
-                    className="gallery-card__image"
-                    key={previewPhoto.photoPath}
-                    src={previewPhoto.photoPath}
-                    alt={`Preview ${index + 1} for ${name} gallery`}
-                    data-cy="gallery-card-preview-image"
-                  />
-                ))}
-            </div>
-          ) : (
-            <img
-              className="gallery-card__image"
-              src="src/assets/images/dummy-image.png"
-              alt={`No photos have been added to ${name} yet`}
-              data-cy="gallery-photo-preview"
-            />
-          )
-        }
-      </div>
+      <Link to={`/galleries/${id}`}>
+        <div
+          className="gallery-card__image-container"
+        >
+          {
+            previewPhotos.length ? (
+              <div
+                className="gallery-card__collage"
+                data-cy="gallery-photo-collage"
+              >
+                {
+                  previewPhotos.length < 4 && (
+                    <img
+                      className="gallery-card__image"
+                      key={previewPhotos[0].photoPath}
+                      src={previewPhotos[0].photoPath}
+                      alt={`Preview for ${name} gallery`}
+                      data-cy="gallery-card-preview-image"
+                    />
+                  )
+                }
+                {previewPhotos.length >= 4 && previewPhotos
+                  .slice(0, 4)
+                  .map((previewPhoto, index) => (
+                    <img
+                      className="gallery-card__image"
+                      key={previewPhoto.photoPath}
+                      src={previewPhoto.photoPath}
+                      alt={`Preview ${index + 1} for ${name} gallery`}
+                      data-cy="gallery-card-preview-image"
+                    />
+                  ))}
+              </div>
+            ) : (
+              <img
+                className="gallery-card__image"
+                src="src/assets/images/dummy-image.png"
+                alt={`No photos have been added to ${name} yet`}
+                data-cy="gallery-photo-preview"
+              />
+            )
+          }
+        </div>
+      </Link>
+
       <div className="gallery-card__inner">
         <div className="gallery-card__wrapper">
           <h3

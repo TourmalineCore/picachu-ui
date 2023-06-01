@@ -1,2 +1,2 @@
 ENV_KEY:dev
-API_ROOT:http://localhost:7501/api
+API_ROOT:https://picachu.dev.tourmalinecore.com/api
