@@ -8,6 +8,7 @@ import { withPrivateRoute } from './common/auth/authStateProvider/withPrivateRou
 import MetricsPage from './pages/Metrics/MetricsPage';
 import PhotosPage from './pages/Photos/PhotosPage';
 import 'react-loading-skeleton/dist/skeleton.css';
+import NotFoundPage from './pages/NotFoundPage/NotFoundPage';
 
 const WithPrivateRoute = withPrivateRoute(Layout);
 
@@ -16,12 +17,16 @@ export function App() {
     <BrowserRouter>
       <Routes>
         <Route
-          path="/*"
+          path="/"
           element={<WithPrivateRoute />}
         >
           <Route
             index
             element={<Navigate to="/galleries" />}
+          />
+          <Route
+            path="*"
+            element={<NotFoundPage />}
           />
           <Route
             path="galleries"
