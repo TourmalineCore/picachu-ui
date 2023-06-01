@@ -24,15 +24,15 @@ export function App() {
             element={<Navigate to="/galleries" />}
           />
           <Route
-            path="/galleries"
+            path="galleries"
             element={<GalleriesPage />}
           />
           <Route
-            path="/galleries/:galleryId"
+            path="galleries/:galleryId"
             element={<PhotosPage />}
           />
           <Route
-            path="/galleries/:galleryId/:id"
+            path="galleries/:galleryId/:id"
             element={<MetricsPage />}
           />
         </Route>
