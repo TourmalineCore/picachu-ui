@@ -3,7 +3,6 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
-  "homepage": "",
   "scripts": {
     "start": "run-s create-config:local vite-start",
     "start:dev": "run-s create-config:dev vite-start",
