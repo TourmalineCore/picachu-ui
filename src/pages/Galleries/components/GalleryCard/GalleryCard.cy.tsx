@@ -15,6 +15,7 @@ describe(`GalleryCard`, () => {
 function defaultNameRenderingTests() {
   it(`newly created gallery card SHOULD have name field filled and focused`, () => {
     mountComponent({
+      id: 1,
       newlyCreated: true,
     });
 
@@ -27,6 +28,7 @@ function defaultNameRenderingTests() {
 function nameEditingTests() {
   it(`SHOULD apply changes to name WHEN pressing Enter in focused name`, () => {
     mountComponent({
+      id: 1,
       newlyCreated: true,
     });
 
@@ -44,6 +46,7 @@ function nameEditingTests() {
 
   it(`SHOULD apply changes to name WHEN focus out in focused name`, () => {
     mountComponent({
+      id: 1,
       newlyCreated: true,
     });
 
@@ -60,6 +63,7 @@ function nameEditingTests() {
 
   it(`SHOULD discard changes to name and apply it with original name WHEN pressing Escape in focused name`, () => {
     mountComponent({
+      id: 1,
       newlyCreated: true,
     });
 
@@ -76,6 +80,7 @@ function nameEditingTests() {
 
   it(`SHOULD discard changes to name and apply it with original name WHEN pressing Enter in focused empty name`, () => {
     mountComponent({
+      id: 1,
       newlyCreated: true,
     });
 
@@ -95,6 +100,7 @@ function nameEditingTests() {
 
   it(`SHOULD discard changes to name and apply it with original name WHEN focus out in focused empty name`, () => {
     mountComponent({
+      id: 1,
       newlyCreated: true,
     });
 
@@ -114,6 +120,7 @@ function nameEditingTests() {
 
   it(`SHOULD have the possibility to edit name WHEN it is not a newly created one`, () => {
     mountComponent({
+      id: 1,
       name: `my super`,
       newlyCreated: false,
     });
@@ -136,6 +143,7 @@ function nameEditingTests() {
 function photoPreviewTests() {
   it(`SHOULD show dummy picture WHEN no image is available`, () => {
     mountComponent({
+      id: 1,
       newlyCreated: true,
       previewPhotos: [],
     });
@@ -147,6 +155,7 @@ function photoPreviewTests() {
 
   it(`SHOULD show a single photo on gallery card preview WHEN only one image is added to the gallery`, () => {
     mountComponent({
+      id: 1,
       newlyCreated: false,
       previewPhotos: [
         { photoPath: `https://picsum.photos/200/300` },
@@ -160,6 +169,7 @@ function photoPreviewTests() {
 
   it(`SHOULD show a single photo on gallery card preview WHEN more than 1 and less than 4 images are added to the gallery`, () => {
     mountComponent({
+      id: 1,
       newlyCreated: false,
       previewPhotos: [
         { photoPath: `https://picsum.photos/200/300` },
@@ -174,6 +184,7 @@ function photoPreviewTests() {
 
   it(`SHOULD show a collage of 4 photos on gallery card preview WHEN 4 images are added to the gallery`, () => {
     mountComponent({
+      id: 1,
       newlyCreated: false,
       previewPhotos: [
         { photoPath: `https://picsum.photos/200/300` },
@@ -189,6 +200,7 @@ function photoPreviewTests() {
 
   it(`SHOULD show a collage of 4 photos on gallery card preview WHEN more than 4 images are added to the gallery`, () => {
     mountComponent({
+      id: 1,
       newlyCreated: false,
       previewPhotos: [
         { photoPath: `https://picsum.photos/200/300` },
@@ -207,6 +219,7 @@ function photoPreviewTests() {
 function deleteGalleryTests() {
   it(`SHOULD delete a gallery WHEN this gallery's Delete button is clicked`, () => {
     mountComponent({
+      id: 1,
       newlyCreated: false,
       previewPhotos: [],
     });
@@ -230,10 +243,12 @@ function checkOnApplyCalledOnce(
 }
 
 function mountComponent({
+  id,
   name = `new gallery`,
   newlyCreated,
   previewPhotos = [],
 }: {
+  id: number;
   name?: string;
   newlyCreated: boolean;
   onNameApply?: (newName: string) => unknown;
@@ -246,6 +261,7 @@ function mountComponent({
 
   cy.mount(
     <GalleryCard
+      id={id}
       previewPhotos={previewPhotos}
       photosCount={0}
       name={name}
