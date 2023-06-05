@@ -1,5 +1,4 @@
 import notFoundImage from '../../assets/images/404.png';
-// import notFoundImage from '../../assets/images/404small.png';
 
 function NotFoundPage() {
   return (
@@ -9,7 +8,7 @@ function NotFoundPage() {
       <img
         src={notFoundImage}
         className="not-found-page__photo"
-        alt="LoginPage_Mountain"
+        alt="error 404"
         draggable={false}
       />
 
