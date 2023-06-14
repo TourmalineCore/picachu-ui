@@ -114,7 +114,13 @@
 
     &--active {
       svg {
-        opacity: 1 !important;
+        opacity: 1;
+      }
+
+      &:hover {
+        svg {
+          opacity: 1;
+        }
       }
     }
 
