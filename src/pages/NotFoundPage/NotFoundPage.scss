@@ -1,0 +1,39 @@
+.not-found-page {
+  $header-height: 64px;
+
+  margin-top: calc($header-height + 88px);
+  line-height: 1.5;
+
+  &__title {
+    margin-bottom: 20px;
+    font-weight: 500;
+    font-size: 22px;
+
+    @include desktop {
+      margin-bottom: 26px;
+      font-size: 48px;
+    }
+  }
+
+  &__photo {
+    margin: 0 auto;
+    width: 100%;
+    height: 100%;
+    max-width: 800px;
+    max-height: 484px;
+  }
+
+  &__description {
+    margin-top: 40px;
+    font-size: 14px;
+
+    @include desktop {
+      margin-bottom: 48px;
+      font-size: 22px;
+    }
+  }
+
+  @include desktop {
+    line-height: 1.2;
+  }
+}
