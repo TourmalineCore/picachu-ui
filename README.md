@@ -1,4 +1,4 @@
-# picachu-ui
+# tourmanique-ui
 
 ## Description
 A project to determine the uniqueness of a photo by its components. UI application.
@@ -77,10 +77,10 @@ When you run the docker run command, the program first checks if the required im
 ### Build
 
 ```bash
-docker build -t picachu-ui .
+docker build -t tourmanique-ui .
 ```
 
 ### Run
 ```bash
-docker run --detach --publish 7551:80 --rm --name picachu-ui --env ENV_KEY="'dev'" --env API_ROOT="'http://localhost:7501/api'" picachu-ui
+docker run --detach --publish 7551:80 --rm --name tourmanique-ui --env ENV_KEY="'dev'" --env API_ROOT="'http://localhost:7501/api'" tourmanique-ui
 ```
