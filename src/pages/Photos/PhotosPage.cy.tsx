@@ -8,7 +8,8 @@ describe(`PhotosPage`, () => {
 
     mountComponent();
 
-    cy.getByData(`no-photos`).contains(`Upload the first photo to the gallery`);
+    cy.getByData(`no-photos`)
+      .contains(`Upload the first photo to the gallery`);
   });
 });
 

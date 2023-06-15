@@ -26,37 +26,43 @@ function PhotosPageContent() {
         photosArray={photosArray}
         isLoading={isLoading}
       />
-    ) : photosPageState.photos.length === 0 ? (
-      <NoPhotos onUploadNewPhoto={onUploadNewPhoto} />
-    ) : (
-      <PhotoList
-        photosArray={photosArray}
-        isLoading={isLoading}
-      />
     )
+      : photosPageState.photos.length === 0 ? (
+        <NoPhotos onUploadNewPhoto={onUploadNewPhoto} />
+      ) : (
+        <PhotoList
+          photosArray={photosArray}
+          isLoading={isLoading}
+        />
+      )
   );
 
   async function onGetPhotos() {
     setIsLoading(true);
+
     try {
       const { data } = await api.get<PhotoType[]>(`/galleries/${galleryId}/photos`);
+
       photosPageState.initialize({ loadedPhotos: data });
     } catch (error: any) {
       console.log(error.response.data.msg);
     } finally {
       setTimeout(() => {
         setIsLoading(false);
-      }, 5000);
+      }, 3000);
     }
   }
 
   async function onUploadNewPhoto(event: ChangeEvent<HTMLInputElement>) {
     if (!event.target.files) return;
+
     const fileUploaded = event.target.files[0];
+
     try {
       await api.post(`/photos/${galleryId}/upload-photo`, {
         fileUploaded,
       });
+
       onGetPhotos();
     } catch (error: any) {
       console.log(error.response.data.msg);

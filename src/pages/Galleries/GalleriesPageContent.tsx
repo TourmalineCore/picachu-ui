@@ -124,7 +124,7 @@ function GalleriesPageContent() {
   }
 
   async function onRestoreGallery() {
-    await api.post(`/galleries/restore/${galleriesPageState.galleryToRestore!.id}`);
+    await api.post(`/galleries/${galleriesPageState.galleryToRestore!.id}/restore`);
     galleriesPageState.restoreGallery();
   }
 }
