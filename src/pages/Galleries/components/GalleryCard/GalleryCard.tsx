@@ -5,6 +5,7 @@ import clsx from 'clsx';
 import { Link } from "react-router-dom";
 import { ReactComponent as DeleteIcon } from "../../../../assets/icons/icon-delete.svg";
 import { PreviewPhoto } from "../GalleriesList/Gallery";
+import placeholderPhoto from "../../../../assets/images/dummy-image.png";
 
 function GalleryCard({
   id,
@@ -81,7 +82,7 @@ function GalleryCard({
             ) : (
               <img
                 className="gallery-card__image"
-                src="src/assets/images/dummy-image.png"
+                src={placeholderPhoto}
                 alt={`No photos have been added to ${name} yet`}
                 data-cy="gallery-photo-preview"
               />
