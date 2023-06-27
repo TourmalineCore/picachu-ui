@@ -31,8 +31,9 @@ function PhotosPageContent() {
         <NoPhotos onUploadNewPhoto={onUploadNewPhoto} />
       ) : (
         <PhotoList
-          photosArray={photosArray}
+          photosArray={photosPageState.photos}
           isLoading={isLoading}
+          onUploadNewPhoto={onUploadNewPhoto}
         />
       )
   );
@@ -41,9 +42,9 @@ function PhotosPageContent() {
     setIsLoading(true);
 
     try {
-      const { data } = await api.get<PhotoType[]>(`/galleries/${galleryId}/photos`);
+      const { data } = await api.get<{ list: PhotoType[]; totalNumberOfItems: number }>(`/galleries/${galleryId}/photos?sortedBy=downloadDate&offset=0&limit=10`);
 
-      photosPageState.initialize({ loadedPhotos: data });
+      photosPageState.initialize({ loadedPhotos: data.list });
     } catch (error: any) {
       console.log(error.response.data.msg);
     } finally {
@@ -56,12 +57,13 @@ function PhotosPageContent() {
   async function onUploadNewPhoto(event: ChangeEvent<HTMLInputElement>) {
     if (!event.target.files) return;
 
-    const fileUploaded = event.target.files[0];
+    const fileUploaded = event.target.files?.[0];
 
     try {
-      await api.post(`/photos/${galleryId}/upload-photo`, {
+      await api.post(
+        `/photos/${galleryId}/upload-photo`,
         fileUploaded,
-      });
+      );
 
       onGetPhotos();
     } catch (error: any) {

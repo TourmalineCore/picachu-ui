@@ -8,6 +8,7 @@ function PhotosPage() {
     () => new PhotosPageState(),
     [],
   );
+
   return (
     <PhotosPageStateContext.Provider value={photosPageState}>
       <PhotosPageContent />

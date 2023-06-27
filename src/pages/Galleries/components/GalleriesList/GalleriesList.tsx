@@ -60,7 +60,7 @@ function GalleriesList({
               onDelete={() => {
                 onGalleryDelete(id);
               }}
-              photosCount={0}
+              photosCount={previewPhotos.length}
               previewPhotos={previewPhotos}
             />
           </li>

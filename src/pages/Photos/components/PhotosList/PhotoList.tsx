@@ -1,4 +1,5 @@
 import Skeleton from 'react-loading-skeleton';
+import { ChangeEvent } from 'react';
 import Breadcrumbs from '../../../../components/Breadcrumbs/Breadcrumbs';
 import FileUploader from '../../../../components/FileUploader/FileUploader';
 import PhotoCard, { PhotoType } from '../PhotoCard/PhotoCard';
@@ -7,9 +8,11 @@ import Sort from '../Sort/Sort';
 function PhotoList({
   photosArray,
   isLoading,
+  onUploadNewPhoto,
 }: {
   photosArray: PhotoType[];
   isLoading: boolean;
+  onUploadNewPhoto?: (event: ChangeEvent<HTMLInputElement>) => Promise<unknown>;
 }) {
   const skeletons = [...new Array(6)].map((_, index) => (
     <li
@@ -29,7 +32,10 @@ function PhotoList({
     <div className="photo-list">
       <Breadcrumbs />
       <div className="photo-list__button-container">
-        <FileUploader isAddButton />
+        <FileUploader
+          isAddButton
+          onUploadNewImage={onUploadNewPhoto}
+        />
         <Sort />
       </div>
 
